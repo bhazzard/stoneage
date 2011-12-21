@@ -5,12 +5,20 @@ define(function() {
 	};
 	
 	Player.prototype.placement = function(placement) {
-		this._workers -= placement.workers;
+		this.workers(this.workers() - placement.workers);
 	};
 	
 	Player.prototype.canPlace = function(placement) {
-		return this._workers >=  placement.workers;
-	}
+		return this.workers() >=  placement.workers;
+	};
+	
+	Player.prototype.workers = function(workers) {
+		if (workers) {
+			this._workers = workers;
+		}
+		
+		return this._workers;
+	};
 	
 	return Player;
 });

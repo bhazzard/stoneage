@@ -14,5 +14,9 @@ require([
 		test("The workspace has one less capacity", function() {
 			equal(workspace.capacity(), 3);
 		});
+		
+		test("The player has one less worker", function() {
+			equal(player.workers(), 4);
+		});
 	})();
 });
