@@ -1,0 +1,38 @@
+.worker_space, .worker, .resource.lumber, .cost .lumber {
+	display: block;
+	height: 15px;
+	width: 15px;
+	margin: 5px;
+	padding: 0px;
+	list-item-style: none;
+}
+
+.building {
+	display: block;
+	height: 75px;
+	width: 75px;
+	margin: 5px;
+	padding: 0px;
+	list-item-style: none;
+	border: 1px solid black;
+}
+
+.worker_space {
+	border: 1px solid black;
+}
+
+.worker_space .worker {
+	margin: 0px;
+}
+
+.worker {
+	background-color: black;
+}
+
+.player_board .resource.lumber {
+	background-color: brown;
+}
+
+.cost .lumber {
+	background-color: brown;
+}

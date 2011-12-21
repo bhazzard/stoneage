@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://raw.github.com/mikeplate/jquery-drag-drop-plugin/master/jquery.drag-drop.plugin.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+	</head>
+	<body>
+		<ol id="player_boards">
+			<li class="player_board player_1">
+				<h1>Player 1's Board</h1>
+				
+				<h2>Workers</h2>
+				<ul class="workers">
+					<li class="worker player_1"></li>
+					<li class="worker player_1"></li>
+					<li class="worker player_1"></li>
+					<li class="worker player_1"></li>
+				</ul>
+				
+				<h2>Resources</h2>
+				<ul class="resources">
+				</ul>
+				
+				<h2>Buildings</h2>
+				<ul class="buildings">
+				</ul>
+			</li>
+		</ol>
+		
+		<ul id="resources">
+			<h1>Resources</h1>
+			<li class="resource" id="forest">
+				<h2>Forest</h2>
+				
+				<ul class="worker_spaces">
+					<li class="worker_space empty"></li>
+					<li class="worker_space empty"></li>
+					<li class="worker_space empty"></li>
+				</ul>
+			</li>
+		</ul>
+		
+		<ul id="buildings">
+			<h1>Buildings</h1>
+			<li class="building">
+				<ul class="worker_spaces">
+					<li class="worker_space empty"></li>
+				</ul>
+				
+				<ul class="cost">
+					<li class="lumber"></li>
+				</ul>
+			</li>
+		</ul>
+		
+		<div id="test">Drag Some Workers onto the forest... and then click on this text. You'll see "resolve" show up under the forest. You can click that to roll the dice and see what you get.</div>
+		
+		<script data-main="main" type="text/javascript" src="https://raw.github.com/jrburke/requirejs/master/require.js"></script>
+	</body>
+</html>
