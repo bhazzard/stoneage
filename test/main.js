@@ -1,4 +1,4 @@
 require([
 	"test/worker_placement",
-	"test/forest_resolution"
+	"test/resourcespace_resolution"
 ]);
