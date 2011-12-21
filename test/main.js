@@ -1,3 +1,4 @@
 require([
-	"test/worker_placement"
+	"test/worker_placement",
+	"test/forest_resolution"
 ]);

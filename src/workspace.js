@@ -17,6 +17,10 @@ define(function() {
 		this.capacity(this.capacity() - placement.workers);
 	};
 	
+	Workspace.prototype.workersFor = function(player, workers) {
+		return this._placements[player.id];
+	}
+	
 	Workspace.prototype.canPlace = function(placement) {
 		return this.capacity() >= placement.workers;
 	}
