@@ -7,9 +7,9 @@ require([
 		module("When I place one worker in a workspace");
 		var player = new Player(1),
 			workspace = new Workspace(4),
-			placement = new Placement(player, workspace, 1);
-		
-		placement.execute();
+			placement = new Placement(player, 1);
+
+        workspace.place(placement);
 
 		test("The workspace has one less capacity", function() {
 			equal(workspace.capacity(), 3);

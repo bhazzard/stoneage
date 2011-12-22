@@ -8,22 +8,22 @@ define(function() {
 		if (capacity) {
 			this._capacity = capacity;
 		}
-		
 		return this._capacity;
 	};
 	
-	Workspace.prototype.placement = function(placement) {
-		this._placements[placement.player.id] = placement.workers;
+	Workspace.prototype.place = function(placement) {
+		this._placements[placement.player.id] = placement;
 		this.capacity(this.capacity() - placement.workers);
+        placement.player.workers(placement.player.workers() - placement.workers);
 	};
 	
-	Workspace.prototype.workersFor = function(player, workers) {
-		return this._placements[player.id];
-	}
+	Workspace.prototype.workersFor = function(player) {
+		return this._placements[player.id].workers;
+	};
 	
 	Workspace.prototype.canPlace = function(placement) {
 		return this.capacity() >= placement.workers;
-	}
+	};
 	
 	return Workspace;
 });

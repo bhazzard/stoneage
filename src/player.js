@@ -2,10 +2,7 @@ define(function() {
 	function Player(id) {
 		this.id = id;
 		this._workers = 5;
-	};
-	
-	Player.prototype.placement = function(placement) {
-		this.workers(this.workers() - placement.workers);
+        this._resources = [];
 	};
 	
 	Player.prototype.canPlace = function(placement) {
@@ -16,9 +13,12 @@ define(function() {
 		if (workers) {
 			this._workers = workers;
 		}
-		
 		return this._workers;
 	};
+
+    Player.prototype.addResource = function(resource){
+        this._resources.push(resource);
+    };
 	
 	return Player;
 });
