@@ -11,7 +11,7 @@ define(['src/workspace', 'src/cup', 'src/resource'], function(Workspace, Cup, Re
             var cup = new Cup();
             cup.dieCount(workerCount);
 
-            var dieResult = cup.rollAllDice();
+            var dieResult = cup.rollDice();
             for(var i = 0; i < dieResult; i+=this._costPerResource){
                 //the "lumber" part sucks, but getting tired...
                 player.addResource(new Resource("lumber", this._costPerResource)); 

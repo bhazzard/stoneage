@@ -1,4 +1,4 @@
-define(['src/dice'], function(Dice) {
+define(['src/die'], function(Die) {
 	function Cup() {
         this._dieCount = 0;
 	};
@@ -10,10 +10,10 @@ define(['src/dice'], function(Dice) {
         return this._dieCount;
     };
 
-    Cup.prototype.rollAllDice = function() {
+    Cup.prototype.rollDice = function() {
         var sum = 0;
         for(var i = 0; i < this.dieCount(); i++){
-            sum += new Dice().roll();
+            sum += new Die().roll();
         }
         return sum;
     };

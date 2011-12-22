@@ -12,11 +12,15 @@ define(function() {
 	};
 	
 	Workspace.prototype.place = function(placement) {
+        this.reduceCapacity(placement.workers);
+        placement.player.reduceWorkers(placement.workers);
 		this._placements[placement.player.id] = placement;
-		this.capacity(this.capacity() - placement.workers);
-        placement.player.workers(placement.player.workers() - placement.workers);
 	};
 	
+    Workspace.prototype.reduceCapacity = function(count){
+		this.capacity(this.capacity() - count);        
+    };
+
 	Workspace.prototype.workersFor = function(player) {
 		return this._placements[player.id].workers;
 	};

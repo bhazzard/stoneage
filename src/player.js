@@ -16,6 +16,10 @@ define(function() {
 		return this._workers;
 	};
 
+    Player.prototype.reduceWorkers = function(count){
+        this.workers(this.workers() - count);
+    };
+
     Player.prototype.addResource = function(resource){
         this._resources.push(resource);
     };
