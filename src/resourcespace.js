@@ -1,23 +1,26 @@
-define(['src/workspace', 'src/cup', 'src/resource'], function(Workspace, Cup, Resource) {
-	return function(capacity) {
-		function ResourceSpace(costPerResource) {
-			this._costPerResource = costPerResource;
-		};
-		
-		ResourceSpace.prototype = new Workspace(capacity);	
-		ResourceSpace.prototype.resolve = function(player) {
-            var workerCount = this.workersFor(player);
+define(['src/workspace', 'src/cup'], function(Workspace, Cup) {
+   return function(capacity) {
+      function ResourceSpace(resource) {
+         this.resource = resource;
+      };
 
-            var cup = new Cup();
-            cup.dieCount(workerCount);
+      ResourceSpace.prototype = new Workspace(capacity);	
 
-            var dieResult = cup.rollDice();
-            for(var i = 0; i < dieResult; i+=this._costPerResource){
-                //the "lumber" part sucks, but getting tired...
-                player.addResource(new Resource("lumber", this._costPerResource)); 
-            }
-		};
-		
-		return ResourceSpace;
-	};
+      ResourceSpace.prototype.tradeWorkersForDice = function(player, cup) {
+         var workerCount = this.workersFor(player);
+         cup.dieCount(workerCount);
+      };
+
+      ResourceSpace.prototype.tradeDiceForResources = function(player, cup) {
+         var totalValue = 0;
+         var resource = this.resource();
+         while(totalValue + resource.value() <= cup.result()) {
+            totalValue += resource.value();
+            player.addResource(resource); 
+            resource = this.resource();
+         }
+      };
+
+      return ResourceSpace;
+   };
 });
