@@ -10,7 +10,7 @@ require([
       } 
    });
 
-   asyncTest("When I place one worker in a workspace", function() {
+   asyncTest("When the player places a worker in the workspace", function() {
       var placement = new Placement(this.player, 1);
 
       expect(2);
