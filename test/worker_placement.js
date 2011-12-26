@@ -1,22 +1,28 @@
 require([
-	"src/player",
-	"src/workspace",
-	"src/placement"
+   "src/player",
+   "src/workspace",
+   "src/placement"
 ], function(Player, Workspace, Placement) {
-	(function() {
-		module("When I place one worker in a workspace");
-		var player = new Player(1),
-			workspace = new Workspace(4),
-			placement = new Placement(player, 1);
+   module("Given a player and a workspace", {
+      setup: function() {
+         this.player = new Player(1);
+         this.workspace = new Workspace(4);
+      } 
+   });
 
-        workspace.place(placement);
+   asyncTest("When I place one worker in a workspace", function() {
+      var placement = new Placement(this.player, 1);
 
-		test("The workspace has one less capacity", function() {
-			equal(workspace.capacity(), 3);
-		});
-		
-		test("The player has one less worker", function() {
-			equal(player.workers(), 4);
-		});
-	})();
+      expect(2);
+
+      var self = this;
+      this.workspace.bind('placed', function(placement) {
+         equal(self.workspace.capacity(), 3, "The workspace should have one less capacity");
+         equal(self.player.workers(), 4, "The player should have one less worker");
+
+         start();
+      });
+
+      this.workspace.place(placement);
+   });
 });
