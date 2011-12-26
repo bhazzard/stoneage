@@ -16,7 +16,7 @@ define(['lib/microevent'], function() {
    Workspace.prototype.place = function(placement) {
       this.reduceCapacity(placement.workers);
       placement.player.reduceWorkers(placement.workers);
-      this._placements[placement.player.id] = placement;
+      this._placements[placement.player.color] = placement;
       this.trigger('placed', placement);
    };
 	
@@ -25,7 +25,7 @@ define(['lib/microevent'], function() {
    };
 
    Workspace.prototype.workersFor = function(player) {
-      return this._placements[player.id].workers;
+      return this._placements[player.color].workers;
    };
 
    Workspace.prototype.canPlace = function(placement) {

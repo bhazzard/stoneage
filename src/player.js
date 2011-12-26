@@ -1,6 +1,6 @@
 define(function() {
-   function Player(id) {
-      this.id = id;
+   function Player(color) {
+      this._color = color;
       this._workers = 5;
       this._resources = [];
    };

@@ -1,4 +1,4 @@
-define(function() {
+define(['lib/underscore'], function(_) {
    function Engine(options) {
       this._options = options;
       this._players = {};
@@ -33,7 +33,11 @@ define(function() {
       if (!this._options.pickPlayers) {
          throw "pickPlayers is a required callback"
       }
-      var players = this._options.pickPlayers();
+
+      var players = _(this._options.pickPlayers()).map(function(inPlayer) {
+         return new Player(inPlayer.color);
+      });
+      this._players = players;
    };
 
    return Engine;
