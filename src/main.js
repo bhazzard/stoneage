@@ -1,4 +1,4 @@
-require(['src/facade'], function(Facade) {
+require(['src/engine'], function(Engine) {
    $(function() {
       var stage, board, forest;
       
@@ -16,7 +16,7 @@ require(['src/facade'], function(Facade) {
 
       stage.appendTo('body');
 
-      var facade = new Facade({
+      var engine = new Engine({
          placeWorkers: function(player, space, quantity) {
             $('<div/>')
                .addClass('worker')
