@@ -6,6 +6,9 @@
       <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/1.0.1/require.min.js"></script>
       <script type="text/javascript">
          require.config({
+            paths: {
+              'underscore': 'lib/underscore'
+            },
             baseUrl: ".",
             waitSeconds: 15,
             urlArgs: "bust=" +  (new Date()).getTime()
