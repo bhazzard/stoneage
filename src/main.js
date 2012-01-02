@@ -1,6 +1,6 @@
 require(['src/engine'], function(Engine) {
    $(function() {
-      var stage, board, forest;
+      var stage, board, forest, piles;
       
       stage = $('<div/>')
          .attr('id', 'stage');
@@ -10,24 +10,32 @@ require(['src/engine'], function(Engine) {
          .appendTo(stage);
 
       forest = $('<div/>')
-         .attr('id', 'forest')
+         .addClass('forest')
          .addClass('resourceSpace')
          .appendTo(board);
 
+      $('<div/>').addClass('worker-pile').addClass('player-red').appendTo(forest);
+
       stage.appendTo('body');
 
+      var playerBoard = $('<div />').addClass('playerBoard').appendTo(stage);
+      $('<div/>').addClass('worker-pile').addClass('player-red').appendTo(playerBoard);
+      $('<div/>').addClass('worker-pile').addClass('player-green').appendTo(playerBoard);
+
       var engine = new Engine({
-         placeWorkers: function(player, space, quantity) {
-            $('<div/>')
-               .addClass('worker')
-               .addClass('player-' + player)
-               .addClass('quantity-' + quantity)
-               .html(quantity)
-               .appendTo('#' + space);
+        workersChanged: function(player, space, quantity) {
+            $('.' + space).find('.worker-pile.player-' + player).html(quantity);
          },
          removeWorkers: function(player, space) {
-            $('#' + space + ' .player-' + player).remove();
-         }
+            $('.' + space + ' .player-' + player).remove();
+         },
+          pickPlayers: function() {
+            return [
+              { color: 'red' },
+              { color: 'green' }
+            ];
+          }
       });
+      engine.start();
    });
 });
