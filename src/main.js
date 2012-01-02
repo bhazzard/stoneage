@@ -32,7 +32,7 @@ require(['src/engine'], function(Engine) {
             $('.' + space + ' .player-' + player).remove();
          },
           turnChange: function(player) {
-
+            activePlayer = player;
           },
           pickPlayers: function() {
             return [

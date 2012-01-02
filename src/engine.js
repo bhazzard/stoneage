@@ -3,12 +3,17 @@ define(['underscore', 'src/player', 'src/workspace', 'src/placement'], function(
       this._options = options;
       this._players = [];
       this._spaces = {};
+      this._currentPlayer = 0;
 
       var that = this;
       this._spaces['forest'] = new Workspace(10);
       this._spaces['forest'].bind('placed', function(placement) {
         that._options.workersChanged(placement.player._color, 'forest', placement.workers);
         that._options.workersChanged(placement.player._color, 'playerBoard', placement.player.workers());
+
+        that._currentPlayer += 1;
+        that._currentPlayer %= that._players.length;
+        that._options.turnChange(that._players[that._currentPlayer]._color);
       });
    };
 
