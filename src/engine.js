@@ -1,13 +1,20 @@
-define(['underscore', 'src/player'], function(_, Player) {
+define(['underscore', 'src/player', 'src/workspace', 'src/placement'], function(_, Player, Workspace, Placement) {
    function Engine(options) {
       this._options = options;
       this._players = [];
       this._spaces = {};
+
+      var that = this;
+      this._spaces['forest'] = new Workspace(10);
+      this._spaces['forest'].bind('placed', function(placement) {
+        that._options.workersChanged(placement.player._color, 'forest', placement.workers);
+        that._options.workersChanged(placement.player._color, 'playerBoard', placement.player.workers());
+      });
    };
 
    Engine.prototype.placeWorkers = function(color, spaceName, numWorkers) {
       var player = this.getPlayer(color),
-          workspace = this.getSpaces[spaceName],
+          workspace = this._spaces[spaceName],
           placement = new Placement(player, numWorkers);
 
       workspace.place(placement);
@@ -18,7 +25,9 @@ define(['underscore', 'src/player'], function(_, Player) {
    };
 
    Engine.prototype.getPlayer = function(color) {
-      return this._players[color];
+      return _(this._players).find(function(player) {
+        return player._color === color;
+      });
    };
 
    Engine.prototype.listSpaces = function() {
@@ -46,10 +55,7 @@ define(['underscore', 'src/player'], function(_, Player) {
         this._options.workersChanged(player._color, 'playerBoard', 5);
       }, this);
 
-      this._options.workersChanged(this._players[0]._color, 'forest', 2);
-      this._options.workersChanged(this._players[0]._color, 'playerBoard', 3);
-      this._options.workersChanged(this._players[1]._color, 'forest', 1);
-      this._options.workersChanged(this._players[1]._color, 'playerBoard', 4);
+      this._options.turnChange(this._players[0]._color);
    };
 
    return Engine;

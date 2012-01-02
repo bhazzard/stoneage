@@ -23,6 +23,7 @@ require(['src/engine'], function(Engine) {
       $('<div/>').addClass('worker-pile').addClass('player-red').appendTo(playerBoard);
       $('<div/>').addClass('worker-pile').addClass('player-green').appendTo(playerBoard);
 
+      var activePlayer = 'red';
       var engine = new Engine({
         workersChanged: function(player, space, quantity) {
             $('.' + space).find('.worker-pile.player-' + player).html(quantity);
@@ -30,6 +31,9 @@ require(['src/engine'], function(Engine) {
          removeWorkers: function(player, space) {
             $('.' + space + ' .player-' + player).remove();
          },
+          turnChange: function(player) {
+
+          },
           pickPlayers: function() {
             return [
               { color: 'red' },
@@ -38,5 +42,11 @@ require(['src/engine'], function(Engine) {
           }
       });
       engine.start();
+
+      $('.forest').click(function() {
+        var quantity = prompt('How many workers would you like to place?');
+
+        engine.placeWorkers(activePlayer, 'forest', quantity);
+      });
    });
 });
