@@ -48,6 +48,8 @@ define(['underscore', 'src/player'], function(_, Player) {
 
       this._options.workersChanged(this._players[0]._color, 'forest', 2);
       this._options.workersChanged(this._players[0]._color, 'playerBoard', 3);
+      this._options.workersChanged(this._players[1]._color, 'forest', 1);
+      this._options.workersChanged(this._players[1]._color, 'playerBoard', 4);
    };
 
    return Engine;

@@ -15,6 +15,7 @@ require(['src/engine'], function(Engine) {
          .appendTo(board);
 
       $('<div/>').addClass('worker-pile').addClass('player-red').appendTo(forest);
+      $('<div/>').addClass('worker-pile').addClass('player-green').appendTo(forest);
 
       stage.appendTo('body');
 
