@@ -1,36 +1,36 @@
 define(['lib/microevent'], function() {
-   function Workspace(capacity) {
+  function Workspace(capacity) {
+    this._capacity = capacity;
+    this._placements = {};
+  };
+
+  MicroEvent.mixin(Workspace);
+ 
+  Workspace.prototype.capacity = function(capacity) {
+    if (capacity) {
       this._capacity = capacity;
-      this._placements = {};
-   };
+    }
+    return this._capacity;
+  };
+ 
+  Workspace.prototype.place = function(placement) {
+    this.reduceCapacity(placement.workers);
+    placement.player.reduceWorkers(placement.workers);
+    this._placements[placement.player.color] = placement;
+    this.trigger('placed', placement);
+  };
+ 
+  Workspace.prototype.reduceCapacity = function(count){
+    this.capacity(this.capacity() - count);        
+  };
 
-   MicroEvent.mixin(Workspace);
-	
-   Workspace.prototype.capacity = function(capacity) {
-      if (capacity) {
-         this._capacity = capacity;
-      }
-      return this._capacity;
-   };
-	
-   Workspace.prototype.place = function(placement) {
-      this.reduceCapacity(placement.workers);
-      placement.player.reduceWorkers(placement.workers);
-      this._placements[placement.player.color] = placement;
-      this.trigger('placed', placement);
-   };
-	
-   Workspace.prototype.reduceCapacity = function(count){
-      this.capacity(this.capacity() - count);        
-   };
+  Workspace.prototype.workersFor = function(player) {
+    return this._placements[player.color].workers;
+  };
 
-   Workspace.prototype.workersFor = function(player) {
-      return this._placements[player.color].workers;
-   };
+  Workspace.prototype.canPlace = function(placement) {
+    return this.capacity() >= placement.workers;
+  };
 
-   Workspace.prototype.canPlace = function(placement) {
-      return this.capacity() >= placement.workers;
-   };
-
-   return Workspace;
+  return Workspace;
 });
