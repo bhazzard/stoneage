@@ -8,55 +8,70 @@ require.config({
    urlArgs: "bust=" +  (new Date()).getTime()
 });
 
-require(['jquery', 'src/engine'], function($, Engine) {
-  $(function() {
-    var stage, board, forest, piles;
-    
-    stage = $('<div/>')
-      .attr('id', 'stage');
-
-    board = $('<div/>')
+require(['jquery', 'underscore'], function($, _) {
+  /**
+   * Creates the visual representation of the board
+   */
+  function createBoard(players, resources) {
+    //Create the main board element
+    $('<div/>')
       .attr('id', 'board')
-      .appendTo(stage);
+      .appendTo('body');
 
-    forest = $('<div/>')
-      .addClass('forest')
-      .addClass('resourceSpace')
-      .appendTo(board);
+    //Create all of the resource spaces
+    _(resources).each(function(resource) {
+      $('<div/>')
+        .addClass(resource)
+        .addClass('resource-space')
+        .appendTo('#board');
 
-    $('<div/>').addClass('worker-pile').addClass('player-red').appendTo(forest);
-    $('<div/>').addClass('worker-pile').addClass('player-green').appendTo(forest);
-
-    stage.appendTo('body');
-
-    var playerBoard = $('<div />').addClass('playerBoard').appendTo(stage);
-    $('<div/>').addClass('worker-pile').addClass('player-red').appendTo(playerBoard);
-    $('<div/>').addClass('worker-pile').addClass('player-green').appendTo(playerBoard);
-
-    var activePlayer = 'red';
-    var engine = new Engine({
-      workersChanged: function(player, space, quantity) {
-        $('.' + space).find('.worker-pile.player-' + player).html(quantity);
-      },
-      removeWorkers: function(player, space) {
-        $('.' + space + ' .player-' + player).remove();
-      },
-      turnChange: function(player) {
-        activePlayer = player;
-      },
-      pickPlayers: function() {
-        return [
-          { color: 'red' },
-          { color: 'green' }
-        ];
-      }
+      //Create piles for all players in each resource space
+      _(players).each(function(player) {
+        $('<div/>').addClass('worker-pile').addClass('player' + player).appendTo('.' + resource);
+      });
     });
-    engine.start();
 
-    $('.forest').click(function() {
-      var quantity = prompt('How many workers would you like to place?');
+    //Create player boards for each player
+    _(players).each(function(player) {
+      var board = $('<div />')
+        .addClass('player-board')
+        .addClass('player' + player)
+        .appendTo('body');
+      $('<div/>').addClass('worker-pile').appendTo(board);
+    });
+  };
 
-      engine.placeWorkers(activePlayer, 'forest', quantity);
+  /**
+   * Initialize the board state
+   */
+  function initializeBoard() {
+    $('.worker-pile').empty();
+    $('.player-board .worker-pile').html(5);
+  };
+
+  $(function() {
+    var players = [1,2],
+      resources = ['forest', 'claypit', 'quary', 'river'],
+      player = 0;
+
+    createBoard(players, resources);
+    initializeBoard();
+
+    //Worker placement phase
+    $('.resource-space').click(function() {
+      var playerName = players[player],
+        workers = prompt('Player ' + playerName + ', how many workers?');
+
+      $('.worker-pile.player' + playerName, this).html(function(i, html) {
+        return html + Number(workers);
+      });
+
+      $('.player-board.player' + playerName + ' .worker-pile').html(function(i, html) {
+        return html - Number(workers);
+      });
+
+      //Cycle to the next player
+      player = (player + 1) % players.length;
     });
   });
 });
