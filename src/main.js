@@ -1,4 +1,14 @@
-require(['src/engine'], function(Engine) {
+require.config({
+   paths: {
+     'underscore': 'lib/underscore-1.2.3',
+     'jquery': 'lib/jquery-1.7.1'
+   },
+   baseUrl: ".",
+   waitSeconds: 15,
+   urlArgs: "bust=" +  (new Date()).getTime()
+});
+
+require(['jquery', 'src/engine'], function($, Engine) {
   $(function() {
     var stage, board, forest, piles;
     
