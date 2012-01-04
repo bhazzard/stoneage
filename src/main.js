@@ -49,31 +49,61 @@ require(['jquery', 'underscore'], function($, _) {
     $('.player-board .worker-pile').html(5);
   };
 
+  /**
+   * Worker placement phase
+   */
+  function placeWorkers(resourceSpace, playerName) {
+    var workers = prompt('Player ' + playerName + ', how many workers?'),
+      remaining = 0;
+
+    $('.player-board.player' + playerName + ' .worker-pile').html(function(i, html) {
+      //Cap the number of workers we can actually place
+      workers = Number(workers) + Math.min(0, Number(html) - Number(workers));
+      return Number(html) - Number(workers);
+    });
+
+    $('.worker-pile.player' + playerName, resourceSpace).html(function(i, html) {
+      return Number(html) + Number(workers);
+    });
+
+    //Figure out if any player has workers left to place
+    $('.player-board .worker-pile').each(function() {
+      remaining += Number($(this).html());
+    });
+
+    //If all workers have been placed, return the resolution phase
+    //(this depends on function hoisting, yay javascript!)
+    return remaining === 0 ? resolve : placeWorkers;
+  };
+
+  /**
+   * Resolution phase
+   */
+  function resolve(resourceSpace, playerName) {
+  };
+
   $(function() {
     var players = [1,2],
       resources = ['forest', 'claypit', 'quary', 'river'],
-      player = 0;
+      player = 0,
+      phase = placeWorkers;
 
     createBoard(players, resources);
     initializeBoard();
 
-    //Worker placement phase
     $('.resource-space').click(function() {
-      var playerName = players[player],
-        workers = prompt('Player ' + playerName + ', how many workers?');
-
-      $('.player-board.player' + playerName + ' .worker-pile').html(function(i, html) {
-        //Cap the number of workers we can actually place
-        workers = Number(workers) + Math.min(0, Number(html) - Number(workers));
-        return Number(html) - Number(workers);
-      });
-
-      $('.worker-pile.player' + playerName, this).html(function(i, html) {
-        return Number(html) + Number(workers);
-      });
+      var nextPhase = phase(this, players[player]);
 
       //Cycle to the next player
       player = (player + 1) % players.length;
+
+      //If the phase changed, go back to the first player
+      if (nextPhase !== phase) {
+        player = 0;
+      }
+
+      //Advance to the next phase (if it changed at all)
+      phase = nextPhase;
     });
   });
 });
