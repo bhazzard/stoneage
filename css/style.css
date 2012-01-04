@@ -1,0 +1,12 @@
+.resourceSpace {
+  height: 100px;
+  border: 3px solid black;
+}
+.forest {
+  border-color: brown;
+}
+.worker-pile {
+  font-weight: bold;
+}
+.player-red { color: red; }
+.player-green { color: green; }
