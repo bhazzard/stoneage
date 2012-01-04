@@ -62,12 +62,14 @@ require(['jquery', 'underscore'], function($, _) {
       var playerName = players[player],
         workers = prompt('Player ' + playerName + ', how many workers?');
 
-      $('.worker-pile.player' + playerName, this).html(function(i, html) {
-        return html + Number(workers);
+      $('.player-board.player' + playerName + ' .worker-pile').html(function(i, html) {
+        //Cap the number of workers we can actually place
+        workers = Number(workers) + Math.min(0, Number(html) - Number(workers));
+        return Number(html) - Number(workers);
       });
 
-      $('.player-board.player' + playerName + ' .worker-pile').html(function(i, html) {
-        return html - Number(workers);
+      $('.worker-pile.player' + playerName, this).html(function(i, html) {
+        return Number(html) + Number(workers);
       });
 
       //Cycle to the next player
