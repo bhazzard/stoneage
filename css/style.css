@@ -9,5 +9,12 @@
 .worker-pile {
   font-weight: bold;
 }
+.resource-pile.forest { color: brown; }
+.resource-pile.claypit { color: red; }
+.resource-pile.quary { color: gray; }
+.resource-pile.river { color: yellow; }
+.player-board { border: 3px solid black; }
 .player1 { color: red; }
+.player-board.player1 { border-color: red; }
 .player2 { color: green; }
+.player-board.player2 { border-color: green; }

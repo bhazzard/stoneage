@@ -18,6 +18,15 @@ require(['jquery', 'underscore'], function($, _) {
       .attr('id', 'board')
       .appendTo('body');
 
+    //Create player boards for each player
+    _(players).each(function(player) {
+      var board = $('<div />')
+        .addClass('player-board')
+        .addClass('player' + player)
+        .appendTo('body');
+      $('<div/>').addClass('worker-pile').appendTo(board);
+    });
+
     //Create all of the resource spaces
     _(resources).each(function(resource) {
       $('<div/>')
@@ -26,18 +35,11 @@ require(['jquery', 'underscore'], function($, _) {
         .appendTo('#board');
 
       //Create piles for all players in each resource space
+      //As well as for all resources on each player board
       _(players).each(function(player) {
-        $('<div/>').addClass('worker-pile').addClass('player' + player).appendTo('.' + resource);
+        $('<div/>').addClass('worker-pile').addClass('player' + player).appendTo('.resource-space.' + resource);
+        $('<div/>').addClass('resource-pile').addClass(resource).appendTo('.player-board.player' + player);
       });
-    });
-
-    //Create player boards for each player
-    _(players).each(function(player) {
-      var board = $('<div />')
-        .addClass('player-board')
-        .addClass('player' + player)
-        .appendTo('body');
-      $('<div/>').addClass('worker-pile').appendTo(board);
     });
   };
 
@@ -80,6 +82,34 @@ require(['jquery', 'underscore'], function($, _) {
    * Resolution phase
    */
   function resolve(resourceSpace, playerName) {
+     $(resourceSpace).trigger('resolve', playerName);
+     return resolve;
+  };
+
+  function roll(numDice) {
+    var total = 0;
+    for (var i=0; i<numDice; i++) {
+      total += Math.round(Math.random() * 6) % 6 + 1;
+    }
+
+    return total;
+  }
+
+  function resolveResourceSpace(resourceName, value) {
+    return function(event, playerName) {
+      var workers = $(this).find('.worker-pile.player' + playerName).html(),
+         diceRoll = roll(Number(workers)),
+         resourceCount = Math.floor(diceRoll / value);
+      alert('Player' + playerName + ' rolled ' + diceRoll + ' and got ' + resourceCount + ' ' + resourceName);
+
+      $('.worker-pile.player' + playerName, this).html('');
+
+      $('.player-board.player' + playerName + ' .worker-pile').html(function(i, html) {
+        return Number(html) + Number(workers);
+      });
+
+      $('.player-board.player' + playerName + ' .resource-pile.' + resourceName).html(resourceCount);
+    };
   };
 
   $(function() {
@@ -105,5 +135,10 @@ require(['jquery', 'underscore'], function($, _) {
       //Advance to the next phase (if it changed at all)
       phase = nextPhase;
     });
+
+    $('.forest').on('resolve', resolveResourceSpace('forest', 3));
+    $('.claypit').on('resolve', resolveResourceSpace('claypit', 4));
+    $('.quary').on('resolve', resolveResourceSpace('quary', 5));
+    $('.river').on('resolve', resolveResourceSpace('river', 4));
   });
 });
