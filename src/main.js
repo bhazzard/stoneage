@@ -89,7 +89,7 @@ require(['jquery', 'underscore'], function($, _) {
   function roll(numDice) {
     var total = 0;
     for (var i=0; i<numDice; i++) {
-      total += Math.round(Math.random() * 6) % 6 + 1;
+      total += Math.round(Math.random() * 6) + 1;
     }
 
     return total;
