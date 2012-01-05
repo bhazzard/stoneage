@@ -19,10 +19,10 @@ require(['jquery', 'underscore'], function($, _) {
       .appendTo('body');
 
     //Create player boards for each player
-    _(players).each(function(player) {
+    players.each(function(player) {
       var board = $('<div />')
         .addClass('player-board')
-        .addClass('player' + player)
+        .addClass('player' + player.id)
         .appendTo('body');
       $('<div/>').addClass('worker-pile').appendTo(board);
     });
@@ -36,9 +36,9 @@ require(['jquery', 'underscore'], function($, _) {
 
       //Create piles for all players in each resource space
       //As well as for all resources on each player board
-      _(players).each(function(player) {
-        $('<div/>').addClass('worker-pile').addClass('player' + player).appendTo('.resource-space.' + resource);
-        $('<div/>').addClass('resource-pile').addClass(resource).appendTo('.player-board.player' + player);
+      players.each(function(player) {
+        $('<div/>').addClass('worker-pile').addClass('player' + player.id).appendTo('.resource-space.' + resource);
+        $('<div/>').addClass('resource-pile').addClass(resource).appendTo('.player-board.player' + player.id);
       });
     });
   };
@@ -54,35 +54,41 @@ require(['jquery', 'underscore'], function($, _) {
   /**
    * Worker placement phase
    */
-  function placeWorkers(resourceSpace, playerName) {
-    var workers = prompt('Player ' + playerName + ', how many workers?'),
-      remaining = 0;
+  function placeWorkers(resourceSpace, players) {
+    var player = players.current(),
+      playerName = player.id,
+      workers = prompt('Player ' + playerName + ', how many workers?');
 
-    $('.player-board.player' + playerName + ' .worker-pile').html(function(i, html) {
-      //Cap the number of workers we can actually place
-      workers = Number(workers) + Math.min(0, Number(html) - Number(workers));
-      return Number(html) - Number(workers);
-    });
+    player.place({
+      //This is awkward at the moment, but will be less so once
+      //workspaces are represented by actual classes.
+      place: function(count) {
+        $('.player-board.player' + playerName + ' .worker-pile').html(function(i, html) {
+          return Number(html) - count;
+        });
 
-    $('.worker-pile.player' + playerName, resourceSpace).html(function(i, html) {
-      return Number(html) + Number(workers);
-    });
-
-    //Figure out if any player has workers left to place
-    $('.player-board .worker-pile').each(function() {
-      remaining += Number($(this).html());
-    });
+        $('.worker-pile.player' + playerName, resourceSpace).html(function(i, html) {
+          return Number(html) + count;
+        });
+      }
+    }, workers);
 
     //If all workers have been placed, return the resolution phase
     //(this depends on function hoisting, yay javascript!)
-    return remaining === 0 ? resolve : placeWorkers;
+    if (players.remainingWorkers() === 0) {
+      players.reset();
+      return resolve;
+    } else {
+      players.nextTurn();
+      return placeWorkers;
+    }
   };
 
   /**
    * Resolution phase
    */
-  function resolve(resourceSpace, playerName) {
-     $(resourceSpace).trigger('resolve', playerName);
+  function resolve(resourceSpace, players) {
+     $(resourceSpace).trigger('resolve', players);
      return resolve;
   };
 
@@ -93,13 +99,14 @@ require(['jquery', 'underscore'], function($, _) {
     }
 
     return total;
-  }
+  };
 
   function resolveResourceSpace(resourceName, value) {
-    return function(event, playerName) {
-      var workers = $(this).find('.worker-pile.player' + playerName).html(),
-         diceRoll = roll(Number(workers)),
-         resourceCount = Math.floor(diceRoll / value);
+    return function(event, players) {
+      var playerName = players.current().id,
+        workers = $(this).find('.worker-pile.player' + playerName).html(),
+        diceRoll = roll(Number(workers)),
+        resourceCount = Math.floor(diceRoll / value);
       alert('Player' + playerName + ' rolled ' + diceRoll + ' and got ' + resourceCount + ' ' + resourceName);
 
       $('.worker-pile.player' + playerName, this).html('');
@@ -112,28 +119,68 @@ require(['jquery', 'underscore'], function($, _) {
     };
   };
 
+  /**
+   * Players collection
+   */
+  function Players() {
+    this.reset();
+  };
+
+  Players.prototype.addPlayer = function(player) {
+    this.players = this.players || [];
+    this.players.push(player);
+    player.id = this.players.length;
+  };
+
+  Players.prototype.nextTurn = function() {
+    this.active = (this.active + 1) % this.players.length;
+  };
+
+  Players.prototype.reset = function() {
+    this.active = 0;
+  };
+
+  Players.prototype.current = function() {
+    return this.players[this.active];
+  };
+
+  Players.prototype.remainingWorkers = function() {
+    return _(this.players).reduce(function(memo, player) {
+      return memo + player.workers;
+    }, 0);
+  };
+
+  Players.prototype.each = function(iterator, context) {
+    _(this.players).each(iterator, context);
+  };
+
+  /**
+   * Player
+   */
+  function Player() {
+    this.workers = 5;
+  };
+
+  Player.prototype.place = function(workspace, count) {
+    count = count || 1;
+    count = Math.min(count, this.workers);
+    this.workers -= count;
+    workspace.place(count);
+  };
+
   $(function() {
-    var players = [1,2],
+    var players = new Players(),
       resources = ['forest', 'claypit', 'quary', 'river'],
-      player = 0,
       phase = placeWorkers;
+
+    players.addPlayer(new Player());
+    players.addPlayer(new Player());
 
     createBoard(players, resources);
     initializeBoard();
 
     $('.resource-space').click(function() {
-      var nextPhase = phase(this, players[player]);
-
-      //Cycle to the next player
-      player = (player + 1) % players.length;
-
-      //If the phase changed, go back to the first player
-      if (nextPhase !== phase) {
-        player = 0;
-      }
-
-      //Advance to the next phase (if it changed at all)
-      phase = nextPhase;
+      phase = phase(this, players);
     });
 
     $('.forest').on('resolve', resolveResourceSpace('forest', 3));
