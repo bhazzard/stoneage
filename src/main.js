@@ -88,8 +88,27 @@ require(['jquery', 'underscore'], function($, _) {
    * Resolution phase
    */
   function resolve(resourceSpace, players) {
-     $(resourceSpace).trigger('resolve', players);
-     return resolve;
+    var playerName = players.current().id;
+
+    $(resourceSpace).trigger('resolve', players);
+
+    //Figure out how many spots remain to be resolved
+    var remainingPlayer = _($('.resource-space .worker-pile.player' + playerName)).reduce(function(memo, elem) {
+      return memo + Number($(elem).html());
+    }, 0);
+
+    var remainingTotal = _($('.resource-space .worker-pile')).reduce(function(memo, elem) {
+      return memo + Number($(elem).html());
+    }, 0);
+
+    if (remainingTotal === 0) {
+      console.log('resolution phase complete!');
+      players.reset();
+    } else if (remainingPlayer === 0) {
+      players.nextTurn();
+    } else {
+    }
+    return resolve;
   };
 
   function roll(numDice) {
