@@ -102,13 +102,14 @@ require(['jquery', 'underscore'], function($, _) {
     }, 0);
 
     if (remainingTotal === 0) {
-      console.log('resolution phase complete!');
       players.reset();
+      return placeWorkers;
     } else if (remainingPlayer === 0) {
       players.nextTurn();
+      return resolve;
     } else {
+      return resolve;
     }
-    return resolve;
   };
 
   function roll(numDice) {
