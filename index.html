@@ -3,6 +3,17 @@
       <link rel="stylesheet" type="text/css" href="css/style.css" />
    </head>
    <body>
-      <script data-main="src/main" type="text/javascript" src="lib/require-1.0.3.min.js"></script>
+     <img id="board_image" src="images/board.png" usemap="#board" border="0" width="1023" height="665" alt="" />
+     <map id="board" name="board">
+       <area id="forest" class="resource-space" shape="rect" coords="323,108,410,219" href="javascript:void(0);" />
+       <area id="claypit" class="resource-space" shape="rect" coords="488,106,655,178" href="javascript:void(0);" />
+       <area id="quary" class="resource-space" shape="rect" coords="890,92,1001,219" href="javascript:void(0);" />
+       <area id="river" class="resource-space" shape="rect" coords="760,261,880,343" href="javascript:void(0);" />
+       <area id="hunt" shape="rect" coords="119,263,242,350" href="javascript:void(0);" />
+       <area id="field" shape="rect" coords="293,373,348,418" href="javascript:void(0);" />
+       <area id="toolhut" shape="rect" coords="546,343,590,380" href="javascript:void(0);" />
+       <area id="specialhut" shape="rect" coords="378,476,455,518" href="javascript:void(0);" />
+     </map>
+     <script data-main="src/main" type="text/javascript" src="lib/require-1.0.3.min.js"></script>
    </body>
 </html>

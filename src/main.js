@@ -13,11 +13,6 @@ require(['jquery', 'underscore'], function($, _) {
    * Creates the visual representation of the board
    */
   function createBoard(players, resources) {
-    //Create the main board element
-    $('<div/>')
-      .attr('id', 'board')
-      .appendTo('body');
-
     //Create player boards for each player
     players.each(function(player) {
       var board = $('<div />')
@@ -29,15 +24,10 @@ require(['jquery', 'underscore'], function($, _) {
 
     //Create all of the resource spaces
     _(resources).each(function(resource) {
-      $('<div/>')
-        .addClass(resource)
-        .addClass('resource-space')
-        .appendTo('#board');
-
       //Create piles for all players in each resource space
       //As well as for all resources on each player board
       players.each(function(player) {
-        $('<div/>').addClass('worker-pile').addClass('player' + player.id).appendTo('.resource-space.' + resource);
+        $('<div/>').addClass('worker-pile').addClass('player' + player.id).appendTo('#' + resource);
         $('<div/>').addClass('resource-pile').addClass(resource).appendTo('.player-board.player' + player.id);
       });
     });
@@ -210,9 +200,9 @@ require(['jquery', 'underscore'], function($, _) {
       phase = phase(this, players);
     });
 
-    $('.forest').on('resolve', resolveResourceSpace('forest', 3));
-    $('.claypit').on('resolve', resolveResourceSpace('claypit', 4));
-    $('.quary').on('resolve', resolveResourceSpace('quary', 5));
-    $('.river').on('resolve', resolveResourceSpace('river', 4));
+    $('#forest').on('resolve', resolveResourceSpace('forest', 3));
+    $('#claypit').on('resolve', resolveResourceSpace('claypit', 4));
+    $('#quary').on('resolve', resolveResourceSpace('quary', 5));
+    $('#river').on('resolve', resolveResourceSpace('river', 4));
   });
 });
