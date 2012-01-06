@@ -123,11 +123,14 @@ require(['jquery', 'underscore'], function($, _) {
 
   function resolveResourceSpace(resourceName, value) {
     return function(event, players) {
-      var playerName = players.current().id,
+      var player = players.current(),
+        playerName = player.id,
         workers = $(this).find('.worker-pile.player' + playerName).html(),
         diceRoll = roll(Number(workers)),
         resourceCount = Math.floor(diceRoll / value);
       alert('Player' + playerName + ' rolled ' + diceRoll + ' and got ' + resourceCount + ' ' + resourceName);
+
+      player.addWorkers(workers);
 
       $('.worker-pile.player' + playerName, this).html('');
 
@@ -186,6 +189,10 @@ require(['jquery', 'underscore'], function($, _) {
     count = Math.min(count, this.workers);
     this.workers -= count;
     workspace.place(count);
+  };
+
+  Player.prototype.addWorkers = function(count) {
+    this.workers += count;
   };
 
   $(function() {
