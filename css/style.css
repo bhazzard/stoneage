@@ -1,11 +1,61 @@
-.resource-space {
-  height: 100px;
-  border: 3px solid black;
+#board {
+  width: 1023px;
+  height: 665px;
+  background: url(../images/board.png) no-repeat;
+  position: relative;
 }
-.forest { border-color: brown; }
-.claypit { border-color: red; }
-.quary { border-color: gray; }
-.river { border-color: yellow; }
+.workspace {
+  position: absolute;
+  border: 1px solid black;
+}
+.workspace.forest {
+  left: 323px;
+  top: 108px;
+  width: 90px;
+  height: 110px;
+}
+.workspace.claypit {
+  left: 488px;
+  top: 106px;
+  width: 160px;
+  height: 70px;
+}
+.workspace.quary {
+  left: 890px;
+  top: 92px;
+  width: 110px;
+  height: 130px;
+}
+.workspace.river {
+  left: 760px;
+  top: 261px;
+  width: 120px;
+  height: 80px;
+}
+.workspace.hunt {
+  left: 119px;
+  top: 263px;
+  width: 120px;
+  height: 90px;
+}
+.workspace.field {
+  left: 293px;
+  top: 373px;
+  width: 60px;
+  height: 50px;
+}
+.workspace.toolhut {
+  left: 546px;
+  top: 343px;
+  width: 40px;
+  height: 40px;
+}
+.workspace.specialhut {
+  left: 378px;
+  top: 476px;
+  width: 80px;
+  height: 40px;
+}
 .worker-pile {
   font-weight: bold;
 }
