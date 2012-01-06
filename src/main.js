@@ -125,8 +125,8 @@ require(['jquery', 'underscore'], function($, _) {
     return function(event, players) {
       var player = players.current(),
         playerName = player.id,
-        workers = $(this).find('.worker-pile.player' + playerName).html(),
-        diceRoll = roll(Number(workers)),
+        workers = Number($(this).find('.worker-pile.player' + playerName).html()),
+        diceRoll = roll(workers),
         resourceCount = Math.floor(diceRoll / value);
       alert('Player' + playerName + ' rolled ' + diceRoll + ' and got ' + resourceCount + ' ' + resourceName);
 
@@ -135,7 +135,7 @@ require(['jquery', 'underscore'], function($, _) {
       $('.worker-pile.player' + playerName, this).html('');
 
       $('.player-board.player' + playerName + ' .worker-pile').html(function(i, html) {
-        return Number(html) + Number(workers);
+        return Number(html) + workers;
       });
 
       $('.player-board.player' + playerName + ' .resource-pile.' + resourceName).html(resourceCount);
