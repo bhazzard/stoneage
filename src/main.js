@@ -203,6 +203,6 @@ require(['jquery', 'underscore'], function($, _) {
     $('#forest').on('resolve', resolveResourceSpace('forest', 3));
     $('#claypit').on('resolve', resolveResourceSpace('claypit', 4));
     $('#quary').on('resolve', resolveResourceSpace('quary', 5));
-    $('#river').on('resolve', resolveResourceSpace('river', 4));
+    $('#river').on('resolve', resolveResourceSpace('river', 6));
   });
 });
