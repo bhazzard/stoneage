@@ -1,5 +1,6 @@
 require.config({
    paths: {
+     'backbone': 'lib/backbone-0.5.3.optamd3',
      'underscore': 'lib/underscore-1.2.3',
      'jquery': 'lib/jquery-1.7.1'
    },
@@ -8,7 +9,7 @@ require.config({
    urlArgs: "bust=" +  (new Date()).getTime()
 });
 
-require(['jquery', 'underscore'], function($, _) {
+require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
   /**
    * Creates the visual representation of the board
    */
@@ -170,7 +171,7 @@ require(['jquery', 'underscore'], function($, _) {
 
   Players.prototype.remainingWorkers = function() {
     return _(this.players).reduce(function(memo, player) {
-      return memo + player.workers;
+      return memo + player.get('workers');
     }, 0);
   };
 
@@ -181,20 +182,21 @@ require(['jquery', 'underscore'], function($, _) {
   /**
    * Player
    */
-  function Player() {
-    this.workers = 5;
-  };
-
-  Player.prototype.place = function(workspace, count) {
-    count = count || 1;
-    count = Math.min(count, this.workers);
-    this.workers -= count;
-    workspace.place(count);
-  };
-
-  Player.prototype.addWorkers = function(count) {
-    this.workers += count;
-  };
+  var Player = Backbone.Model.extend({
+    defaults: {
+      workers: 5
+    },
+    place: function(workspace, count) {
+      var workers = this.get('workers');
+      count = count || 1;
+      count = Math.min(count, workers);
+      this.set('workers', workers - count);
+      workspace.place(count);
+    },
+    addWorkers: function(count) {
+      this.set('workers', this.get('workers') + count);
+    }
+  });
 
   $(function() {
     var players = new Players(),
