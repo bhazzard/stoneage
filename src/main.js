@@ -19,15 +19,6 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       .attr('id', 'board')
       .appendTo('body');
 
-    //Create player boards for each player
-    players.each(function(player) {
-      var board = $('<div />')
-        .addClass('player-board')
-        .addClass('player' + player.id)
-        .appendTo('body');
-      $('<div/>').addClass('worker-pile').appendTo(board);
-    });
-
     //Create all of the resource spaces
     _(resources).each(function(resource) {
       $('<div/>')
@@ -39,8 +30,6 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       //As well as for all resources on each player board
       players.each(function(player) {
         $('<div/>').addClass('worker-pile').addClass('player' + player.id).appendTo('.workspace.' + resource);
-        $('<div/>').addClass('worker-pile').addClass('player' + player.id).appendTo('#' + resource);
-        $('<div/>').addClass('resource-pile').addClass(resource).appendTo('.player-board.player' + player.id);
       });
     });
   };
@@ -49,8 +38,7 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
    * Initialize the board state
    */
   function initializeBoard() {
-    $('.worker-pile').empty();
-    $('.player-board .worker-pile').html(5);
+    $('.workspace .worker-pile').empty();
   };
 
   /**
@@ -65,10 +53,6 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       //This is awkward at the moment, but will be less so once
       //workspaces are represented by actual classes.
       place: function(count) {
-        $('.player-board.player' + playerName + ' .worker-pile').html(function(i, html) {
-          return Number(html) - count;
-        });
-
         $('.worker-pile.player' + playerName, resourceSpace).html(function(i, html) {
           return Number(html) + count;
         });
@@ -133,14 +117,9 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       alert('Player' + playerName + ' rolled ' + diceRoll + ' and got ' + resourceCount + ' ' + resourceName);
 
       player.addWorkers(workers);
+      player.set(resourceName, resourceCount);
 
       $('.worker-pile.player' + playerName, this).html('');
-
-      $('.player-board.player' + playerName + ' .worker-pile').html(function(i, html) {
-        return Number(html) + workers;
-      });
-
-      $('.player-board.player' + playerName + ' .resource-pile.' + resourceName).html(resourceCount);
     };
   };
 
@@ -149,7 +128,11 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
    */
   var Player = Backbone.Model.extend({
     defaults: {
-      workers: 5
+      workers: 5,
+      wood: 0,
+      brick: 0,
+      stone: 0,
+      gold: 0
     },
     place: function(workspace, count) {
       var workers = this.get('workers');
@@ -191,10 +174,37 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
     }
   });
 
+  /**
+   * Player view
+   */
+  var PlayerView = Backbone.View.extend({
+    className: 'player-board',
+    initialize: function() {
+      this.model.bind('change', this.render, this);
+    },
+    render: function() {
+      $(this.el).empty().addClass('player' + this.model.id);
+      $('<div/>').addClass('worker-pile').html('Workers: ' + this.model.get('workers')).appendTo(this.el);
+      $('<div/>').addClass('resource-pile wood').html('Wood: ' + this.model.get('wood')).appendTo(this.el);
+      $('<div/>').addClass('resource-pile brick').html('Brick: ' + this.model.get('brick')).appendTo(this.el);
+      $('<div/>').addClass('resource-pile stone').html('Stone: ' + this.model.get('stone')).appendTo(this.el);
+      $('<div/>').addClass('resource-pile gold').html('Gold: ' + this.model.get('gold')).appendTo(this.el);
+      return this;
+    }
+  });
+
   $(function() {
     var players = new Players(),
       resources = ['forest', 'claypit', 'quary', 'river'],
       phase = placeWorkers;
+
+    //Add a player view for each player
+    players.bind('add', function(player) {
+      var view = new PlayerView({
+        model: player
+      });
+      $(view.render().el).appendTo('body');
+    });
 
     players.add(new Player());
     players.add(new Player());
@@ -206,9 +216,9 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       phase = phase(this, players);
     });
 
-    $('.forest').on('resolve', resolveResourceSpace('forest', 3));
-    $('.claypit').on('resolve', resolveResourceSpace('claypit', 4));
-    $('.quary').on('resolve', resolveResourceSpace('quary', 5));
-    $('.river').on('resolve', resolveResourceSpace('river', 6));
+    $('.forest').on('resolve', resolveResourceSpace('wood', 3));
+    $('.claypit').on('resolve', resolveResourceSpace('brick', 4));
+    $('.quary').on('resolve', resolveResourceSpace('stone', 5));
+    $('.river').on('resolve', resolveResourceSpace('gold', 6));
   });
 });
