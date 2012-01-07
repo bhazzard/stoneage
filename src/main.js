@@ -78,7 +78,7 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
     //If all workers have been placed, return the resolution phase
     //(this depends on function hoisting, yay javascript!)
     if (players.remainingWorkers() === 0) {
-      players.reset();
+      players.gotoLeader();
       return resolve;
     } else {
       players.nextTurn();
@@ -92,7 +92,7 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
   function resolve(resourceSpace, players) {
     var playerName = players.current().id;
 
-    $(resourceSpace).trigger('resolve', players);
+    $(resourceSpace).trigger('resolve', [players]);
 
     //Figure out how many spots remain to be resolved
     var remainingPlayer = _($('.workspace .worker-pile.player' + playerName)).reduce(function(memo, elem) {
@@ -104,7 +104,7 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
     }, 0);
 
     if (remainingTotal === 0) {
-      players.reset();
+      players.gotoLeader();
       return placeWorkers;
     } else if (remainingPlayer === 0) {
       players.nextTurn();
@@ -145,41 +145,6 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
   };
 
   /**
-   * Players collection
-   */
-  function Players() {
-    this.reset();
-  };
-
-  Players.prototype.addPlayer = function(player) {
-    this.players = this.players || [];
-    this.players.push(player);
-    player.id = this.players.length;
-  };
-
-  Players.prototype.nextTurn = function() {
-    this.active = (this.active + 1) % this.players.length;
-  };
-
-  Players.prototype.reset = function() {
-    this.active = 0;
-  };
-
-  Players.prototype.current = function() {
-    return this.players[this.active];
-  };
-
-  Players.prototype.remainingWorkers = function() {
-    return _(this.players).reduce(function(memo, player) {
-      return memo + player.get('workers');
-    }, 0);
-  };
-
-  Players.prototype.each = function(iterator, context) {
-    _(this.players).each(iterator, context);
-  };
-
-  /**
    * Player
    */
   var Player = Backbone.Model.extend({
@@ -198,13 +163,41 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
     }
   });
 
+  /**
+   * Players collection
+   */
+  var Players = Backbone.Collection.extend({
+    model: Player,
+    initialize: function() {
+      this.gotoLeader();
+      this.bind('add', this._setPlayerId, this);
+    },
+    gotoLeader: function() {
+      this.active = 0;
+    },
+    nextTurn: function() {
+      this.active = (this.active + 1) % this.length;
+    },
+    current: function() {
+      return this.at(this.active);
+    },
+    remainingWorkers: function() {
+      return this.reduce(function(memo, player) {
+        return memo + player.get('workers');
+      }, 0);
+    },
+    _setPlayerId: function(player) {
+      player.id = this.length;
+    }
+  });
+
   $(function() {
     var players = new Players(),
       resources = ['forest', 'claypit', 'quary', 'river'],
       phase = placeWorkers;
 
-    players.addPlayer(new Player());
-    players.addPlayer(new Player());
+    players.add(new Player());
+    players.add(new Player());
 
     createBoard(players, resources);
     initializeBoard();
