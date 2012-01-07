@@ -13,61 +13,11 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
   /**
    * Creates the visual representation of the board
    */
-  function createBoard(players, resources) {
+  function createBoard() {
     //Create the main board element
     $('<div/>')
       .attr('id', 'board')
       .appendTo('body');
-
-    //Create all of the resource spaces
-    _(resources).each(function(resource) {
-      $('<div/>')
-        .addClass(resource)
-        .addClass('workspace')
-        .appendTo('#board');
-
-      //Create piles for all players in each resource space
-      //As well as for all resources on each player board
-      players.each(function(player) {
-        $('<div/>').addClass('worker-pile').addClass('player' + player.id).appendTo('.workspace.' + resource);
-      });
-    });
-  };
-
-  /**
-   * Initialize the board state
-   */
-  function initializeBoard() {
-    $('.workspace .worker-pile').empty();
-  };
-
-  /**
-   * Worker placement phase
-   */
-  function placeWorkers(resourceSpace, players) {
-    var player = players.current(),
-      playerName = player.id,
-      workers = prompt('Player ' + playerName + ', how many workers?');
-
-    player.place({
-      //This is awkward at the moment, but will be less so once
-      //workspaces are represented by actual classes.
-      place: function(count) {
-        $('.worker-pile.player' + playerName, resourceSpace).html(function(i, html) {
-          return Number(html) + count;
-        });
-      }
-    }, workers);
-
-    //If all workers have been placed, return the resolution phase
-    //(this depends on function hoisting, yay javascript!)
-    if (players.remainingWorkers() === 0) {
-      players.gotoLeader();
-      return resolve;
-    } else {
-      players.nextTurn();
-      return placeWorkers;
-    }
   };
 
   /**
@@ -124,6 +74,70 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
   };
 
   /**
+   * Workspace
+   */
+  var Workspace = Backbone.Model.extend({
+    place: function(player, count) {
+      var current = this.get(player.id) || 0;
+      this.set(player.id, current + count);
+    },
+    resolve: function() {
+    },
+    total: function() {
+      var i, total = 0;
+      for (i=1; i<=4; ++i) {
+        total += this.get(i);
+      }
+      return total;
+    }
+  });
+
+  /**
+   * Workspace collection
+   */
+  var Workspaces = Backbone.Collection.extend({
+    model: Workspace,
+    toResolve: function(player) {
+      return this.reduce(function(memo, workspace) {
+        if (player) {
+          return memo + workspace.get(player.id);
+        } else {
+          return memo + workspace.total();
+        }
+      }, 0);
+    }
+  });
+
+  /**
+   * Workspace view
+   */
+  var WorkspaceView = Backbone.View.extend({
+    className: 'workspace',
+    events: {
+      'click': 'click'
+    },
+    initialize: function() {
+      this.model.bind('change', this.render, this);
+    },
+    render: function() {
+      $(this.el).empty().addClass(this.model.get('name'));
+      for (var i=1; i<=4; ++i) {
+        $('<div/>')
+          .addClass('worker-pile player' + i)
+          .appendTo(this.el)
+          .html(this.model.get(i));
+      }
+      return this;
+    },
+    click: function() {
+      var player = this.options.players.current(),
+        workers = prompt('Player ' + player.id + ', how many workers?');
+
+      player.place(this.model, workers);
+    }
+  });
+
+  /**
    * Player
    */
   var Player = Backbone.Model.extend({
@@ -139,7 +153,8 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       count = count || 1;
       count = Math.min(count, workers);
       this.set('workers', workers - count);
-      workspace.place(count);
+      workspace.place(this, count);
+      this.trigger('place');
     },
     addWorkers: function(count) {
       this.set('workers', this.get('workers') + count);
@@ -153,7 +168,7 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
     model: Player,
     initialize: function() {
       this.gotoLeader();
-      this.bind('add', this._setPlayerId, this);
+      this.bind('add', this._onAdd, this);
     },
     gotoLeader: function() {
       this.active = 0;
@@ -169,8 +184,12 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
         return memo + player.get('workers');
       }, 0);
     },
-    _setPlayerId: function(player) {
+    _onAdd: function(player) {
       player.id = this.length;
+      player.bind('place', this._onPlace, this);
+    },
+    _onPlace: function() {
+      this.nextTurn();
     }
   });
 
@@ -195,8 +214,18 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
 
   $(function() {
     var players = new Players(),
-      resources = ['forest', 'claypit', 'quary', 'river'],
-      phase = placeWorkers;
+      workspaces = new Workspaces();
+
+    createBoard();
+
+    //Add a workspace view for each workspace
+    workspaces.bind('add', function(workspace) {
+      var view = new WorkspaceView({
+        model: workspace,
+        players: players
+      });
+      $(view.render().el).appendTo('#board');
+    });
 
     //Add a player view for each player
     players.bind('add', function(player) {
@@ -209,12 +238,26 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
     players.add(new Player());
     players.add(new Player());
 
-    createBoard(players, resources);
-    initializeBoard();
-
-    $('.workspace').click(function() {
-      phase = phase(this, players);
-    });
+    workspaces.add(new Workspace({
+      name: 'forest',
+      resource: 'wood',
+      value: 3
+    }));
+    workspaces.add(new Workspace({
+      name: 'claypit',
+      resource: 'brick',
+      value: 4
+    }));
+    workspaces.add(new Workspace({
+      name: 'quary',
+      resource: 'stone',
+      value: 5
+    }));
+    workspaces.add(new Workspace({
+      name: 'river',
+      resource: 'gold',
+      value: 6
+    }));
 
     $('.forest').on('resolve', resolveResourceSpace('wood', 3));
     $('.claypit').on('resolve', resolveResourceSpace('brick', 4));
