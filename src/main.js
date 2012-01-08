@@ -120,7 +120,7 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       return this;
     },
     click: function() {
-      this.options.board.place(this.model);
+      this.options.board.activate(this.model);
     }
   });
 
