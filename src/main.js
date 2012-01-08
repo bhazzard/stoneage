@@ -203,6 +203,9 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
    * Board
    */
   var Board = Backbone.Model.extend({
+    defaults: {
+      phase: 'place'
+    },
     initialize: function() {
       var workspaces = new Workspaces();
       workspaces.add(new Workspace({
@@ -226,6 +229,9 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
         value: 6
       }));
       this.workspaces = workspaces;
+    },
+    activate: function(workspace) {
+      this[this.get('phase')](workspace);
     },
     place: function(workspace) {
       var player = this.get('players').current(),
