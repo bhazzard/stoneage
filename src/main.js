@@ -11,16 +11,6 @@ require.config({
 
 require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
   /**
-   * Creates the visual representation of the board
-   */
-  function createBoard() {
-    //Create the main board element
-    $('<div/>')
-      .attr('id', 'board')
-      .appendTo('body');
-  };
-
-  /**
    * Resolution phase
    */
   function resolve(resourceSpace, players) {
@@ -130,10 +120,7 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       return this;
     },
     click: function() {
-      var player = this.options.players.current(),
-        workers = prompt('Player ' + player.id + ', how many workers?');
-
-      player.place(this.model, workers);
+      this.options.board.place(this.model);
     }
   });
 
@@ -212,52 +199,78 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
     }
   });
 
+  /**
+   * Board
+   */
+  var Board = Backbone.Model.extend({
+    initialize: function() {
+      var workspaces = new Workspaces();
+      workspaces.add(new Workspace({
+        name: 'forest',
+        resource: 'wood',
+        value: 3
+      }));
+      workspaces.add(new Workspace({
+        name: 'claypit',
+        resource: 'brick',
+        value: 4
+      }));
+      workspaces.add(new Workspace({
+        name: 'quary',
+        resource: 'stone',
+        value: 5
+      }));
+      workspaces.add(new Workspace({
+        name: 'river',
+        resource: 'gold',
+        value: 6
+      }));
+      this.workspaces = workspaces;
+    },
+    place: function(workspace) {
+      var player = this.get('players').current(),
+        workers = prompt('Player ' + player.id + ', how many workers?');
+      player.place(workspace, workers);
+    }
+  });
+
+  /**
+   * Board view
+   */
+  var BoardView = Backbone.View.extend({
+    className: 'board',
+    render: function() {
+      this.model.workspaces.each(function(workspace) {
+        var view = new WorkspaceView({
+          model: workspace,
+          board: this.model
+        });
+        $(view.render().el).appendTo(this.el);
+      }, this);
+      return this;
+    }
+  });
+
   $(function() {
     var players = new Players(),
-      workspaces = new Workspaces();
-
-    createBoard();
-
-    //Add a workspace view for each workspace
-    workspaces.bind('add', function(workspace) {
-      var view = new WorkspaceView({
-        model: workspace,
+      board = new Board({
         players: players
+      }),
+      boardView = new BoardView({
+        model: board
       });
-      $(view.render().el).appendTo('#board');
-    });
 
-    //Add a player view for each player
-    players.bind('add', function(player) {
+    $(boardView.render().el).appendTo('body');
+
+    players.add(new Player());
+    players.add(new Player());
+
+    players.each(function(player) {
       var view = new PlayerView({
         model: player
       });
       $(view.render().el).appendTo('body');
     });
-
-    players.add(new Player());
-    players.add(new Player());
-
-    workspaces.add(new Workspace({
-      name: 'forest',
-      resource: 'wood',
-      value: 3
-    }));
-    workspaces.add(new Workspace({
-      name: 'claypit',
-      resource: 'brick',
-      value: 4
-    }));
-    workspaces.add(new Workspace({
-      name: 'quary',
-      resource: 'stone',
-      value: 5
-    }));
-    workspaces.add(new Workspace({
-      name: 'river',
-      resource: 'gold',
-      value: 6
-    }));
 
     $('.forest').on('resolve', resolveResourceSpace('wood', 3));
     $('.claypit').on('resolve', resolveResourceSpace('brick', 4));

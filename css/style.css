@@ -1,4 +1,4 @@
-#board {
+.board {
   width: 1023px;
   height: 665px;
   background: url(../images/board.png) no-repeat;
