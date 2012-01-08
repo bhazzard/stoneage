@@ -28,8 +28,13 @@ define([
     feed: function() {
       var food = this.get('food') + this.get('production'),
         workers = this.get('workers');
-      //TODO - need to handle the case where there is not enough food
-      this.set('food', food - workers);
+      food -= workers;
+      if (workers < 0) {
+        //TODO - need to handle the case where there is not enough food
+      } else {
+        this.set('food', food);
+        this.trigger('fed');
+      }
     }
   });
 });

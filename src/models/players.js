@@ -27,14 +27,27 @@ define([
         return memo + player.get('workers');
       }, 0);
     },
+    feed: function() {
+      this.gotoLeader();
+      this.current().feed();
+    },
     _onAdd: function(player) {
       player.id = this.length;
       player.bind('place', this._onPlace, this);
+      player.bind('fed', this._onFed, this);
     },
     _onPlace: function() {
       this.nextTurn();
       if (this.remainingWorkers() === 0) {
         this.trigger('resolve');
+      }
+    },
+    _onFed: function() {
+      this.nextTurn();
+      if (this.active === this.leader) {
+        this.trigger('allfed');
+      } else {
+        this.current().feed();
       }
     }
   });

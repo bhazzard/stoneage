@@ -52,6 +52,9 @@ define([
       this.workspaces.bind('allresolved', function() {
         this.feed();
       }, this);
+      this.get('players').bind('allfed', function() {
+        this.reset();
+      }, this);
     },
     activate: function(workspace) {
       this[this.get('phase')](workspace);
@@ -66,11 +69,7 @@ define([
       workspace.resolve(player);
     },
     feed: function() {
-      var players = this.get('players');
-      players.each(function(player) {
-        player.feed();
-      });
-      this.reset();
+      this.get('players').feed();
     },
     reset: function() {
       //TODO - pass through until we have cards/buildings to flip
