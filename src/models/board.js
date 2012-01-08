@@ -2,8 +2,9 @@ define([
     'backbone',
     'src/models/workspace',
     'src/models/workspaces',
-    'src/models/field'
-  ], function(Backbone, Workspace, Workspaces, Field) {
+    'src/models/field',
+    'src/models/specialhut'
+  ], function(Backbone, Workspace, Workspaces, Field, SpecialHut) {
   return Backbone.Model.extend({
     defaults: {
       phase: 'place'
@@ -36,7 +37,8 @@ define([
           resource: 'gold',
           value: 6
         }),
-        new Field()
+        new Field(),
+        new SpecialHut()
       ]);
       this.workspaces = workspaces;
 
