@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+  padding: 0;
+}
 .board {
   width: 1023px;
   height: 665px;
@@ -59,12 +63,30 @@
 .worker-pile {
   font-weight: bold;
 }
-.resource-pile.forest { color: brown; }
-.resource-pile.claypit { color: red; }
-.resource-pile.quary { color: gray; }
-.resource-pile.river { color: yellow; }
-.player-board { border: 3px solid black; }
+.player-board {
+  border: 3px solid black;
+  position: absolute;
+  top: 0;
+  left: 1024px;
+  width: 100px;
+  height: 160px;
+}
 .player1 { color: red; }
-.player-board.player1 { border-color: red; }
 .player2 { color: green; }
-.player-board.player2 { border-color: green; }
+.player3 { color: #EAC117; }
+.player4 { color: blue; }
+.player-board.player1 {
+  border-color: red;
+}
+.player-board.player2 {
+  border-color: green;
+  top: 167px;
+}
+.player-board.player3 {
+  border-color: #EAC117;
+  top: 334px;
+}
+.player-board.player4 {
+  border-color: blue;
+  top: 501px;
+}
