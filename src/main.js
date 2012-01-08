@@ -29,7 +29,7 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       this.set(player.id, undefined);
       var resourceCount = Math.floor(roll / value);
       player.addWorkers(workers);
-      player.set(resourceName, resourceCount);
+      player.addResource(resourceName, resourceCount);
       alert('Player ' + player.id + ' rolled ' + roll + ' and got ' + resourceCount +' ' + resourceName);
       this.trigger('resolve', player);
       return resourceCount;
@@ -119,6 +119,9 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
     },
     addWorkers: function(count) {
       this.set('workers', this.get('workers') + count);
+    },
+    addResource: function(resource, count) {
+      this.set(resource, this.get(resource) + count);
     }
   });
 
@@ -207,7 +210,6 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       }));
       this.workspaces = workspaces;
 
-      //TODO - better event names?
       this.get('players').bind('resolve', function() {
         this.get('players').gotoLeader();
         this.set('phase', 'resolve');
