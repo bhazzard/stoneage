@@ -108,7 +108,7 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
   var Player = Backbone.Model.extend({
     defaults: {
       workers: 5,
-      food: 0,
+      food: 12,
       wood: 0,
       brick: 0,
       stone: 0,
