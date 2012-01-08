@@ -108,6 +108,7 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
   var Player = Backbone.Model.extend({
     defaults: {
       workers: 5,
+      food: 0,
       wood: 0,
       brick: 0,
       stone: 0,
@@ -175,6 +176,7 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
     render: function() {
       $(this.el).empty().addClass('player' + this.model.id);
       $('<div/>').addClass('worker-pile').html('Workers: ' + this.model.get('workers')).appendTo(this.el);
+      $('<div/>').addClass('resource-pile food').html('Food: ' + this.model.get('food')).appendTo(this.el);
       $('<div/>').addClass('resource-pile wood').html('Wood: ' + this.model.get('wood')).appendTo(this.el);
       $('<div/>').addClass('resource-pile brick').html('Brick: ' + this.model.get('brick')).appendTo(this.el);
       $('<div/>').addClass('resource-pile stone').html('Stone: ' + this.model.get('stone')).appendTo(this.el);
@@ -192,26 +194,33 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
     },
     initialize: function() {
       var workspaces = new Workspaces();
-      workspaces.add(new Workspace({
-        name: 'forest',
-        resource: 'wood',
-        value: 3
-      }));
-      workspaces.add(new Workspace({
-        name: 'claypit',
-        resource: 'brick',
-        value: 4
-      }));
-      workspaces.add(new Workspace({
-        name: 'quary',
-        resource: 'stone',
-        value: 5
-      }));
-      workspaces.add(new Workspace({
-        name: 'river',
-        resource: 'gold',
-        value: 6
-      }));
+      workspaces.add([
+        new Workspace({
+          name: 'hunt',
+          resource: 'food',
+          value: 2
+        }),
+        new Workspace({
+          name: 'forest',
+          resource: 'wood',
+          value: 3
+        }),
+        new Workspace({
+          name: 'claypit',
+          resource: 'brick',
+          value: 4
+        }),
+        new Workspace({
+          name: 'quary',
+          resource: 'stone',
+          value: 5
+        }),
+        new Workspace({
+          name: 'river',
+          resource: 'gold',
+          value: 6
+        })
+      ]);
       this.workspaces = workspaces;
 
       this.get('players').bind('resolve', function() {
