@@ -74,8 +74,17 @@ define([
     },
     reset: function() {
       //TODO - pass through until we have cards/buildings to flip
-      this.get('players').gotoLeader();
-      this.set('phase', 'place');
+      this.determineWinner();
+    },
+    determineWinner: function() {
+      //TODO - check if a building card pile is empty, or if there are no more culture cards
+      var winner = false;
+      if (winner) {
+        //TODO - will not execute until there are cards/buildings to score
+      } else {
+        this.get('players').gotoLeader();
+        this.set('phase', 'place');
+      }
     }
   });
 });
