@@ -5,11 +5,16 @@ define([
   return Backbone.Collection.extend({
     model: Player,
     initialize: function() {
+      this.leader = 0;
       this.gotoLeader();
       this.bind('add', this._onAdd, this);
     },
     gotoLeader: function() {
-      this.active = 0;
+      this.active = this.leader;
+    },
+    advanceLeaderToken: function() {
+      this.leader = (this.leader + 1) % this.length;
+      this.gotoLeader();
     },
     nextTurn: function() {
       this.active = (this.active + 1) % this.length;

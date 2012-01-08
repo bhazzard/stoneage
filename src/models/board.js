@@ -82,7 +82,7 @@ define([
       if (winner) {
         //TODO - will not execute until there are cards/buildings to score
       } else {
-        this.get('players').gotoLeader();
+        this.get('players').advanceLeaderToken();
         this.set('phase', 'place');
       }
     }
