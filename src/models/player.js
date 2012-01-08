@@ -24,6 +24,12 @@ define([
     },
     addResource: function(resource, count) {
       this.set(resource, this.get(resource) + count);
+    },
+    feed: function() {
+      var food = this.get('food') + this.get('production'),
+        workers = this.get('workers');
+      //TODO - need to handle the case where there is not enough food
+      this.set('food', food - workers);
     }
   });
 });

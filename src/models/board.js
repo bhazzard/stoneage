@@ -50,8 +50,7 @@ define([
         this.get('players').nextTurn();
       }, this);
       this.workspaces.bind('allresolved', function() {
-        this.get('players').gotoLeader();
-        this.set('phase', 'place');
+        this.feed();
       }, this);
     },
     activate: function(workspace) {
@@ -65,6 +64,14 @@ define([
     resolve: function(workspace) {
       var player = this.get('players').current();
       workspace.resolve(player);
+    },
+    feed: function() {
+      var players = this.get('players');
+      players.each(function(player) {
+        player.feed();
+      });
+      players.gotoLeader();
+      this.set('phase', 'place');
     }
   });
 });
