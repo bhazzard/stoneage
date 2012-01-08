@@ -11,59 +11,6 @@ require.config({
 
 require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
   /**
-   * Resolution phase
-   */
-  function resolve(resourceSpace, players) {
-    var playerName = players.current().id;
-
-    $(resourceSpace).trigger('resolve', [players]);
-
-    //Figure out how many spots remain to be resolved
-    var remainingPlayer = _($('.workspace .worker-pile.player' + playerName)).reduce(function(memo, elem) {
-      return memo + Number($(elem).html());
-    }, 0);
-
-    var remainingTotal = _($('.workspace .worker-pile')).reduce(function(memo, elem) {
-      return memo + Number($(elem).html());
-    }, 0);
-
-    if (remainingTotal === 0) {
-      players.gotoLeader();
-      return placeWorkers;
-    } else if (remainingPlayer === 0) {
-      players.nextTurn();
-      return resolve;
-    } else {
-      return resolve;
-    }
-  };
-
-  function roll(numDice) {
-    var total = 0;
-    for (var i=0; i<numDice; i++) {
-      total += Math.round(Math.random() * 6) + 1;
-    }
-
-    return total;
-  };
-
-  function resolveResourceSpace(resourceName, value) {
-    return function(event, players) {
-      var player = players.current(),
-        playerName = player.id,
-        workers = Number($(this).find('.worker-pile.player' + playerName).html()),
-        diceRoll = roll(workers),
-        resourceCount = Math.floor(diceRoll / value);
-      alert('Player' + playerName + ' rolled ' + diceRoll + ' and got ' + resourceCount + ' ' + resourceName);
-
-      player.addWorkers(workers);
-      player.set(resourceName, resourceCount);
-
-      $('.worker-pile.player' + playerName, this).html('');
-    };
-  };
-
-  /**
    * Workspace
    */
   var Workspace = Backbone.Model.extend({
@@ -71,12 +18,26 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       var current = this.get(player.id) || 0;
       this.set(player.id, current + count);
     },
-    resolve: function() {
+    resolve: function(player) {
+      var roll = 0,
+        resourceName = this.get('resource'),
+        value = this.get('value'),
+        workers = this.get(player.id);
+      for (var i=0; i<workers; i++) {
+        roll += Math.round(Math.random() * 6) + 1;
+      }
+      this.set(player.id, undefined);
+      var resourceCount = Math.floor(roll / value);
+      player.addWorkers(workers);
+      player.set(resourceName, resourceCount);
+      alert('Player ' + player.id + ' rolled ' + roll + ' and got ' + resourceCount +' ' + resourceName);
+      this.trigger('resolve', player);
+      return resourceCount;
     },
     total: function() {
       var i, total = 0;
       for (i=1; i<=4; ++i) {
-        total += this.get(i);
+        total += (this.get(i) || 0);
       }
       return total;
     }
@@ -87,14 +48,27 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
    */
   var Workspaces = Backbone.Collection.extend({
     model: Workspace,
+    initialize: function() {
+      this.bind('add', this._onAdd, this);
+    },
     toResolve: function(player) {
       return this.reduce(function(memo, workspace) {
         if (player) {
-          return memo + workspace.get(player.id);
+          return memo + (workspace.get(player.id) || 0);
         } else {
           return memo + workspace.total();
         }
       }, 0);
+    },
+    _onAdd: function(workspace) {
+      workspace.bind('resolve', this._onResolve, this);
+    },
+    _onResolve: function(player) {
+      if (this.toResolve() === 0) {
+        this.trigger('allresolved');
+      } else if (this.toResolve(player) === 0) {
+        this.trigger('playerresolved');
+      }
     }
   });
 
@@ -177,6 +151,9 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
     },
     _onPlace: function() {
       this.nextTurn();
+      if (this.remainingWorkers() === 0) {
+        this.trigger('resolve');
+      }
     }
   });
 
@@ -229,6 +206,19 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
         value: 6
       }));
       this.workspaces = workspaces;
+
+      //TODO - better event names?
+      this.get('players').bind('resolve', function() {
+        this.get('players').gotoLeader();
+        this.set('phase', 'resolve');
+      }, this);
+      this.workspaces.bind('playerresolved', function() {
+        this.get('players').nextTurn();
+      }, this);
+      this.workspaces.bind('allresolved', function() {
+        this.get('players').gotoLeader();
+        this.set('phase', 'place');
+      }, this);
     },
     activate: function(workspace) {
       this[this.get('phase')](workspace);
@@ -237,6 +227,10 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       var player = this.get('players').current(),
         workers = prompt('Player ' + player.id + ', how many workers?');
       player.place(workspace, workers);
+    },
+    resolve: function(workspace) {
+      var player = this.get('players').current();
+      workspace.resolve(player);
     }
   });
 
@@ -277,10 +271,5 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       });
       $(view.render().el).appendTo('body');
     });
-
-    $('.forest').on('resolve', resolveResourceSpace('wood', 3));
-    $('.claypit').on('resolve', resolveResourceSpace('brick', 4));
-    $('.quary').on('resolve', resolveResourceSpace('stone', 5));
-    $('.river').on('resolve', resolveResourceSpace('gold', 6));
   });
 });
