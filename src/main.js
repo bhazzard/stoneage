@@ -32,7 +32,6 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       player.addResource(resourceName, resourceCount);
       alert('Player ' + player.id + ' rolled ' + roll + ' and got ' + resourceCount +' ' + resourceName);
       this.trigger('resolve', player);
-      return resourceCount;
     },
     workers: function(playerId) {
       if (playerId === undefined) {
@@ -44,6 +43,28 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       } else {
         return this.get(playerId) || 0;
       }
+    }
+  });
+
+  /**
+   * Field
+   */
+  var Field = Workspace.extend({
+    initialize: function() {
+      this.set({
+        name: 'field',
+        resource: 'production',
+        value: 1
+      });
+    },
+    resolve: function(player) {
+      var resourceName = this.get('resource'),
+        value = this.get('value'),
+        workers = this.workers(player.id);
+      this.set(player.id, undefined);
+      player.addWorkers(workers);
+      player.addResource(resourceName, 1);
+      this.trigger('resolve', player);
     }
   });
 
@@ -109,6 +130,7 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
     defaults: {
       workers: 5,
       food: 12,
+      production: 0,
       wood: 0,
       brick: 0,
       stone: 0,
@@ -174,9 +196,14 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       this.model.bind('change', this.render, this);
     },
     render: function() {
+      var foodLabel = 'Food: ' + this.model.get('food'),
+        production = this.model.get('production');
+      if (production > 0) {
+        foodLabel += '+' + production;
+      }
       $(this.el).empty().addClass('player' + this.model.id);
       $('<div/>').addClass('worker-pile').html('Workers: ' + this.model.get('workers')).appendTo(this.el);
-      $('<div/>').addClass('resource-pile food').html('Food: ' + this.model.get('food')).appendTo(this.el);
+      $('<div/>').addClass('resource-pile food').html(foodLabel).appendTo(this.el);
       $('<div/>').addClass('resource-pile wood').html('Wood: ' + this.model.get('wood')).appendTo(this.el);
       $('<div/>').addClass('resource-pile brick').html('Brick: ' + this.model.get('brick')).appendTo(this.el);
       $('<div/>').addClass('resource-pile stone').html('Stone: ' + this.model.get('stone')).appendTo(this.el);
@@ -219,7 +246,8 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
           name: 'river',
           resource: 'gold',
           value: 6
-        })
+        }),
+        new Field()
       ]);
       this.workspaces = workspaces;
 
