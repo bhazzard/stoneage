@@ -15,14 +15,14 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
    */
   var Workspace = Backbone.Model.extend({
     place: function(player, count) {
-      var current = this.get(player.id) || 0;
+      var current = this.workers(player.id);
       this.set(player.id, current + count);
     },
     resolve: function(player) {
       var roll = 0,
         resourceName = this.get('resource'),
         value = this.get('value'),
-        workers = this.get(player.id);
+        workers = this.workers(player.id);
       for (var i=0; i<workers; i++) {
         roll += Math.round(Math.random() * 6) + 1;
       }
@@ -34,12 +34,16 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
       this.trigger('resolve', player);
       return resourceCount;
     },
-    total: function() {
-      var i, total = 0;
-      for (i=1; i<=4; ++i) {
-        total += (this.get(i) || 0);
+    workers: function(playerId) {
+      if (playerId === undefined) {
+        var i, total = 0;
+        for (i=1; i<=4; ++i) {
+          total += this.workers(i);
+        }
+        return total;
+      } else {
+        return this.get(playerId) || 0;
       }
-      return total;
     }
   });
 
@@ -54,9 +58,9 @@ require(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
     toResolve: function(player) {
       return this.reduce(function(memo, workspace) {
         if (player) {
-          return memo + (workspace.get(player.id) || 0);
+          return memo + workspace.workers(player.id);
         } else {
-          return memo + workspace.total();
+          return memo + workspace.workers();
         }
       }, 0);
     },
