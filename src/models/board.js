@@ -70,7 +70,11 @@ define([
       players.each(function(player) {
         player.feed();
       });
-      players.gotoLeader();
+      this.reset();
+    },
+    reset: function() {
+      //TODO - pass through until we have cards/buildings to flip
+      this.get('players').gotoLeader();
       this.set('phase', 'place');
     }
   });
