@@ -17,8 +17,9 @@ require([
     'src/views/board',
     'src/models/player',
     'src/models/players',
-    'src/views/player'
-  ], function($, _, Backbone, Board, BoardView, Player, Players, PlayerView) {
+    'src/views/player',
+    'src/views/feed'
+  ], function($, _, Backbone, Board, BoardView, Player, Players, PlayerView, FeedView) {
   var players = new Players(),
     board = new Board({
       players: players
@@ -33,9 +34,12 @@ require([
   players.add(new Player());
 
   players.each(function(player) {
-    var view = new PlayerView({
+    var playerView = new PlayerView({
       model: player
     });
-    $(view.render().el).appendTo('body');
+    var feedView = new FeedView({
+      model: player
+    });
+    $(playerView.render().el).appendTo('body');
   });
 });

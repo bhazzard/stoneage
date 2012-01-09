@@ -15,6 +15,7 @@ define([
       }
       $(this.el).empty().addClass('player' + this.model.id);
       $('<div/>').addClass('worker-pile').html('Workers: ' + this.model.get('workers')).appendTo(this.el);
+      $('<div/>').addClass('score').html('Score: ' + this.model.get('score')).appendTo(this.el);
       $('<div/>').addClass('resource-pile food').html(foodLabel).appendTo(this.el);
       $('<div/>').addClass('resource-pile wood').html('Wood: ' + this.model.get('wood')).appendTo(this.el);
       $('<div/>').addClass('resource-pile brick').html('Brick: ' + this.model.get('brick')).appendTo(this.el);

@@ -5,7 +5,7 @@ define([
     defaults: {
       score: 0,
       workers: 5,
-      food: 12,
+      food: 4,//12,
       production: 0,
       wood: 0,
       brick: 0,
@@ -24,19 +24,23 @@ define([
       this.set(attribute, this.get(attribute) + count);
     },
     subtract: function(attribute, count) {
-      this.set(attribute, this.get(attribute) + count);
+      this.set(attribute, this.get(attribute) - count);
     },
-    feed: function() {
-      var food = this.get('food') + this.get('production'),
-        workers = this.get('workers'),
+    feed: function(type) {
+      var food = 0,
         deficit = 0;
-      food -= workers;
+      if (type === 'score') {
+        this.subtract(type, 10);
+      } else {
+        food = this.get('food') + this.get('production') - this.get('workers');
+      }
       if (food < 0) {
         deficit = -food;
         if (this.resourceCount() < deficit) {
           this.subtract('score', 10);
         } else {
-          this.trigger('deficit', deficit);
+          this.set('deficit', deficit);
+          this.trigger('deficit');
         }
       } else {
         this.set('food', food);

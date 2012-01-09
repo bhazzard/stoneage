@@ -90,3 +90,11 @@ body {
   border-color: blue;
   top: 501px;
 }
+.feeding-dialog {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: white;
+  border: 2px solid gray;
+  z-index: 100;
+}
