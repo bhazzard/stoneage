@@ -3,8 +3,9 @@ define([
     'src/models/workspace',
     'src/models/workspaces',
     'src/models/field',
-    'src/models/specialhut'
-  ], function(Backbone, Workspace, Workspaces, Field, SpecialHut) {
+    'src/models/specialhut',
+		'src/models/hunt'
+  ], function(Backbone, Workspace, Workspaces, Field, SpecialHut, Hunt) {
   return Backbone.Model.extend({
     defaults: {
       phase: 'place'
@@ -12,11 +13,7 @@ define([
     initialize: function() {
       var workspaces = new Workspaces();
       workspaces.add([
-        new Workspace({
-          name: 'hunt',
-          resource: 'food',
-          value: 2
-        }),
+        new Hunt(),
         new Workspace({
           name: 'forest',
           resource: 'wood',
