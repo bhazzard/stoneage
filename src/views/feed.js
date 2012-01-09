@@ -8,7 +8,7 @@ define([
       'click .ok': 'feed',
       'click .up': 'up',
       'click .down': 'down',
-      'click :radio': 'change'
+      'click :radio': 'checkDeficit'
     },
     initialize: function() {
       this.model.bind('deficit', this.render, this);
@@ -61,16 +61,15 @@ define([
     checkDeficit: function() {
       if ($(':radio:checked', this.el).val() === 'score') {
         $('.ok', this.el).attr('disabled', false);
+        $('.up,.down,:text', this.el).attr('disabled', true);
       } else {
         var total = 0;
+        $('.up,.down,:text', this.el).attr('disabled', false);
         $(':text', this.el).each(function() {
           total += Number($(this).val());
         });
         $('.ok', this.el).attr('disabled', total !== this.model.get('deficit'));
       }
-    },
-    change: function() {
-      this.checkDeficit();
     }
   });
 });
