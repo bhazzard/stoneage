@@ -13,7 +13,7 @@ define([
       var workers = this.workers(player.id);
       this.set(player.id, undefined);
       if (workers === 2) {
-        player.addWorkers(workers + 1);
+        player.add('workers', workers + 1);
       }
       this.trigger('resolve', player);
     }

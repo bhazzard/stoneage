@@ -16,8 +16,8 @@ define([
       }
       this.set(player.id, undefined);
       var resourceCount = Math.floor(roll / value);
-      player.addWorkers(workers);
-      player.addResource(resourceName, resourceCount);
+      player.add('workers', workers);
+      player.add(resourceName, resourceCount);
       alert('Player ' + player.id + ' rolled ' + roll + ' and got ' + resourceCount +' ' + resourceName);
       this.trigger('resolve', player);
     },

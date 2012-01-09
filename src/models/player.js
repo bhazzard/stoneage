@@ -20,14 +20,11 @@ define([
       workspace.place(this, count);
       this.trigger('place');
     },
-    addWorkers: function(count) {
-      this.set('workers', this.get('workers') + count);
+    add: function(attribute, count) {
+      this.set(attribute, this.get(attribute) + count);
     },
-    addResource: function(resource, count) {
-      this.set(resource, this.get(resource) + count);
-    },
-    subtractScore: function(count) {
-      this.set('score', this.get('score') - count);
+    subtract: function(attribute, count) {
+      this.set(attribute, this.get(attribute) + count);
     },
     feed: function() {
       var food = this.get('food') + this.get('production'),
@@ -37,7 +34,7 @@ define([
       if (food < 0) {
         deficit = -food;
         if (this.resourceCount() < deficit) {
-          this.subtractScore(10);
+          this.subtract('score', 10);
         } else {
           this.trigger('deficit', deficit);
         }

@@ -14,8 +14,8 @@ define([
         value = this.get('value'),
         workers = this.workers(player.id);
       this.set(player.id, undefined);
-      player.addWorkers(workers);
-      player.addResource(resourceName, 1);
+      player.add('workers', workers);
+      player.add(resourceName, 1);
       this.trigger('resolve', player);
     }
   });
