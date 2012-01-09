@@ -10,7 +10,11 @@ define([
       });
     },
 		canPlace : function(count) {
-			return count == 1;
+			var workerCount = this.workers() + count;
+			return {
+				result : workerCount == 1,
+				reason : 'Only 1 worker allowed on field'
+			};
 		},
     resolve: function(player) {
       var resourceName = this.get('resource'),

@@ -10,7 +10,9 @@ define([
 			});
 		},
 		canPlace: function(count){
-			return true;
+			return {
+				result : true
+			};
 		}
 	});
 });

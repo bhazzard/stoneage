@@ -64,10 +64,12 @@ define([
       var player = this.get('players').current(),
         workers = prompt('Player ' + player.id + ', how many workers?');
 
-			if(workspace.canPlace(workers)){
+			workers = parseInt(workers);
+			var specResult = workspace.canPlace(workers);
+			if(specResult.result){
       	player.place(workspace, workers);
 			} else {
-				alert('Too many workers');
+				alert(specResult.reason);
 				this.place(workspace);
 			}
     },

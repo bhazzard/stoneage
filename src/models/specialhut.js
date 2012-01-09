@@ -10,7 +10,11 @@ define([
       });
     },
 		canPlace : function(count) {
-			return count == 2;
+			var workerCount = this.workers() + count;
+			return{
+				result :  workerCount == 2,
+				reason : 'Only two workers allowed in hut.'
+			};
 		},
     resolve: function(player) {
       var workers = this.workers(player.id);

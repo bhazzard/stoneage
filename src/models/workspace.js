@@ -3,8 +3,23 @@ define([
   ], function(Backbone) {
   return Backbone.Model.extend({
 		canPlace : function(count){
+			if(this._playersOnWorkspace() >= 2){
+				return {
+					result : false,
+					reason : 'Already 2 players on workspace'
+				};
+			}
 			var workerCount = this.workers() + count;
-			return workerCount <= this.get('maxWorkers');
+			console.log(workerCount);
+			if(workerCount > this.get('maxWorkers')){
+				return {
+					result : false,
+					reason : 'Too many workers on ' + this.get('name')
+				};
+			}
+			return {
+				result : true
+			};
 		},
     place: function(player, count) {
       var current = this.workers(player.id);
@@ -35,6 +50,15 @@ define([
       } else {
         return this.get(playerId) || 0;
       }
-    }
+    },
+		_playersOnWorkspace : function(){
+			var i, count;
+			for(i=1; i <=4; ++i){
+				if(this.get(i) > 0){
+					count++;
+				}
+			}
+			return count;
+		}
   });
 });
