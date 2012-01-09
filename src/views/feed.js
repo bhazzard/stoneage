@@ -69,6 +69,7 @@ define([
           total += Number($(this).val());
         });
         $('.ok', this.el).attr('disabled', total !== this.model.get('deficit'));
+        $('.up', this.el).attr('disabled', total === this.model.get('deficit'));
       }
     }
   });
