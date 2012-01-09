@@ -5,7 +5,9 @@ define([
   return Backbone.View.extend({
     className: 'feeding-dialog',
     events: {
-      'click .ok': 'feed'
+      'click .ok': 'feed',
+      'click .up': 'up',
+      'click .down': 'down'
     },
     initialize: function() {
       this.model.bind('deficit', this.render, this);
@@ -16,10 +18,10 @@ define([
         '<div>' +
           '<div><label><input type="radio" name="feed" class="score" checked="checked" /> Lose 10 points</label></div>',
           '<div><label><input type="radio" name="feed" class="resources" /> Lose resources</label></div>',
-          '<div>Wood: <button class="wood">-</button><span class="wood">0</span><button class="wood">+</button></div>' +
-          '<div>Brick: <button class="brick">-</button><span class="brick">0</span><button class="brick">+</button></div>' +
-          '<div>Stone: <button class="stone">-</button><span class="stone">0</span><button class="stone">+</button></div>' +
-          '<div>Gold: <button class="gold">-</button><span class="gold">0</span><button class="gold">+</button></div>' +
+          '<div>Wood: <button class="down">-</button><input type="text" name="wood" value="0" /><button class="up">+</button></div>' +
+          '<div>Brick: <button class="down">-</button><input type="text" name="brick" value="0" /><button class="up">+</button></div>' +
+          '<div>Stone: <button class="down">-</button><input type="text" name="stone" value="0" /><button class="up">+</button></div>' +
+          '<div>Gold: <button class="down">-</button><input type="text" name="gold" value="0" /><button class="up">+</button></div>' +
         '</div>' +
         '<button class="ok">Ok</button>'
       ];
@@ -36,6 +38,20 @@ define([
         this.model.feed('score');
       }
       this.remove();
+    },
+    up: function(event) {
+      var text = $(event.target).siblings(':text'),
+        count = Number(text.val());
+      if (count < this.model.get(text.attr('name'))) {
+        text.val(count + 1);
+      }
+    },
+    down: function(event) {
+      var text = $(event.target).siblings(':text'),
+        count = Number(text.val());
+      if (count > 0) {
+        text.val(count - 1);
+      }
     }
   });
 });
