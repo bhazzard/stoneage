@@ -18,8 +18,13 @@ define([
         '</div>' +
         '<button class="ok">Ok</button>'
       ];
-      $(template.join('')).appendTo(this.el);
+      $(this.el).html(template.join(''));
       $(this.el).appendTo('body');
+
+      //I'm not sure why we need to call this here.
+      //I guess .remove() undelegates, but nothing
+      //ever re-delegates...
+      this.delegateEvents(this.events);
     },
     feed: function() {
       if ($('.score', this.el).is(':checked')) {
