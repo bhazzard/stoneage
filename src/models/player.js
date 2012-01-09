@@ -1,6 +1,7 @@
 define([
+    'underscore',
     'backbone'
-  ], function(Backbone) {
+  ], function(_, Backbone) {
   return Backbone.Model.extend({
     defaults: {
       score: 0,
@@ -29,10 +30,14 @@ define([
     feed: function(type) {
       var food = 0,
         deficit = 0;
-      if (type === 'score') {
+      if (type === undefined) {
+        food = this.get('food') + this.get('production') - this.get('workers');
+      } else if (type === 'score') {
         this.subtract(type, 10);
       } else {
-        food = this.get('food') + this.get('production') - this.get('workers');
+        _(type).each(function(count, resource) {
+          this.subtract(resource, count);
+        }, this);
       }
       if (food < 0) {
         deficit = -food;

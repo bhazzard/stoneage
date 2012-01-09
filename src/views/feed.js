@@ -37,8 +37,14 @@ define([
       this.delegateEvents(this.events);
     },
     feed: function() {
+      var resources = {};
       if ($(':radio:checked', this.el).val() === 'score') {
         this.model.feed('score');
+      } else {
+        $(':text', this.el).each(function() {
+          resources[$(this).attr('name')] = Number($(this).val());
+        });
+        this.model.feed(resources);
       }
       this.remove();
     },
