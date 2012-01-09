@@ -3,6 +3,7 @@ define([
   ], function(Backbone) {
   return Backbone.Model.extend({
     defaults: {
+      score: 0,
       workers: 5,
       food: 12,
       production: 0,
@@ -25,16 +26,31 @@ define([
     addResource: function(resource, count) {
       this.set(resource, this.get(resource) + count);
     },
+    subtractScore: function(count) {
+      this.set('score', this.get('score') - count);
+    },
     feed: function() {
       var food = this.get('food') + this.get('production'),
-        workers = this.get('workers');
+        workers = this.get('workers'),
+        deficit = 0;
       food -= workers;
-      if (workers < 0) {
-        //TODO - need to handle the case where there is not enough food
+      if (food < 0) {
+        deficit = -food;
+        if (this.resourceCount() < deficit) {
+          this.subtractScore(10);
+        } else {
+          this.trigger('deficit', deficit);
+        }
       } else {
         this.set('food', food);
         this.trigger('fed');
       }
+    },
+    resourceCount: function() {
+      return this.get('wood') +
+        this.get('brick') +
+        this.get('stone') +
+        this.get('gold');
     }
   });
 });
