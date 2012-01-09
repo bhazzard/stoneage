@@ -7,7 +7,8 @@ define([
     events: {
       'click .ok': 'feed',
       'click .up': 'up',
-      'click .down': 'down'
+      'click .down': 'down',
+      'click :radio': 'change'
     },
     initialize: function() {
       this.model.bind('deficit', this.render, this);
@@ -16,8 +17,8 @@ define([
       var template = [
         '<p>Player ' + this.model.id + ' you have ' + this.model.get('deficit') + ' starving workers. How will you feed them?</p>',
         '<div>' +
-          '<div><label><input type="radio" name="feed" class="score" checked="checked" /> Lose 10 points</label></div>',
-          '<div><label><input type="radio" name="feed" class="resources" /> Lose resources</label></div>',
+          '<div><label><input type="radio" name="feed" value="score" checked="checked" /> Lose 10 points</label></div>',
+          '<div><label><input type="radio" name="feed" value="resources" /> Lose resources</label></div>',
           '<div>Wood: <button class="down">-</button><input type="text" name="wood" value="0" /><button class="up">+</button></div>' +
           '<div>Brick: <button class="down">-</button><input type="text" name="brick" value="0" /><button class="up">+</button></div>' +
           '<div>Stone: <button class="down">-</button><input type="text" name="stone" value="0" /><button class="up">+</button></div>' +
@@ -28,13 +29,15 @@ define([
       $(this.el).html(template.join(''));
       $(this.el).appendTo('body');
 
+      this.checkDeficit();
+
       //I'm not sure why we need to call this here.
       //I guess .remove() undelegates, but nothing
       //ever re-delegates...
       this.delegateEvents(this.events);
     },
     feed: function() {
-      if ($('.score', this.el).is(':checked')) {
+      if ($(':radio:checked', this.el).val() === 'score') {
         this.model.feed('score');
       }
       this.remove();
@@ -44,6 +47,7 @@ define([
         count = Number(text.val());
       if (count < this.model.get(text.attr('name'))) {
         text.val(count + 1);
+        this.checkDeficit();
       }
     },
     down: function(event) {
@@ -51,7 +55,22 @@ define([
         count = Number(text.val());
       if (count > 0) {
         text.val(count - 1);
+        this.checkDeficit();
       }
+    },
+    checkDeficit: function() {
+      if ($(':radio:checked', this.el).val() === 'score') {
+        $('.ok', this.el).attr('disabled', false);
+      } else {
+        var total = 0;
+        $(':text', this.el).each(function() {
+          total += Number($(this).val());
+        });
+        $('.ok', this.el).attr('disabled', total !== this.model.get('deficit'));
+      }
+    },
+    change: function() {
+      this.checkDeficit();
     }
   });
 });
