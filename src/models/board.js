@@ -65,7 +65,7 @@ define([
         workers = prompt('Player ' + player.id + ', how many workers?');
 
 			workers = parseInt(workers);
-			var specResult = workspace.canPlace(workers);
+			var specResult = workspace.canPlace(player, workers);
 			if(specResult.result){
       	player.place(workspace, workers);
 			} else {

@@ -9,7 +9,7 @@ define([
         value: 1
       });
     },
-		canPlace : function(count) {
+		canPlace : function(player, count) {
 			var workerCount = this.workers() + count;
 			return {
 				result : workerCount == 1,

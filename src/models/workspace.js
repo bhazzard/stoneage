@@ -2,7 +2,13 @@ define([
     'backbone'
   ], function(Backbone) {
   return Backbone.Model.extend({
-		canPlace : function(count){
+		canPlace : function(player, count){
+			if(this.get(player.id) > 0){
+				return {
+					result : false,
+					reason : 'Player ' + player.id + ' already has workers on ' + this.get('name')
+				};
+			}			
 			if(this._playersOnWorkspace() >= 2){
 				return {
 					result : false,
@@ -10,7 +16,6 @@ define([
 				};
 			}
 			var workerCount = this.workers() + count;
-			console.log(workerCount);
 			if(workerCount > this.get('maxWorkers')){
 				return {
 					result : false,

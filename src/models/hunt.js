@@ -9,7 +9,7 @@ define([
 				value: 2
 			});
 		},
-		canPlace: function(count){
+		canPlace: function(player, count){
 			return {
 				result : true
 			};
