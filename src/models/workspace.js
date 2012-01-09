@@ -2,6 +2,10 @@ define([
     'backbone'
   ], function(Backbone) {
   return Backbone.Model.extend({
+		canPlace : function(count){
+			var workerCount = this.workers() + count;
+			return workerCount <= this.get('maxWorkers');
+		},
     place: function(player, count) {
       var current = this.workers(player.id);
       this.set(player.id, current + count);

@@ -9,6 +9,9 @@ define([
         value: 1
       });
     },
+		canPlace : function(count) {
+			return count == 2;
+		},
     resolve: function(player) {
       var workers = this.workers(player.id);
       this.set(player.id, undefined);

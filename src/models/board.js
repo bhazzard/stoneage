@@ -20,22 +20,26 @@ define([
         new Workspace({
           name: 'forest',
           resource: 'wood',
-          value: 3
+          value: 3,
+					maxWorkers : 7
         }),
         new Workspace({
           name: 'claypit',
           resource: 'brick',
-          value: 4
+          value: 4,
+					maxWorkers : 7
         }),
         new Workspace({
           name: 'quary',
           resource: 'stone',
-          value: 5
+          value: 5,
+					maxWorkers : 7
         }),
         new Workspace({
           name: 'river',
           resource: 'gold',
-          value: 6
+          value: 6,
+					maxWorkers : 7
         }),
         new Field(),
         new SpecialHut()
@@ -62,7 +66,13 @@ define([
     place: function(workspace) {
       var player = this.get('players').current(),
         workers = prompt('Player ' + player.id + ', how many workers?');
-      player.place(workspace, workers);
+
+			if(workspace.canPlace(workers)){
+      	player.place(workspace, workers);
+			} else {
+				alert('Too many workers');
+				this.place(workspace);
+			}
     },
     resolve: function(workspace) {
       var player = this.get('players').current();

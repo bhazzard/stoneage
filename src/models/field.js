@@ -9,6 +9,9 @@ define([
         value: 1
       });
     },
+		canPlace : function(count) {
+			return count == 1;
+		},
     resolve: function(player) {
       var resourceName = this.get('resource'),
         value = this.get('value'),
