@@ -11,7 +11,6 @@ require.config({
 
 require([
     'jquery',
-    'underscore',
     'backbone',
     'src/models/board',
     'src/views/board',
@@ -19,7 +18,7 @@ require([
     'src/models/players',
     'src/views/player',
     'src/views/feed'
-  ], function($, _, Backbone, Board, BoardView, Player, Players, PlayerView, FeedView) {
+  ], function($, Backbone, Board, BoardView, Player, Players, PlayerView, FeedView) {
   var players = new Players(),
     board = new Board({
       players: players

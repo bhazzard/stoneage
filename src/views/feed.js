@@ -8,7 +8,7 @@ define([
       'click .ok': 'feed',
       'click .up': 'up',
       'click .down': 'down',
-      'click :radio': 'change'
+      'click :radio': 'checkDeficit'
     },
     initialize: function() {
       this.model.bind('deficit', this.render, this);
@@ -37,8 +37,14 @@ define([
       this.delegateEvents(this.events);
     },
     feed: function() {
+      var resources = {};
       if ($(':radio:checked', this.el).val() === 'score') {
         this.model.feed('score');
+      } else {
+        $(':text', this.el).each(function() {
+          resources[$(this).attr('name')] = Number($(this).val());
+        });
+        this.model.feed(resources);
       }
       this.remove();
     },
@@ -61,16 +67,16 @@ define([
     checkDeficit: function() {
       if ($(':radio:checked', this.el).val() === 'score') {
         $('.ok', this.el).attr('disabled', false);
+        $('.up,.down,:text', this.el).attr('disabled', true);
       } else {
         var total = 0;
+        $('.up,.down,:text', this.el).attr('disabled', false);
         $(':text', this.el).each(function() {
           total += Number($(this).val());
         });
         $('.ok', this.el).attr('disabled', total !== this.model.get('deficit'));
+        $('.up', this.el).attr('disabled', total === this.model.get('deficit'));
       }
-    },
-    change: function() {
-      this.checkDeficit();
     }
   });
 });
