@@ -4,7 +4,10 @@ define([
     'src/models/building'
   ], function(_, Backbone, Building) {
   var Buildings = Backbone.Collection.extend({
-    model: Building
+    model: Building,
+    top: function() {
+      return this.at(0);
+    }
   });
 
   //Special "Deck" class that preloads all of the buildings
