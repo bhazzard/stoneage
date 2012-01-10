@@ -1,7 +1,8 @@
 define([
+    'underscore',
     'backbone',
     'src/models/building'
-  ], function(Backbone, Building) {
+  ], function(_, Backbone, Building) {
   var Buildings = Backbone.Collection.extend({
     model: Building
   });
@@ -139,10 +140,14 @@ define([
         })
       ];
 
-      this.add(deck);
-    },
-    split: function() {
-      //TODO - split into 4 buildings collections and return
+      deck = _.shuffle(deck);
+      
+      //Split into 4 even piles
+      //NOTE - some buildings may go missing until we have all 28
+      var size = Math.floor(deck.length/4);
+      for (var i=0; i<4; ++i) {
+        this.add(new Buildings(deck.slice(i*size, i*size+size)));
+      }
     }
   });
 });
