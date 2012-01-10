@@ -6,7 +6,7 @@ define([
     defaults: {
       score: 0,
       workers: 5,
-      food: 4,//12,
+      food: 12,
       production: 0,
       wood: 0,
       brick: 0,
