@@ -10,7 +10,8 @@ define([
       var piles = this.model.get('piles');
       _(piles).each(function(pile, i) {
         var view = new BuildingView({
-          model: pile.top()
+          model: pile.top(),
+          board: this.options.board
         });
         $(view.render().el)
           .addClass('pile' + (i+1))

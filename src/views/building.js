@@ -22,7 +22,7 @@ define([
       return this;
     },
     click: function() {
-      //TODO - execute phase for this building
+      this.options.board.activate(this.model);
     }
   });
 });

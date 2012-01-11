@@ -15,7 +15,8 @@ define([
         $(view.render().el).appendTo(this.el);
       }, this);
       var view = new BuildingsView({
-        model: this.model.buildings
+        model: this.model.buildings,
+        board: this.model
       });
       $(view.render().el).appendTo(this.el);
       return this;
