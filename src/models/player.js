@@ -1,15 +1,15 @@
 define([
     'underscore',
     'backbone',
-    'src/models/tool'
-  ], function(_, Backbone, Tool) {
+    'src/models/tools'
+  ], function(_, Backbone, Tools) {
   return Backbone.Model.extend({
     defaults: {
       score: 0,
       workers: 5,
       food: 12,
       production: 0,
-      tools: [],
+      tools: new Tools(),
       wood: 0,
       brick: 0,
       stone: 0,
@@ -28,17 +28,6 @@ define([
     },
     subtract: function(attribute, count) {
       this.set(attribute, this.get(attribute) - count);
-    },
-    addTool: function() {
-      var tools = this.get('tools');
-      if (tools.length < 3) {
-        tools[tools.length] = new Tool(); 
-      } else {
-        var lowestTool = _(tools).min(function(tool) {
-          return tool.value();
-        });
-        lowestTool.upgrade();
-      }
     },
     feed: function(type) {
       var food = 0,

@@ -22,7 +22,7 @@ define([
         workers = this.workers(player.id);
       this.set(player.id, undefined);
       player.add('workers', workers);
-      player.addTool();
+      player.get('tools').upgrade();
       this.trigger('resolve', player);
     }
   });

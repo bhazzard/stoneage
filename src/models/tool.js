@@ -12,6 +12,7 @@ define([
     },
     upgrade: function() {
       this.set('value', this.get('value') + 1);
+      console.log(this.get('value'));
     },
     tap: function() {
       this.set('tapped', true);
