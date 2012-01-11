@@ -13,6 +13,7 @@ define([
       phase: 'place'
     },
     initialize: function() {
+      var buildings = new Buildings();
       var workspaces = new Workspaces();
       workspaces.add([
         new Hunt(),
@@ -44,8 +45,9 @@ define([
         new SpecialHut(),
         new ToolHut()
       ]);
+      workspaces.add(buildings.get('piles'));
       this.workspaces = workspaces;
-      this.buildings = new Buildings();
+      this.buildings = buildings;
 
       this.get('players').bind('resolve', function() {
         this.get('players').gotoLeader();

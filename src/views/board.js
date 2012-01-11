@@ -1,9 +1,8 @@
 define([
     'jquery',
     'backbone',
-    'src/views/workspace',
-    'src/views/buildings'
-  ], function($, Backbone, WorkspaceView, BuildingsView) {
+    'src/views/workspace'
+  ], function($, Backbone, WorkspaceView) {
   return Backbone.View.extend({
     className: 'board',
     render: function() {
@@ -14,11 +13,6 @@ define([
         });
         $(view.render().el).appendTo(this.el);
       }, this);
-      var view = new BuildingsView({
-        model: this.model.buildings,
-        board: this.model
-      });
-      $(view.render().el).appendTo(this.el);
       return this;
     }
   });

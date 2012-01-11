@@ -1,12 +1,32 @@
 define([
     'underscore',
     'backbone',
+    'src/models/workspace',
     'src/models/building'
-  ], function(_, Backbone, Building) {
-  var Buildings = Backbone.Collection.extend({
-    model: Building,
+  ], function(_, Backbone, Workspace, Building) {
+  var BuildingPile = Workspace.extend({
+    initialize: function() {
+      this.set('class', 'building' + this.top().id);
+    },
     top: function() {
-      return this.at(0);
+      return this.get('pile')[0];
+    },
+    canPlace : function(player, count) {
+    	var workerCount = this.workers() + count;
+    	return {
+    		result : workerCount == 1,
+    		reason : 'Only 1 worker allowed on a building'
+    	};
+    },
+    resolve: function(player) {
+      var building = this.top(),
+        workers = this.workers(player.id);
+      this.set(player.id, undefined);
+      player.add('workers', workers);
+      if (building.canPurchase(player) && confirm('Buy this building?')) {
+        building.purchase(player);
+      }
+      this.trigger('resolve', player);
     }
   });
 
@@ -166,7 +186,10 @@ define([
       //NOTE - some buildings may go missing until we have all 28
       var size = Math.floor(deck.length/4), piles = [];
       for (var i=0; i<4; ++i) {
-        piles.push(new Buildings(deck.slice(i*size, i*size+size)));
+        piles.push(new BuildingPile({
+          name: 'building-pile' + (i+1),
+          pile: deck.slice(i*size, i*size+size)
+        }));
       }
       this.set('piles', piles);
     }
