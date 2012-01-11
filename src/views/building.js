@@ -12,7 +12,7 @@ define([
       this.model.bind('change', this.render, this);
     },
     render: function() {
-      $(this.el).empty().addClass(this.model.get('name'));
+      $(this.el).empty().addClass('building' + this.model.id);
       for (var i=1; i<=4; ++i) {
         $('<div/>')
           .addClass('worker-pile player' + i)
