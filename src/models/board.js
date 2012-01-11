@@ -4,9 +4,10 @@ define([
     'src/models/workspaces',
     'src/models/field',
     'src/models/specialhut',
-		'src/models/hunt',
+    'src/models/toolhut',
+    'src/models/hunt',
     'src/models/buildings'
-  ], function(Backbone, Workspace, Workspaces, Field, SpecialHut, Hunt, Buildings) {
+  ], function(Backbone, Workspace, Workspaces, Field, SpecialHut, ToolHut, Hunt, Buildings) {
   return Backbone.Model.extend({
     defaults: {
       phase: 'place'
@@ -19,28 +20,29 @@ define([
           name: 'forest',
           resource: 'wood',
           value: 3,
-					maxWorkers : 7
+          maxWorkers : 7
         }),
         new Workspace({
           name: 'claypit',
           resource: 'brick',
           value: 4,
-					maxWorkers : 7
+          maxWorkers : 7
         }),
         new Workspace({
           name: 'quary',
           resource: 'stone',
           value: 5,
-					maxWorkers : 7
+          maxWorkers : 7
         }),
         new Workspace({
           name: 'river',
           resource: 'gold',
           value: 6,
-					maxWorkers : 7
+          maxWorkers : 7
         }),
         new Field(),
-        new SpecialHut()
+        new SpecialHut(),
+        new ToolHut()
       ]);
       this.workspaces = workspaces;
       this.buildings = new Buildings();
