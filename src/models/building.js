@@ -11,7 +11,7 @@ define([
       _(this.get('cost')).each(function(amount, resource) {
         player.subtract(resource, amount);
       }, this);
-      //TODO - add score
+      player.add('score', this.get('value'));
     }
   });
 });
