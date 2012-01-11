@@ -9,11 +9,14 @@ define([
       workers: 5,
       food: 12,
       production: 0,
-      tools: new Tools(),
+      tools: undefined,
       wood: 0,
       brick: 0,
       stone: 0,
       gold: 0
+    },
+    initialize: function() {
+      this.set('tools', new Tools());
     },
     place: function(workspace, count) {
       var workers = this.get('workers');

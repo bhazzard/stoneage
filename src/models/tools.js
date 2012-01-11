@@ -6,7 +6,7 @@ define([
   return Backbone.Collection.extend({
     model: Tool,
     upgrade: function() {
-      if (this.size() < 4) {
+      if (this.size() < 3) {
         this.add(new Tool()); 
       } else {
         var lowestTool = this.min(function(tool) {

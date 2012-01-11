@@ -11,8 +11,11 @@ define([
       return this.get('value');
     },
     upgrade: function() {
-      this.set('value', this.get('value') + 1);
-      console.log(this.get('value'));
+      var value = this.get('value');
+
+      if (value < 4) {
+        this.set('value', value + 1);
+      }
     },
     tap: function() {
       this.set('tapped', true);
