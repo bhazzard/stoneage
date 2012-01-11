@@ -9,8 +9,6 @@ require.config({
    urlArgs: "bust=" +  (new Date()).getTime()
 });
 
-require([], function() {
-  test('pass', function() {
-    equal(1, 1);
-  });
-});
+require([
+  'test/models/player'
+]);
