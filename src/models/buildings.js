@@ -11,7 +11,7 @@ define([
   });
 
   //Special "Deck" class that preloads all of the buildings
-  return Buildings.extend({
+  return Backbone.Model.extend({
     initialize: function() {
       var deck = [
         new Building({  //Building 1
@@ -147,10 +147,11 @@ define([
       
       //Split into 4 even piles
       //NOTE - some buildings may go missing until we have all 28
-      var size = Math.floor(deck.length/4);
+      var size = Math.floor(deck.length/4), piles = [];
       for (var i=0; i<4; ++i) {
-        this.add(new Buildings(deck.slice(i*size, i*size+size)));
+        piles.push(new Buildings(deck.slice(i*size, i*size+size)));
       }
+      this.set('piles', piles);
     }
   });
 });

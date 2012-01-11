@@ -4,8 +4,9 @@ define([
     'src/models/workspaces',
     'src/models/field',
     'src/models/specialhut',
-		'src/models/hunt'
-  ], function(Backbone, Workspace, Workspaces, Field, SpecialHut, Hunt) {
+		'src/models/hunt',
+    'src/models/buildings'
+  ], function(Backbone, Workspace, Workspaces, Field, SpecialHut, Hunt, Buildings) {
   return Backbone.Model.extend({
     defaults: {
       phase: 'place'
@@ -42,6 +43,7 @@ define([
         new SpecialHut()
       ]);
       this.workspaces = workspaces;
+      this.buildings = new Buildings();
 
       this.get('players').bind('resolve', function() {
         this.get('players').gotoLeader();

@@ -1,12 +1,14 @@
 define([
     'jquery',
+    'underscore',
     'backbone',
     'src/views/building'
-  ], function($, Backbone, BuildingView) {
+  ], function($, _, Backbone, BuildingView) {
   return Backbone.View.extend({
     className: 'buildings',
     render: function() {
-      this.collection.each(function(pile, i) {
+      var piles = this.model.get('piles');
+      _(piles).each(function(pile, i) {
         var view = new BuildingView({
           model: pile.top()
         });
