@@ -12,7 +12,9 @@ define([
         var view = new BuildingView({
           model: pile.top()
         });
-        $(view.render().el).appendTo(this.el);
+        $(view.render().el)
+          .addClass('pile' + (i+1))
+          .appendTo(this.el);
       }, this);
       return this;
     }

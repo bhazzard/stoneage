@@ -99,3 +99,14 @@ body {
   border: 2px solid gray;
   z-index: 100;
 }
+.building {
+  position: absolute;
+  top: 545px;
+  width: 91px;
+  height: 112px;
+  border: 1px solid black;
+}
+.building.pile1 { left: 72; }
+.building.pile2 { left: 178; }
+.building.pile3 { left: 287; }
+.building.pile4 { left: 395; }
