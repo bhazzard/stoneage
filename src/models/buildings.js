@@ -31,6 +31,9 @@ define([
     },
     pop: function() {
       this.get('pile').shift();
+      this.set('class', 'building-back');
+    },
+    reset: function() {
       this.flip();
     },
     flip: function() {

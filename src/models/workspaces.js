@@ -7,6 +7,11 @@ define([
     initialize: function() {
       this.bind('add', this._onAdd, this);
     },
+    reset: function() {
+      this.each(function(workspace) {
+        workspace.reset();
+      });
+    },
     toResolve: function(player) {
       return this.reduce(function(memo, workspace) {
         if (player) {

@@ -86,7 +86,8 @@ define([
       this.get('players').feed();
     },
     reset: function() {
-      //TODO - pass through until we have cards/buildings to flip
+      this.workspaces.reset();
+      //TODO - flip culture cards when they exist
       this.determineWinner();
     },
     determineWinner: function() {

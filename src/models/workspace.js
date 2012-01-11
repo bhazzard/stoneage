@@ -45,6 +45,9 @@ define([
       alert('Player ' + player.id + ' rolled ' + roll + ' and got ' + resourceCount +' ' + resourceName);
       this.trigger('resolve', player);
     },
+    reset: function() {
+      //no-op
+    },
     workers: function(playerId) {
       if (playerId === undefined) {
         var i, total = 0;
