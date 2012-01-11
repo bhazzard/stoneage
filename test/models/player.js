@@ -26,4 +26,14 @@ require(['src/models/player'], function(Player) {
     player.subtract('wood', 5);
     equals(player.get('wood'), 3, 'wood should be 3');
   });
+
+  test('resourceCount', function() {
+    var player = new Player({
+      wood: 1,
+      brick: 2,
+      stone: 3,
+      gold: 4
+    });
+    equals(player.resourceCount(), 10, 'resourceCount should be 10');
+  });
 });
