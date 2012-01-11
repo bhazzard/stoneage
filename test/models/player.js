@@ -12,4 +12,10 @@ require(['src/models/player'], function(Player) {
     equals(player.get('gold'), 0, 'gold should be 0');
     equals(player.get('production'), 0, 'production should be 0');
   });
+
+  test('add', function() {
+    var player = new Player();
+    player.add('score', 5);
+    equals(player.get('score'), 5, 'score should be 5');
+  });
 });
