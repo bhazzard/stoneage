@@ -18,4 +18,12 @@ require(['src/models/player'], function(Player) {
     player.add('score', 5);
     equals(player.get('score'), 5, 'score should be 5');
   });
+
+  test('subtract', function() {
+    var player = new Player({
+      wood: 8
+    });
+    player.subtract('wood', 5);
+    equals(player.get('wood'), 3, 'wood should be 3');
+  });
 });
