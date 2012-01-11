@@ -19,10 +19,6 @@ define([
           .appendTo(this.el)
           .html(this.model.get(i));
       }
-      var cost = this.model.get('cost');
-      _(cost).each(function(amount, resource) {
-        $('<div/>').html(resource + ': ' + amount).appendTo(this.el);
-      }, this);
       return this;
     },
     click: function() {

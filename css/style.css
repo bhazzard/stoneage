@@ -101,12 +101,28 @@ body {
 }
 .building {
   position: absolute;
-  top: 545px;
+  top: 548px;
   width: 91px;
   height: 112px;
-  border: 1px solid black;
 }
 .building.pile1 { left: 72; }
 .building.pile2 { left: 178; }
 .building.pile3 { left: 287; }
 .building.pile4 { left: 395; }
+.building1 { background: url(../images/hut_01.png); }
+.building4 { background: url(../images/hut_04.png); }
+.building6 { background: url(../images/hut_06.png); }
+.building8 { background: url(../images/hut_08.png); }
+.building12 { background: url(../images/hut_12.png); }
+.building13 { background: url(../images/hut_13.png); }
+.building14 { background: url(../images/hut_14.png); }
+.building15 { background: url(../images/hut_15.png); }
+.building16 { background: url(../images/hut_16.png); }
+.building18 { background: url(../images/hut_18.png); }
+.building20 { background: url(../images/hut_20.png); }
+.building21 { background: url(../images/hut_21.png); }
+.building23 { background: url(../images/hut_23.png); }
+.building24 { background: url(../images/hut_24.png); }
+.building26 { background: url(../images/hut_26.png); }
+.building27 { background: url(../images/hut_27.png); }
+.building28 { background: url(../images/hut_28.png); }
