@@ -4,8 +4,9 @@ define([
   ], function(_, Backbone) {
   return Backbone.Model.extend({
     canPurchase: function(player) {
-      //TODO - actually check...
-      return true;
+      return _(this.get('cost')).all(function(amount, resource) {
+        return player.get(resource) >= amount;
+      }, this);
     },
     purchase: function(player) {
       _(this.get('cost')).each(function(amount, resource) {
