@@ -12,6 +12,8 @@ define([
     },
     render: function() {
       $(this.el).empty()
+        .removeClass()
+        .addClass(this.className)
         .addClass(this.model.get('name'))
         .addClass(this.model.get('class'));
       for (var i=1; i<=4; ++i) {

@@ -6,7 +6,7 @@ define([
   ], function(_, Backbone, Workspace, Building) {
   var BuildingPile = Workspace.extend({
     initialize: function() {
-      this.set('class', 'building' + this.top().id);
+      this.flip();
     },
     top: function() {
       return this.get('pile')[0];
@@ -25,8 +25,21 @@ define([
       player.add('workers', workers);
       if (building.canPurchase(player) && confirm('Buy this building?')) {
         building.purchase(player);
+        this.pop();
       }
       this.trigger('resolve', player);
+    },
+    pop: function() {
+      this.get('pile').shift();
+      this.flip();
+    },
+    flip: function() {
+      var building = this.top();
+      if (building) {
+        this.set('class', 'building' + building.id);
+      } else {
+        this.set('class', 'building-empty');
+      }
     }
   });
 

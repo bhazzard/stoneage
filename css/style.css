@@ -123,6 +123,7 @@ body {
   width: 91px;
   height: 112px;
 }
+.building-empty { background: none; }
 .building1 { background: url(../images/hut_01.png); }
 .building4 { background: url(../images/hut_04.png); }
 .building6 { background: url(../images/hut_06.png); }
