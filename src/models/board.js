@@ -47,7 +47,6 @@ define([
       ]);
       workspaces.add(buildings.get('piles'));
       this.workspaces = workspaces;
-      this.buildings = buildings;
 
       this.get('players').bind('resolve', function() {
         this.get('players').gotoLeader();
