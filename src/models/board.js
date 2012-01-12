@@ -50,15 +50,25 @@ define([
       workspaces.add(buildings.get('piles'));
       this.workspaces = workspaces;
 
-      this.get('players').bind('resolve', function() {
-        this.get('players').gotoLeader();
-        this.set('phase', 'resolve');
-      }, this);
       this.workspaces.bind('playerresolved', function() {
         this.get('players').nextTurn();
       }, this);
       this.workspaces.bind('allresolved', function() {
         this.feed();
+      }, this);
+      this.workspaces.bind('howmany', function(workspace) {
+        var player = this.get('players').current(),
+          workers = prompt('Player ' + player.id + ', how many workers?');
+        workspace.place(player, Number(workers));
+      }, this);
+      this.workspaces.bind('place', function() {
+        var players = this.get('players');
+        if (players.remainingWorkers() === 0) {
+          this.get('players').gotoLeader();
+          this.set('phase', 'resolve');
+        } else {
+          players.nextTurn();
+        }
       }, this);
       this.get('players').bind('allfed', function() {
         this.reset();
@@ -82,15 +92,9 @@ define([
         player = players.current();
       }
 
-      workers = prompt('Player ' + player.id + ', how many workers?');
-
 			workers = parseInt(workers);
-			var specResult = workspace.canPlace(player, workers);
-			if(specResult.result){
-      	player.place(workspace, workers);
-			} else {
-				alert(specResult.reason);
-				this.place(workspace);
+			if(workspace.canPlace(player)){
+        workspace.place(player);
 			}
     },
     resolve: function(workspace) {

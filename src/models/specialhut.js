@@ -9,13 +9,12 @@ define([
         value: 1
       });
     },
-		canPlace : function(player, count) {
-			var workerCount = this.workers() + count;
-			return{
-				result :  workerCount == 2,
-				reason : 'Only two workers allowed in hut.'
-			};
+		canPlace : function(player) {
+      return this.workers() === 0 && player.get('workers') > 1;
 		},
+    place: function(player) {
+      Workspace.prototype.place.call(this, player, 2);
+    },
     resolve: function(player) {
       var workers = this.workers(player.id);
       this.set(player.id, undefined);

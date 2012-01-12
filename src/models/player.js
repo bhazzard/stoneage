@@ -18,14 +18,6 @@ define([
     initialize: function() {
       this.set('tools', new Tools());
     },
-    place: function(workspace, count) {
-      var workers = this.get('workers');
-      count = count || 1;
-      count = Math.min(count, workers);
-      this.set('workers', workers - count);
-      workspace.place(this, count);
-      this.trigger('place');
-    },
     add: function(attribute, count) {
       this.set(attribute, this.get(attribute) + count);
     },

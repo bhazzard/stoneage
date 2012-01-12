@@ -34,14 +34,7 @@ define([
     },
     _onAdd: function(player, index) {
       player.id = index === undefined ? this.length : index+1;
-      player.bind('place', this._onPlace, this);
       player.bind('fed', this._onFed, this);
-    },
-    _onPlace: function() {
-      this.nextTurn();
-      if (this.remainingWorkers() === 0) {
-        this.trigger('resolve');
-      }
     },
     _onFed: function() {
       this.nextTurn();

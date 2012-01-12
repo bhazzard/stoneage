@@ -11,12 +11,11 @@ define([
     top: function() {
       return this.get('pile')[0];
     },
-    canPlace : function(player, count) {
-    	var workerCount = this.workers() + count;
-    	return {
-    		result : workerCount == 1,
-    		reason : 'Only 1 worker allowed on a building'
-    	};
+		canPlace : function(player) {
+      return this.workers() === 0 && player.get('workers') > 0;
+		},
+    place: function(player) {
+      Workspace.prototype.place.call(this, player, 1);
     },
     resolve: function(player) {
       var building = this.top(),

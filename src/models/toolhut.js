@@ -9,12 +9,11 @@ define([
         value: 1
       });
     },
-    canPlace : function(player, count) {
-      var workerCount = this.workers() + count;
-      return {
-        result : workerCount == 1,
-        reason : "Only 1 worker allowed in the Toolmaker's hut"
-      };
+		canPlace : function(player) {
+      return this.workers() === 0 && player.get('workers') > 0;
+		},
+    place: function(player) {
+      Workspace.prototype.place.call(this, player, 1);
     },
     resolve: function(player) {
       var resourceName = this.get('resource'),

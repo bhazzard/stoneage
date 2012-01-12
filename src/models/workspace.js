@@ -3,32 +3,25 @@ define([
   ], function(Backbone) {
   return Backbone.Model.extend({
 		canPlace : function(player, count){
-			if(this.get(player.id) > 0){
-				return {
-					result : false,
-					reason : 'Player ' + player.id + ' already has workers on ' + this.get('name')
-				};
-			}			
+			if(this.workers(player.id) > 0){
+        //Already on this workspace
+        return false;
+			}
+      //TODO - won't necessarily be correct for 2/3 players
 			if(this._playersOnWorkspace() >= 2){
-				return {
-					result : false,
-					reason : 'Already 2 players on workspace'
-				};
+        //Already 2 players on the workspace
+        return false;
 			}
-			var workerCount = this.workers() + count;
-			if(workerCount > this.get('maxWorkers')){
-				return {
-					result : false,
-					reason : 'Too many workers on ' + this.get('name')
-				};
-			}
-			return {
-				result : true
-			};
+      return this.workers() < this.get('maxWorkers');
 		},
     place: function(player, count) {
-      var current = this.workers(player.id);
-      this.set(player.id, current + count);
+      if (count) {
+        player.subtract('workers', count);
+        this.set(player.id, count);
+        this.trigger('place');
+      } else {
+        this.trigger('howmany', this);
+      }
     },
     resolve: function(player) {
       var roll = 0,
