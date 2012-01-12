@@ -10,9 +10,7 @@ define([
 			});
 		},
 		canPlace: function(player, count){
-			return {
-				result : true
-			};
+      return true;
 		}
 	});
 });
