@@ -11,7 +11,7 @@ body {
 }
 .workspace {
   position: absolute;
-  border: 1px solid black;
+  cursor: pointer;
 }
 .workspace.forest {
   left: 323px;
