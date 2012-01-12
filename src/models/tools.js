@@ -5,15 +5,22 @@ define([
   ], function(_, Backbone, Tool) {
   return Backbone.Collection.extend({
     model: Tool,
+	initialize: function() {
+      var that = this;
+      _(3).times(function() {
+        that.add(new Tool());
+      });
+	},
     upgrade: function() {
-      if (this.size() < 3) {
-        this.add(new Tool()); 
-      } else {
-        var lowestTool = this.min(function(tool) {
-          return tool.value();
-        });
-        lowestTool.upgrade();
-      }
-    }
+      var lowestTool = this.min(function(tool) {
+        return tool.get('value');
+      });
+      lowestTool.upgrade();
+    },
+	untapAll: function() {
+	  this.each(function(tool) {
+		tool.untap();
+	  });
+	}
   });
 });

@@ -4,11 +4,8 @@ define([
   ], function(_, Backbone) {
   return Backbone.Model.extend({
     defaults: {
-      value: 1,
+      value: 0,
       tapped: false 
-    },
-    value: function() {
-      return this.get('value');
     },
     upgrade: function() {
       var value = this.get('value');
