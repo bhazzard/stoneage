@@ -28,9 +28,9 @@ define([
     pop: function() {
       this.get('pile').shift();
       if (this.empty()) {
-        this.set('class', 'building-back');
-      } else {
         this.set('class', 'building-empty');
+      } else {
+        this.set('class', 'building-back');
       }
     },
     empty: function() {

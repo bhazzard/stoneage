@@ -49,6 +49,7 @@ define([
       ]);
       workspaces.add(buildings.models);
       this.workspaces = workspaces;
+      this.buildings = buildings;
 
       this.workspaces.bind('playerresolved', function() {
         this.get('players').nextTurn();
@@ -107,15 +108,16 @@ define([
     reset: function() {
       this.workspaces.reset();
       //TODO - flip culture cards when they exist
-      this.determineWinner();
+      this.checkForEndGame();
     },
-    determineWinner: function() {
-      //TODO - check if a building card pile is empty, or if there are no more culture cards
-      var winner = false;
-      if (winner) {
-        //TODO - will not execute until there are cards/buildings to score
+    checkForEndGame: function() {
+      //TODO - check if there are no more culture cards as well
+      var gameover = this.buildings.empty(),
+        players = this.get('players');
+      if (gameover) {
+        this.trigger('gameover', players.winner());
       } else {
-        this.get('players').advanceLeaderToken();
+        players.advanceLeaderToken();
         this.set('phase', 'place');
       }
     }

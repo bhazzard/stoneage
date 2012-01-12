@@ -20,6 +20,11 @@ define([
     nextTurn: function() {
       this.active = (this.active + 1) % this.length;
     },
+    winner: function() {
+      return this.max(function(player) {
+        return player.get('score');
+      });
+    },
     current: function() {
       return this.at(this.active);
     },

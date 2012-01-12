@@ -166,6 +166,11 @@ define([
           pile: deck.slice(i*size, i*size+size)
         }));
       }
+    },
+    empty: function() {
+      return this.any(function(pile) {
+        return pile.empty();
+      });
     }
   });
 });
