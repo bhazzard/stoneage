@@ -30,17 +30,21 @@ define([
     },
     pop: function() {
       this.get('pile').shift();
-      this.set('class', 'building-back');
+      if (this.empty()) {
+        this.set('class', 'building-back');
+      } else {
+        this.set('class', 'building-empty');
+      }
+    },
+    empty: function() {
+      return !this.get('pile').length;
     },
     reset: function() {
       this.flip();
     },
     flip: function() {
-      var building = this.top();
-      if (building) {
-        this.set('class', 'building' + building.id);
-      } else {
-        this.set('class', 'building-empty');
+      if (!this.empty()) {
+        this.set('class', 'building' + this.top().id);
       }
     }
   });
