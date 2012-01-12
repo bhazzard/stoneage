@@ -20,6 +20,7 @@ define([
         if (maxWorkers) {
           count = Math.min(count, maxWorkers - this.workers());
         }
+        count = Math.min(count, player.get('workers'));
         player.subtract('workers', count);
         this.set(player.id, count);
         this.trigger('place');
