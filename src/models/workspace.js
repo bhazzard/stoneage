@@ -15,7 +15,11 @@ define([
       return this.workers() < this.get('maxWorkers');
 		},
     place: function(player, count) {
+      var maxWorkers = this.get('maxWorkers');
       if (count) {
+        if (maxWorkers) {
+          count = Math.min(count, maxWorkers - this.workers());
+        }
         player.subtract('workers', count);
         this.set(player.id, count);
         this.trigger('place');
@@ -52,7 +56,7 @@ define([
         return this.get(playerId) || 0;
       }
     },
-		_playersOnWorkspace : function(){
+		_playersOnWorkspace: function(){
 			var i, count;
 			for(i=1; i <=4; ++i){
 				if(this.get(i) > 0){
