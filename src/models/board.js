@@ -66,8 +66,21 @@ define([
       this[this.get('phase')](workspace);
     },
     place: function(workspace) {
-      var player = this.get('players').current(),
-        workers = prompt('Player ' + player.id + ', how many workers?');
+      var i = 0,
+        players = this.get('players'),
+        player = players.current(),
+        workers;
+
+      //Skip players with 0 workers left to place
+      //There is probably a better place for this.
+      //Maybe the players collection should know more
+      //about phases?
+      while (i++ < players.length && player.get('workers') === 0) {
+        players.nextTurn();
+        player = players.current();
+      }
+
+      workers = prompt('Player ' + player.id + ', how many workers?');
 
 			workers = parseInt(workers);
 			var specResult = workspace.canPlace(player, workers);
