@@ -8,6 +8,7 @@ define([
       this.leader = 0;
       this.gotoLeader();
       this.bind('add', this._onAdd, this);
+      this.each(this._onAdd, this);
     },
     gotoLeader: function() {
       this.active = this.leader;
@@ -31,8 +32,8 @@ define([
       this.gotoLeader();
       this.current().feed();
     },
-    _onAdd: function(player) {
-      player.id = this.length;
+    _onAdd: function(player, index) {
+      player.id = index === undefined ? this.length : index+1;
       player.bind('place', this._onPlace, this);
       player.bind('fed', this._onFed, this);
     },

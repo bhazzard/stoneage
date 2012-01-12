@@ -200,8 +200,10 @@ define([
       
       //Split into 4 even piles
       //NOTE - some buildings may go missing until we have all 28
-      var size = Math.floor(deck.length/4), piles = [];
-      for (var i=0; i<4; ++i) {
+      var size = Math.floor(deck.length/4),
+        piles = [],
+        players = this.get('players');
+      for (var i=0; i<players; ++i) {
         piles.push(new BuildingPile({
           name: 'building-pile' + (i+1),
           pile: deck.slice(i*size, i*size+size)

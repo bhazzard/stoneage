@@ -13,7 +13,9 @@ define([
       phase: 'place'
     },
     initialize: function() {
-      var buildings = new Buildings();
+      var buildings = new Buildings({
+        players: this.get('players').length
+      });
       var workspaces = new Workspaces();
       workspaces.add([
         new Hunt(),
