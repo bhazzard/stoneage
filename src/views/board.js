@@ -1,8 +1,9 @@
 define([
     'jquery',
     'backbone',
-    'src/views/workspace'
-  ], function($, Backbone, WorkspaceView) {
+    'src/views/workspace',
+	'src/views/production-track'
+  ], function($, Backbone, WorkspaceView, ProductionTrackView) {
   return Backbone.View.extend({
     className: 'board',
     initialize: function() {
@@ -16,6 +17,13 @@ define([
         });
         $(view.render().el).appendTo(this.el);
       }, this);
+	  
+	  var productionTrack = new ProductionTrackView({
+	    model: this.model.get('players'),
+		board: this.el
+	  });	  
+	  $(productionTrack.render().el).appendTo(this.el);
+	  
       return this;
     },
     _gameover: function(player) {
