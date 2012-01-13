@@ -123,7 +123,6 @@ body {
   width: 91px;
   height: 112px;
 }
-.building-empty { background: none; }
 .building-back { background: url(../images/hut_back.png); }
 .building1 { background: url(../images/hut_01.png); }
 .building4 { background: url(../images/hut_04.png); }
@@ -142,3 +141,24 @@ body {
 .building26 { background: url(../images/hut_26.png); }
 .building27 { background: url(../images/hut_27.png); }
 .building28 { background: url(../images/hut_28.png); }
+.stack1 {
+  z-index: 7;
+}
+.stack2 {
+  z-index: 6;
+}
+.stack3 {
+  z-index: 5;
+}
+.stack4 {
+  z-index: 4;
+}
+.stack5 {
+  z-index: 3;
+}
+.stack6 {
+  z-index: 2;
+}
+.stack7 {
+  z-index: 1;
+}

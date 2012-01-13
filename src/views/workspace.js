@@ -14,8 +14,7 @@ define([
       $(this.el).empty()
         .removeClass()
         .addClass(this.className)
-        .addClass(this.model.get('name'))
-        .addClass(this.model.get('class'));
+        .addClass(this.model.get('name'));
       for (var i=1; i<=4; ++i) {
         $('<div/>')
           .addClass('worker-pile player' + i)

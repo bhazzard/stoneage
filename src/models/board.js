@@ -50,6 +50,9 @@ define([
       workspaces.add(buildings.models);
       this.workspaces = workspaces;
       this.buildings = buildings;
+      this.buildings.bind('remove', function(building) {
+        this.workspaces.remove(building);
+      }, this);
 
       this.workspaces.bind('playerresolved', function() {
         this.get('players').nextTurn();

@@ -1,11 +1,10 @@
 define([
     'underscore',
     'backbone',
-    'src/models/buildingpile',
     'src/models/building'
-  ], function(_, Backbone, BuildingPile, Building) {
+  ], function(_, Backbone, Building) {
   return Backbone.Collection.extend({
-    model: BuildingPile,
+    model: Building,
     initialize: function(models, options) {
       var deck = [
         new Building({
@@ -159,17 +158,36 @@ define([
       //Split into 4 even piles
       //NOTE - some buildings may go missing until we have all 28
       var size = Math.floor(deck.length/4),
-        players = options.players;
+        players = options.players,
+        pile;
       for (var i=0; i<players; ++i) {
-        this.add(new BuildingPile({
-          name: 'building-pile' + (i+1),
-          pile: deck.slice(i*size, i*size+size)
-        }));
+        pile = deck.slice(i*size, i*size+size);
+        _(pile).each(function(building, position) {
+          building.set('buildings', this);
+          building.set('pile', i+1);
+          building.set('position', position);
+          building.set('name', 'building-back building-pile' + (i+1) + ' stack' + (position+1));
+          this.add(building);
+        }, this);
       }
+
+      this.players = players;
+      this.each(function(building) {
+        building.reset();
+      });
     },
     empty: function() {
-      return this.any(function(pile) {
-        return pile.empty();
+      for (var i=1; i<=this.players; ++i) {
+        if (!this.any(function(b) { return b.get('pile') === i })) {
+          return true;
+        }
+      }
+      return false;
+    },
+    onTop: function(building) {
+      return !this.any(function(b) {
+        return b.get('pile') === building.get('pile') &&
+          b.get('position') < building.get('position');
       });
     }
   });

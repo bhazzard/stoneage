@@ -10,5 +10,6 @@ require.config({
 });
 
 require([
-  'test/models/player'
+  'test/models/player',
+  'test/models/buildings'
 ]);

@@ -16,14 +16,19 @@ define([
           board: this.model
         });
         $(view.render().el).appendTo(this.el);
+        workspace.view = view;
       }, this);
 	  
-	  var productionTrack = new ProductionTrackView({
-	    model: this.model.get('players'),
-		board: this.el
-	  });	  
-	  $(productionTrack.render().el).appendTo(this.el);
+      var productionTrack = new ProductionTrackView({
+        model: this.model.get('players'),
+        board: this.el
+      });	  
+      $(productionTrack.render().el).appendTo(this.el);
 	  
+      this.model.workspaces.bind('remove', function(workspace) {
+        workspace.view.remove();
+      });
+
       return this;
     },
     _gameover: function(player) {
