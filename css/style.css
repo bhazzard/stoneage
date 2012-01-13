@@ -99,30 +99,15 @@ body {
   border: 2px solid gray;
   z-index: 100;
 }
-.building-pile1 {
+.building {
   top: 548px;
-  left: 72;
   width: 91px;
   height: 112px;
 }
-.building-pile2 {
-  top: 548px;
-  left: 178;
-  width: 91px;
-  height: 112px;
-}
-.building-pile3 {
-  top: 548px;
-  left: 287;
-  width: 91px;
-  height: 112px;
-}
-.building-pile4 {
-  top: 548px;
-  left: 395;
-  width: 91px;
-  height: 112px;
-}
+.building-pile1 { left: 72px; }
+.building-pile2 { left: 178px; }
+.building-pile3 { left: 287px; }
+.building-pile4 { left: 395px; }
 .building-back { background: url(../images/hut_back.png); }
 .building1 { background: url(../images/hut_01.png); }
 .building4 { background: url(../images/hut_04.png); }

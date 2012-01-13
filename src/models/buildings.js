@@ -166,7 +166,7 @@ define([
           building.set('buildings', this);
           building.set('pile', i+1);
           building.set('position', position);
-          building.set('name', 'building-back building-pile' + (i+1) + ' stack' + (position+1));
+          building.set('name', 'building building-back building-pile' + (i+1) + ' stack' + (position+1));
           this.add(building);
         }, this);
       }
