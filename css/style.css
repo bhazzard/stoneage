@@ -127,24 +127,34 @@ body {
 .building26 { background: url(../images/hut_26.png); }
 .building27 { background: url(../images/hut_27.png); }
 .building28 { background: url(../images/hut_28.png); }
-.stack1 {
-  z-index: 7;
-}
-.stack2 {
-  z-index: 6;
-}
-.stack3 {
-  z-index: 5;
-}
-.stack4 {
-  z-index: 4;
-}
-.stack5 {
-  z-index: 3;
-}
-.stack6 {
-  z-index: 2;
-}
-.stack7 {
-  z-index: 1;
-}
+.stack1 { z-index: 7; }
+.stack2 { z-index: 6; }
+.stack3 { z-index: 5; }
+.stack4 { z-index: 4; }
+.stack5 { z-index: 3; }
+.stack6 { z-index: 2; }
+.stack7 { z-index: 1; }
+.building-pile1.stack6,
+.building-pile2.stack6,
+.building-pile3.stack6,
+.building-pile4.stack6 { top: 546px; }
+.building-pile1.stack5,
+.building-pile2.stack5,
+.building-pile3.stack5,
+.building-pile4.stack5 { top: 544px; }
+.building-pile1.stack4,
+.building-pile2.stack4,
+.building-pile3.stack4,
+.building-pile4.stack4 { top: 542px; }
+.building-pile1.stack3,
+.building-pile2.stack3,
+.building-pile3.stack3,
+.building-pile4.stack3 { top: 540px; }
+.building-pile1.stack2,
+.building-pile2.stack2,
+.building-pile3.stack2,
+.building-pile4.stack2 { top: 538px; }
+.building-pile1.stack1,
+.building-pile2.stack1,
+.building-pile3.stack1,
+.building-pile4.stack1 { top: 536px; }
