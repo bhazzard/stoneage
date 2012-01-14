@@ -7,9 +7,9 @@ define([
   return Backbone.View.extend({
     className: 'production-track',
     render: function() {
-	  var that = this;
-	  _(11).times(function() {
-	    $('<div/>').appendTo(that.el);
+      var that = this;
+      _(11).times(function() {
+        $('<div/>').appendTo(that.el);
       });
 	  
       this.model.each(function(player) {
@@ -17,14 +17,14 @@ define([
           model: player,
           track: this
         });
-		productionMarker.render();
+        productionMarker.render();
       }, this);
 	  
       return this;
     },
-	placeMarker: function(marker, position) {
-	  var positionDiv = $(this.el).children().eq(10 - position);
-	  $(marker.el).appendTo(positionDiv);
-	}
+    placeMarker: function(marker, position) {
+      var positionDiv = $(this.el).children().eq(10 - position);
+      $(marker.el).appendTo(positionDiv);
+    }
   });
 });
