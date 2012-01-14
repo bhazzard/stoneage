@@ -65,9 +65,14 @@ body {
   width: 80px;
   height: 40px;
 }
-.worker-pile {
-  font-weight: bold;
+.meeple {
+  width: 24px;
+  height: 35px;
 }
+.meeple.player1 { background: url(../images/red_meeple.png); }
+.meeple.player2 { background: url(../images/green_meeple.png); }
+.meeple.player3 { background: url(../images/yellow_meeple.png); }
+.meeple.player4 { background: url(../images/blue_meeple.png); }
 .player-board {
   border: 3px solid black;
   position: absolute;
@@ -183,3 +188,5 @@ div.production-marker {
 
 .production-marker.player1 { background-color: red; }
 .production-marker.player2 { background-color: green; }
+.production-marker.player3 { background-color: #EAC117; }
+.production-marker.player4 { background-color: blue; }

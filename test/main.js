@@ -11,5 +11,6 @@ require.config({
 
 require([
   'test/models/player',
-  'test/models/buildings'
+  'test/models/buildings',
+  'test/models/field'
 ]);
