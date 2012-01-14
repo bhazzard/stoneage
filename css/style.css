@@ -94,6 +94,40 @@ body {
 .specialhut .position1 { left: 10px; top: -5px; }
 .specialhut .position2 { left: 45px; top: -12px; }
 .building .position1 { left: 32px; top: 25px; }
+.forest .position1 { left: 8px; top: -11px; }
+.forest .position2 { left: 43px; top: 0px; }
+.forest .position3 { left: 15px; top: 17px; }
+.forest .position4 { left: 54px; top: 23px; }
+.forest .position5 { left: 7px; top: 41px; }
+.forest .position6 { left: 42px; top: 45px; }
+.forest .position7 { left: 56px; top: 65px; }
+.claypit .position1 { left: 9px; top: 1px; }
+.claypit .position2 { left: 53px; top: -5px; }
+.claypit .position3 { left: 88px; top: -9px; }
+.claypit .position4 { left: 125px; top: -2px; }
+.claypit .position5 { left: 45px; top: 20px; }
+.claypit .position6 { left: 87px; top: 17px; }
+.claypit .position7 { left: 131px; top: 21px; }
+.quary .position1 { left: 5px; top: 1px; }
+.quary .position2 { left: 44px; top: 1px; }
+.quary .position3 { left: 33px; top: 21px; }
+.quary .position4 { left: 70px; top: 23px; }
+.quary .position5 { left: 40px; top: 43px; }
+.quary .position6 { left: 74px; top: 50px; }
+.quary .position7 { left: 61px; top: 77px; }
+.river .position1 { left: 16px; top: -10px; }
+.river .position2 { left: 54px; top: -12px; }
+.river .position3 { left: 90px; top: -6px; }
+.river .position4 { left: 8px; top: 12px; }
+.river .position5 { left: 46px; top: 9px; }
+.river .position6 { left: 80px; top: 17px; }
+.river .position7 { left: 51px; top: 35px; }
+.hunt .meeple {
+  position: static;
+  display: inline-block;
+  margin-left: -8px;
+  margin-top: -8px;
+}
 
 .player1 { color: red; }
 .player2 { color: green; }
