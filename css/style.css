@@ -90,6 +90,13 @@ body {
 .forest .position5 { left: 7px; top: 41px; }
 .forest .position6 { left: 42px; top: 45px; }
 .forest .position7 { left: 56px; top: 65px; }
+.claypit .position1 { left: 9px; top: 1px; }
+.claypit .position2 { left: 53px; top: -5px; }
+.claypit .position3 { left: 88px; top: -9px; }
+.claypit .position4 { left: 125px; top: -2px; }
+.claypit .position5 { left: 45px; top: 20px; }
+.claypit .position6 { left: 87px; top: 17px; }
+.claypit .position7 { left: 131px; top: 21px; }
 
 /* Player Boards */
 .player-board {
