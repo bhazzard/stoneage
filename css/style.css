@@ -5,6 +5,7 @@ body {
   background-size: 100%
 }
 .board {
+  padding-bottom:81px;
   width: 1023px;
   height: 665px;
   margin: -333px 0 0 -511px;
@@ -15,7 +16,7 @@ body {
 }
 
 .bottom-panel {
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   height: 81px;
   width: 100%;
