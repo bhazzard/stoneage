@@ -158,3 +158,24 @@ body {
 .building-pile2.stack1,
 .building-pile3.stack1,
 .building-pile4.stack1 { top: 536px; }
+
+.production-track {
+  position: absolute;
+  top: 250px;
+}
+
+.production-track div {
+  height: 32px;
+  width: 45px;
+  margin: 5px;
+}
+
+div.production-marker {
+  float: left;
+  margin: 1px;
+  width: 10px;
+  height: 10px;
+}
+
+.production-marker.player1 { background-color: red; }
+.production-marker.player2 { background-color: green; }

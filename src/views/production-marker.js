@@ -8,12 +8,12 @@ define([
       this.model.bind('change', this.update, this);
     },
     render: function() {
-      $(this.el).addClass('player-' + this.model.id);
+      $(this.el).addClass('player' + this.model.id);
 	  this.options.track.placeMarker(this, 0);
 	  return this;
     },
-	update: function() {
-	  this.options.track.placeMarker(this, this.model.get('production'));
-	}
+    update: function() {
+      this.options.track.placeMarker(this, this.model.get('production'));
+    }
   });
 });
