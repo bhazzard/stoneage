@@ -84,12 +84,13 @@ body {
 .meeple {
   width: 24px;
   height: 35px;
-  position: absolute;
 }
+.meeple.ghost { opacity: 0.3; }
 .meeple.player1 { background: url(../images/red_meeple.png); }
 .meeple.player2 { background: url(../images/green_meeple.png); }
 .meeple.player3 { background: url(../images/yellow_meeple.png); }
 .meeple.player4 { background: url(../images/blue_meeple.png); }
+.workspace .meeple { position: absolute; }
 .toolhut .position1 { left: 10px; top: -10px; }
 .field .position1 { left: 15px; top: -7px; }
 .specialhut .position1 { left: 10px; top: -5px; }
@@ -160,7 +161,7 @@ body {
 .counter.gold { background-image: url(../images/gold.png); }
 
 /* Dialogs */
-.gameover, .feeding-dialog {
+.gameover, .placement-dialog, .feeding-dialog {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -168,6 +169,7 @@ body {
   border: 2px solid gray;
   z-index: 100;
 }
+.placement-dialog .meeple { display: inline-block; }
 
 /* Buildings */
 .building {

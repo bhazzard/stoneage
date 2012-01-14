@@ -60,11 +60,6 @@ define([
       this.workspaces.bind('allresolved', function() {
         this.feed();
       }, this);
-      this.workspaces.bind('howmany', function(workspace) {
-        var player = this.get('players').current(),
-          workers = prompt('Player ' + player.id + ', how many workers?');
-        workspace.place(player, Number(workers));
-      }, this);
       this.workspaces.bind('place', function() {
         var players = this.get('players');
         if (players.remainingWorkers() === 0) {

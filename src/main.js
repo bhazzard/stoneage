@@ -18,8 +18,9 @@ require([
     'src/models/players',
     'src/views/player',
     'src/views/feed',
+    'src/views/placement',
     'src/views/bottompanel'
-  ], function($, Backbone, Board, BoardView, Player, Players, PlayerView, FeedView, BottomPanel) {
+  ], function($, Backbone, Board, BoardView, Player, Players, PlayerView, FeedView, PlacementView, BottomPanel) {
   var players = new Players([
       new Player(),
       new Player()
@@ -43,5 +44,14 @@ require([
       model: player
     });
     bottomPanel.addPlayer(playerView);
+  });
+
+  board.workspaces.bind('howmany', function(workspace) {
+    var player = players.current(),
+      placementView = new PlacementView({
+        model: workspace,
+        player: player
+      });
+    $(placementView.render().el).appendTo('body');
   });
 });
