@@ -179,3 +179,5 @@ div.production-marker {
 
 .production-marker.player1 { background-color: red; }
 .production-marker.player2 { background-color: green; }
+.production-marker.player3 { background-color: #EAC117; }
+.production-marker.player4 { background-color: blue; }
