@@ -15,10 +15,11 @@ define([
         .removeClass()
         .addClass(this.className)
         .addClass(this.model.get('name'));
+      var position = 1;
       for (var i=1; i<=4; ++i) {
         for (var j=1; j<=this.model.get(i); ++j) {
           $('<div/>')
-            .addClass('meeple player' + i)
+            .addClass('meeple player' + i + ' position' + (position++))
             .appendTo(this.el);
         }
       }
