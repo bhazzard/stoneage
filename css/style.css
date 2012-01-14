@@ -97,6 +97,13 @@ body {
 .claypit .position5 { left: 45px; top: 20px; }
 .claypit .position6 { left: 87px; top: 17px; }
 .claypit .position7 { left: 131px; top: 21px; }
+.quary .position1 { left: 5px; top: 1px; }
+.quary .position2 { left: 44px; top: 1px; }
+.quary .position3 { left: 33px; top: 21px; }
+.quary .position4 { left: 70px; top: 23px; }
+.quary .position5 { left: 40px; top: 43px; }
+.quary .position6 { left: 74px; top: 50px; }
+.quary .position7 { left: 61px; top: 77px; }
 
 /* Player Boards */
 .player-board {
