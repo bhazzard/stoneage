@@ -111,6 +111,12 @@ body {
 .river .position5 { left: 46px; top: 9px; }
 .river .position6 { left: 80px; top: 17px; }
 .river .position7 { left: 51px; top: 35px; }
+.hunt .meeple {
+  position: static;
+  display: inline-block;
+  margin-left: -8px;
+  margin-top: -8px;
+}
 
 /* Player Boards */
 .player-board {
