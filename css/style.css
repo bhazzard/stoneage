@@ -104,6 +104,13 @@ body {
 .quary .position5 { left: 40px; top: 43px; }
 .quary .position6 { left: 74px; top: 50px; }
 .quary .position7 { left: 61px; top: 77px; }
+.river .position1 { left: 16px; top: -10px; }
+.river .position2 { left: 54px; top: -12px; }
+.river .position3 { left: 90px; top: -6px; }
+.river .position4 { left: 8px; top: 12px; }
+.river .position5 { left: 46px; top: 9px; }
+.river .position6 { left: 80px; top: 17px; }
+.river .position7 { left: 51px; top: 35px; }
 
 /* Player Boards */
 .player-board {
