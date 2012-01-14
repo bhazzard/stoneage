@@ -16,10 +16,11 @@ define([
         .addClass(this.className)
         .addClass(this.model.get('name'));
       for (var i=1; i<=4; ++i) {
-        $('<div/>')
-          .addClass('worker-pile player' + i)
-          .appendTo(this.el)
-          .html(this.model.get(i));
+        for (var j=1; j<=this.model.get(i); ++j) {
+          $('<div/>')
+            .addClass('meeple player' + i)
+            .appendTo(this.el);
+        }
       }
       return this;
     },
