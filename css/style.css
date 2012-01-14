@@ -14,6 +14,17 @@ body {
   position: relative;
 }
 
+.bottom-panel {
+  position: absolute;
+  bottom: 0px;
+  height: 81px;
+  width: 100%;
+  background-image: url(../images/bottompanel.png);
+  background-size: 100%;
+  z-index: 1000;
+  float: left;
+}
+
 /* Workspaces */
 .workspace {
   position: absolute;
@@ -84,34 +95,34 @@ body {
 .specialhut .position2 { left: 45px; top: -12px; }
 .building .position1 { left: 32px; top: 25px; }
 
-/* Player Boards */
-.player-board {
-  border: 3px solid black;
-  position: absolute;
-  top: 0;
-  left: 1024px;
-  width: 100px;
-  height: 160px;
-}
 .player1 { color: red; }
 .player2 { color: green; }
 .player3 { color: #EAC117; }
 .player4 { color: blue; }
-.player-board.player1 {
-  border-color: red;
+
+/* Player Boards */
+.player-board {
+  width: 150px;
+  padding-top: 20px;
+  margin-left: 20px;
+  float: left;
 }
-.player-board.player2 {
-  border-color: green;
-  top: 167px;
+
+.counter {
+  float: left;
+  width: 35px;
+  height: 29px;
+  margin 5px;
+  background-repeat: no-repeat;
 }
-.player-board.player3 {
-  border-color: #EAC117;
-  top: 334px;
-}
-.player-board.player4 {
-  border-color: blue;
-  top: 501px;
-}
+
+.counter.worker-pile { background-size: 50%;}
+.player1 .counter.worker-pile { background-image: url(../images/red_meeple.png); }
+.player2 .counter.worker-pile { background-image: url(../images/green_meeple.png); }
+.counter.wood { background-image: url(../images/wood.png); }
+.counter.brick { background-image: url(../images/clay.png); }
+.counter.stone { background-image: url(../images/stone.png); }
+.counter.gold { background-image: url(../images/gold.png); }
 
 /* Dialogs */
 .gameover, .feeding-dialog {
