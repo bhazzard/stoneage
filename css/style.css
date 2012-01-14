@@ -83,6 +83,13 @@ body {
 .specialhut .position1 { left: 10px; top: -5px; }
 .specialhut .position2 { left: 45px; top: -12px; }
 .building .position1 { left: 32px; top: 25px; }
+.forest .position1 { left: 8px; top: -11px; }
+.forest .position2 { left: 43px; top: 0px; }
+.forest .position3 { left: 15px; top: 17px; }
+.forest .position4 { left: 54px; top: 23px; }
+.forest .position5 { left: 7px; top: 41px; }
+.forest .position6 { left: 42px; top: 45px; }
+.forest .position7 { left: 56px; top: 65px; }
 
 /* Player Boards */
 .player-board {
