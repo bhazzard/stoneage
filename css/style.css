@@ -288,6 +288,11 @@ div.production-marker {
 .die.face6 { background-position: -565px 0px; }
 
 /* Tools */
+.tool {
+  width: 50px;
+  height: 50px;
+}
+.tool.tapped { -webkit-transform: rotate(90deg); }
 .tool1 { background: url(images/tool_1.png) no-repeat; }
 .tool2 { background: url(images/tool_2.png) no-repeat; }
 .tool3 { background: url(images/tool_3.png) no-repeat; }
