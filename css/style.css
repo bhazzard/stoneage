@@ -160,6 +160,18 @@ body {
 .counter.brick { background-image: url(images/clay.png); }
 .counter.stone { background-image: url(images/stone.png); }
 .counter.gold { background-image: url(images/gold.png); }
+.counter.tools {
+  margin-left: 0;
+  padding-left: 0;
+}
+.counter.tools .tool {
+  background-size: contain;
+  border: 1px solid #333;
+  width: 27px;
+  height: 27px;
+  display: inline-block;
+  margin-left: 3px;
+}
 
 /* Dialogs */
 .gameover,
@@ -274,3 +286,9 @@ div.production-marker {
 .die.face4 { background-position: -339px 0px; }
 .die.face5 { background-position: -452px 0px; }
 .die.face6 { background-position: -565px 0px; }
+
+/* Tools */
+.tool1 { background: url(images/tool_1.png) no-repeat; }
+.tool2 { background: url(images/tool_2.png) no-repeat; }
+.tool3 { background: url(images/tool_3.png) no-repeat; }
+.tool4 { background: url(images/tool_4.png) no-repeat; }
