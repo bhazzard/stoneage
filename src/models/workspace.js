@@ -8,7 +8,7 @@ define([
         return false;
       }
       //TODO - won't necessarily be correct for 2/3 players
-      if(this._playersOnWorkspace() >= 2){
+      if(this._playersOnWorkspace() >= this.get('maxPlayers')){
         //Already 2 players on the workspace
         return false;
       }
@@ -61,7 +61,7 @@ define([
       }
     },
     _playersOnWorkspace: function(){
-      var i, count;
+      var i, count = 0;
       for(i=1; i <=4; ++i){
         if(this.get(i) > 0){
           count++;

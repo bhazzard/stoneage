@@ -23,25 +23,29 @@ define([
           name: 'forest',
           resource: 'wood',
           value: 3,
-          maxWorkers : 7
+          maxWorkers : 7,
+          maxPlayers : 2
         }),
         new Workspace({
           name: 'claypit',
           resource: 'brick',
           value: 4,
-          maxWorkers : 7
+          maxWorkers : 7,
+          maxPlayers : 2
         }),
         new Workspace({
           name: 'quary',
           resource: 'stone',
           value: 5,
-          maxWorkers : 7
+          maxWorkers : 7,
+          maxPlayers : 2
         }),
         new Workspace({
           name: 'river',
           resource: 'gold',
           value: 6,
-          maxWorkers : 7
+          maxWorkers : 7,
+          maxPlayers : 2
         }),
         new Field(),
         new SpecialHut(),
