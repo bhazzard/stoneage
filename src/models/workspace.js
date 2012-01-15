@@ -3,16 +3,16 @@ define([
   ], function(Backbone) {
   return Backbone.Model.extend({
     canPlace : function(player, count){
-        if(this.workers(player) > 0){
-            //Already on this workspace
-            return false;
-        }
-        //TODO - won't necessarily be correct for 2/3 players
-        if(this._playersOnWorkspace() >= 2){
-            //Already 2 players on the workspace
-            return false;
-        }
-        return this.workers() < this.get('maxWorkers');
+      if(this.workers(player) > 0){
+        //Already on this workspace
+        return false;
+      }
+      //TODO - won't necessarily be correct for 2/3 players
+      if(this._playersOnWorkspace() >= 2){
+        //Already 2 players on the workspace
+        return false;
+      }
+      return this.workers() < this.get('maxWorkers');
     },
     place: function(player, count) {
       var maxWorkers = this.get('maxWorkers');
