@@ -21,6 +21,7 @@ require([
     'src/views/feed',
     'src/views/placement',
     'src/views/resolution',
+    'src/views/purchase',
     'src/views/bottompanel'
   ], function(
     $,
@@ -34,6 +35,7 @@ require([
     FeedView,
     PlacementView,
     ResolutionView,
+    PurchaseView,
     BottomPanel) {
   var players = new Players([
       new Player(),
@@ -81,8 +83,10 @@ require([
   });
 
   board.workspaces.bind('purchase', function(building, player) {
-    if (confirm('buy this building?')) {
-      building.purchase(player);
-    }
+    var purchaseView = new PurchaseView({
+      model: building,
+      player: player
+    });
+    $(purchaseView.render().el).appendTo('body');
   });
 });

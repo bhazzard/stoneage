@@ -161,7 +161,11 @@ body {
 .counter.gold { background-image: url(../images/gold.png); }
 
 /* Dialogs */
-.gameover, .resolution-dialog, .placement-dialog, .feeding-dialog {
+.gameover,
+.resolution-dialog,
+.purchase-dialog,
+.placement-dialog,
+.feeding-dialog {
   position: absolute;
   top: 10px;
   left: 10px;
