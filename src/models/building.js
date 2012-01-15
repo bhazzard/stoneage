@@ -13,7 +13,9 @@ define([
       _(this.get('cost')).each(function(amount, resource) {
         player.subtract(resource, amount);
       }, this);
+      this.get('buildings').remove(this);
       player.add('score', this.get('value'));
+      this.trigger('resolve', player);
     },
     canPlace : function(player) {
       return this.workers() === 0 && player.get('workers') > 0;
@@ -25,11 +27,12 @@ define([
       var workers = this.workers(player);
       this.set(player.id, undefined);
       player.add('workers', workers);
-      if (this.canPurchase(player) && confirm('Buy this building?')) {
-        this.purchase(player);
-        this.get('buildings').remove(this);
+      //Resolve immediately if the player cannot afford the building
+      if (!this.canPurchase(player)) {
+        this.trigger('resolve', player);
+      } else {
+        this.trigger('purchase', this, player);
       }
-      this.trigger('resolve', player);
     },
     reset: function() {
       //Flip the card

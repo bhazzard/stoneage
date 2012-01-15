@@ -79,4 +79,10 @@ require([
     });
     $(resolutionView.render().el).appendTo('body');
   });
+
+  board.workspaces.bind('purchase', function(building, player) {
+    if (confirm('buy this building?')) {
+      building.purchase(player);
+    }
+  });
 });
