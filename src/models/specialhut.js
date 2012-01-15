@@ -16,7 +16,7 @@ define([
       Workspace.prototype.place.call(this, player, 2);
     },
     resolve: function(player) {
-      var workers = this.workers(player.id);
+      var workers = this.workers(player);
       this.set(player.id, undefined);
       if (workers === 2) {
         player.add('workers', workers + 1);

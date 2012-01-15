@@ -13,14 +13,26 @@ require([
     'jquery',
     'backbone',
     'src/models/board',
-    'src/views/board',
     'src/models/player',
     'src/models/players',
+    'src/models/dice',
+    'src/views/board',
     'src/views/player',
     'src/views/feed',
     'src/views/placement',
     'src/views/bottompanel'
-  ], function($, Backbone, Board, BoardView, Player, Players, PlayerView, FeedView, PlacementView, BottomPanel) {
+  ], function(
+    $,
+    Backbone,
+    Board,
+    Player,
+    Players,
+    Dice,
+    BoardView,
+    PlayerView,
+    FeedView,
+    PlacementView,
+    BottomPanel) {
   var players = new Players([
       new Player(),
       new Player()
@@ -53,5 +65,12 @@ require([
         player: player
       });
     $(placementView.render().el).appendTo('body');
+  });
+
+  board.workspaces.bind('roll', function(workspace, player) {
+    var dice = new Dice(workspace.workers(player));
+    var roll = dice.roll();
+    alert('rolled ' + roll);
+    workspace.resolve(player, roll);
   });
 });

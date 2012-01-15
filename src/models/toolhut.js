@@ -18,7 +18,7 @@ define([
     resolve: function(player) {
       var resourceName = this.get('resource'),
         value = this.get('value'),
-        workers = this.workers(player.id);
+        workers = this.workers(player);
       this.set(player.id, undefined);
       player.add('workers', workers);
       player.get('tools').upgrade();

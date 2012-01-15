@@ -3,7 +3,7 @@ define([
   ], function(Backbone) {
   return Backbone.Model.extend({
     canPlace : function(player, count){
-        if(this.workers(player.id) > 0){
+        if(this.workers(player) > 0){
             //Already on this workspace
             return false;
         }
@@ -28,20 +28,20 @@ define([
         this.trigger('howmany', this);
       }
     },
-    resolve: function(player) {
-      var roll = 0,
-        resourceName = this.get('resource'),
+    resolve: function(player, roll) {
+      var resourceName = this.get('resource'),
         value = this.get('value'),
-        workers = this.workers(player.id);
-      for (var i=0; i<workers; i++) {
-        roll += Math.floor(Math.random() * 6) + 1;
+        workers = this.workers(player),
+        resourceCount;
+      if (roll === undefined) {
+        this.trigger('roll', this, player);
+      } else {
+        this.set(player.id, undefined);
+        resourceCount = Math.floor(roll / value);
+        player.add('workers', workers);
+        player.add(resourceName, resourceCount);
+        this.trigger('resolve', player);
       }
-      this.set(player.id, undefined);
-      var resourceCount = Math.floor(roll / value);
-      player.add('workers', workers);
-      player.add(resourceName, resourceCount);
-      alert('Player ' + player.id + ' rolled ' + roll + ' and got ' + resourceCount +' ' + resourceName);
-      this.trigger('resolve', player);
     },
     canResolve : function(player){
       return this.workers(player.id) > 0;
@@ -49,15 +49,15 @@ define([
     reset: function() {
       //no-op
     },
-    workers: function(playerId) {
-      if (playerId === undefined) {
+    workers: function(player) {
+      if (player === undefined) {
         var i, total = 0;
         for (i=1; i<=4; ++i) {
-          total += this.workers(i);
+          total += this.workers({ id: i });
         }
         return total;
       } else {
-        return this.get(playerId) || 0;
+        return this.get(player.id) || 0;
       }
     },
     _playersOnWorkspace: function(){

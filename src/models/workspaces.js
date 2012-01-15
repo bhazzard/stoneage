@@ -15,7 +15,7 @@ define([
     toResolve: function(player) {
       return this.reduce(function(memo, workspace) {
         if (player) {
-          return memo + workspace.workers(player.id);
+          return memo + workspace.workers(player);
         } else {
           return memo + workspace.workers();
         }

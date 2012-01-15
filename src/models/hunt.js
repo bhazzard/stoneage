@@ -10,7 +10,7 @@ define([
             });
         },
         canPlace: function(player, count){
-            if(this.workers(player.id) > 0){
+            if(this.workers(player) > 0){
                 //Already on this workspace
                 return false;
             }

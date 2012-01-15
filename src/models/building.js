@@ -22,7 +22,7 @@ define([
       Workspace.prototype.place.call(this, player, 1);
     },
     resolve: function(player) {
-      var workers = this.workers(player.id);
+      var workers = this.workers(player);
       this.set(player.id, undefined);
       player.add('workers', workers);
       if (this.canPurchase(player) && confirm('Buy this building?')) {
