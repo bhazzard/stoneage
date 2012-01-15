@@ -131,30 +131,31 @@ body {
   margin-top: -8px;
 }
 
-.player1 { color: red; }
-.player2 { color: green; }
-.player3 { color: #EAC117; }
-.player4 { color: blue; }
-
 /* Player Boards */
 .player-board {
-  width: 150px;
+  width: 250px;
   padding-top: 20px;
   margin-left: 20px;
-  float: left;
+  display: inline-block;
 }
 
 .counter {
-  float: left;
-  width: 35px;
+  display: inline-block;
+  padding-left: 40px;
+  margin-left: 5px;
   height: 29px;
-  margin 5px;
+  line-height: 29px;
   background-repeat: no-repeat;
 }
 
-.counter.worker-pile { background-size: 50%;}
+.counter.worker-pile {
+  background-size: contain;
+  padding-left: 30px;
+}
 .player1 .counter.worker-pile { background-image: url(images/red_meeple.png); }
 .player2 .counter.worker-pile { background-image: url(images/green_meeple.png); }
+.player3 .counter.worker-pile { background-image: url(images/yellow_meeple.png); }
+.player4 .counter.worker-pile { background-image: url(images/blue_meeple.png); }
 .counter.wood { background-image: url(images/wood.png); }
 .counter.brick { background-image: url(images/clay.png); }
 .counter.stone { background-image: url(images/stone.png); }
