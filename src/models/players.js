@@ -37,6 +37,11 @@ define([
       this.gotoLeader();
       this.current().feed();
     },
+    resetAll: function() {
+      this.each(function(player) {
+        player.get('tools').untapAll();
+      });
+    },
     _onAdd: function(player, index) {
       player.id = index === undefined ? this.length : index+1;
       player.bind('fed', this._onFed, this);

@@ -16,18 +16,27 @@ define([
         $('<div />').addClass('die face' + die).appendTo(roll);
       }, this);
 
-      var tools = new ToolsView({
-        collection: this.options.player.get('tools')
+      var tools = this.options.player.get('tools');
+      var toolsView = new ToolsView({
+        collection: tools
       });
-      $(tools.render().el).appendTo(this.el);
+      $(toolsView.render().el).appendTo(this.el);
+      
+      this.unavailable = tools.reduce(function(memo, tool) {
+        return memo + (tool.get('tapped') ? tool.get('value') : 0);
+      }, 0);
 
       $('<button class="ok">Ok</button>').appendTo(this.el);
       return this;
     },
     resolve: function() {
+      var tapped = this.options.player.get('tools').reduce(function(memo, tool) {
+        return memo + (tool.get('tapped') ? tool.get('value') : 0);
+      }, 0) - this.unavailable;
+
       this.model.resolve(
         this.options.player,
-        this.options.dice.sum + _($(this.el).find('input:checked')).reduce(function(memo, el) { return memo + Number($(el).attr('value')); }, 0));
+        this.options.dice.sum + tapped);
       this.remove();
     }
   });

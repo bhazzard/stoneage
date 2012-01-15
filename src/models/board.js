@@ -111,6 +111,7 @@ define([
       this.get('players').feed();
     },
     reset: function() {
+      this.get('players').resetAll();
       this.workspaces.reset();
       //TODO - flip culture cards when they exist
       this.checkForEndGame();
