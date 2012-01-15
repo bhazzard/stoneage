@@ -10,7 +10,9 @@ define([
       });
     },
 		canPlace : function(player) {
-      return this.workers() === 0 && player.get('workers') > 0;
+      return this.workers() === 0 &&
+        player.get('workers') > 0 &&
+        player.get('production') < 10;
 		},
     place: function(player) {
       Workspace.prototype.place.call(this, player, 1);
