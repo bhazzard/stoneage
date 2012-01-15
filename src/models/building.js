@@ -15,9 +15,9 @@ define([
       }, this);
       player.add('score', this.get('value'));
     },
-		canPlace : function(player) {
+    canPlace : function(player) {
       return this.workers() === 0 && player.get('workers') > 0;
-		},
+    },
     place: function(player) {
       Workspace.prototype.place.call(this, player, 1);
     },

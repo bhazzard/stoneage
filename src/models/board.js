@@ -91,14 +91,16 @@ define([
         player = players.current();
       }
 
-			workers = parseInt(workers);
-			if(workspace.canPlace(player)){
+      workers = parseInt(workers);
+	  if(workspace.canPlace(player)){
         workspace.place(player);
-			}
+	  }
     },
     resolve: function(workspace) {
       var player = this.get('players').current();
-      workspace.resolve(player);
+      if(workspace.canResolve(player)) {
+        workspace.resolve(player);
+      }
     },
     feed: function() {
       this.get('players').feed();

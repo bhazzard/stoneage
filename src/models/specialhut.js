@@ -9,9 +9,9 @@ define([
         value: 1
       });
     },
-		canPlace : function(player) {
+    canPlace : function(player) {
       return this.workers() === 0 && player.get('workers') > 1;
-		},
+    },
     place: function(player) {
       Workspace.prototype.place.call(this, player, 2);
     },

@@ -43,6 +43,9 @@ define([
       alert('Player ' + player.id + ' rolled ' + roll + ' and got ' + resourceCount +' ' + resourceName);
       this.trigger('resolve', player);
     },
+    canResolve : function(player){
+      return this.workers(player.id) > 0;
+    },
     reset: function() {
       //no-op
     },
