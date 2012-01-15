@@ -20,6 +20,7 @@ require([
     'src/views/player',
     'src/views/feed',
     'src/views/placement',
+    'src/views/resolution',
     'src/views/bottompanel'
   ], function(
     $,
@@ -32,6 +33,7 @@ require([
     PlayerView,
     FeedView,
     PlacementView,
+    ResolutionView,
     BottomPanel) {
   var players = new Players([
       new Player(),
@@ -69,8 +71,12 @@ require([
 
   board.workspaces.bind('roll', function(workspace, player) {
     var dice = new Dice(workspace.workers(player));
-    var roll = dice.roll();
-    alert('rolled ' + roll);
-    workspace.resolve(player, roll);
+    dice.roll();
+    var resolutionView = new ResolutionView({
+      model: workspace,
+      player: player,
+      dice: dice
+    });
+    $(resolutionView.render().el).appendTo('body');
   });
 });
