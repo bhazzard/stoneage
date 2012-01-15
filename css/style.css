@@ -166,7 +166,7 @@ body {
 .purchase-dialog,
 .placement-dialog,
 .feeding-dialog {
-  position: absolute;
+  position: fixed;
   top: 10px;
   left: 10px;
   background: white;
