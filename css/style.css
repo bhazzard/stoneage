@@ -193,7 +193,10 @@ body {
   border: 2px solid gray;
   z-index: 100;
 }
-.placement-dialog .meeple { display: inline-block; }
+.placement-dialog .meeple {
+  display: inline-block;
+  cursor: pointer;
+}
 
 /* Buildings */
 .building {
