@@ -34,7 +34,7 @@ define([
         value = this.get('value'),
         workers = this.workers(player.id);
       for (var i=0; i<workers; i++) {
-        roll += Math.round(Math.random() * 6) + 1;
+        roll += Math.floor(Math.random() * 6) + 1;
       }
       this.set(player.id, undefined);
       var resourceCount = Math.floor(roll / value);
