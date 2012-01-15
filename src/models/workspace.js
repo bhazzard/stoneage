@@ -7,9 +7,7 @@ define([
         //Already on this workspace
         return false;
       }
-      //TODO - won't necessarily be correct for 2/3 players
       if(this._playersOnWorkspace() >= this.get('maxPlayers')){
-        //Already 2 players on the workspace
         return false;
       }
       return this.workers() < this.get('maxWorkers');
