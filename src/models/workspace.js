@@ -44,7 +44,7 @@ define([
       }
     },
     canResolve : function(player){
-      return this.workers(player.id) > 0;
+      return this.workers(player) > 0;
     },
     reset: function() {
       //no-op
