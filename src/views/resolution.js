@@ -1,8 +1,9 @@
 define([
     'jquery',
     'underscore',
-    'backbone'
-  ], function($, _, Backbone) {
+    'backbone',
+    'src/views/tools'
+  ], function($, _, Backbone, ToolsView) {
   return Backbone.View.extend({
     className: 'resolution-dialog',
     events: {
@@ -15,12 +16,10 @@ define([
         $('<div />').addClass('die face' + die).appendTo(roll);
       }, this);
 
-      this.options.player.get('tools').each(function(tool) {
-        if (!tool.get('tapped')) {
-          var toolOption = $('<input />').attr('value', tool.get('value')).attr('type', 'checkbox');
-          $(this.el).append(toolOption).append(tool.get('value'));
-        }
-      }, this);
+      var tools = new ToolsView({
+        collection: this.options.player.get('tools')
+      });
+      $(tools.render().el).appendTo(this.el);
 
       $('<button class="ok">Ok</button>').appendTo(this.el);
       return this;

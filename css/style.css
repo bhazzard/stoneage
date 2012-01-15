@@ -197,6 +197,11 @@ body {
   display: inline-block;
   cursor: pointer;
 }
+.resolution-dialog .tool {
+  display: inline-block;
+  border: 1px solid #333;
+  margin: 5px;
+}
 
 /* Buildings */
 .building {
