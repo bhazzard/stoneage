@@ -18,7 +18,7 @@ body {
 .bottom-panel {
   position: fixed;
   bottom: 0px;
-  height: 81px;
+  height: 91px;
   width: 100%;
   background-image: url(images/bottompanel.png);
   background-size: 100%;
@@ -134,7 +134,7 @@ body {
 /* Player Boards */
 .player-board {
   width: 250px;
-  padding-top: 20px;
+  margin-top: 20px;
   margin-left: 20px;
   display: inline-block;
 }
@@ -143,6 +143,7 @@ body {
   display: inline-block;
   padding-left: 40px;
   margin-left: 5px;
+  margin-top: 5px;
   height: 29px;
   line-height: 29px;
   background-repeat: no-repeat;
@@ -156,11 +157,16 @@ body {
 .player2 .counter.worker-pile { background-image: url(images/green_meeple.png); }
 .player3 .counter.worker-pile { background-image: url(images/yellow_meeple.png); }
 .player4 .counter.worker-pile { background-image: url(images/blue_meeple.png); }
+.counter.food {
+  background-image: url(images/food.png);
+  padding-left: 34px;
+}
 .counter.wood { background-image: url(images/wood.png); }
 .counter.brick { background-image: url(images/clay.png); }
 .counter.stone { background-image: url(images/stone.png); }
 .counter.gold { background-image: url(images/gold.png); }
 .counter.tools {
+  vertical-align: top;
   margin-left: 0;
   padding-left: 0;
 }
@@ -172,6 +178,7 @@ body {
   display: inline-block;
   margin-left: 3px;
 }
+.counter.score { padding: 0; }
 
 /* Dialogs */
 .gameover,
