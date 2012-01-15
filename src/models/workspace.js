@@ -61,13 +61,13 @@ define([
       }
     },
     _playersOnWorkspace: function(){
-        var i, count;
-        for(i=1; i <=4; ++i){
-            if(this.get(i) > 0){
-                count++;
-            }
+      var i, count;
+      for(i=1; i <=4; ++i){
+        if(this.get(i) > 0){
+          count++;
         }
-        return count;
+      }
+      return count;
     }
   });
 });
