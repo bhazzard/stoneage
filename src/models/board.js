@@ -16,6 +16,7 @@ define([
       var buildings = new Buildings([], {
         players: this.get('players').length
       });
+      var workspaceMax = this.maxPlayers();
       var workspaces = new Workspaces();
       workspaces.add([
         new Hunt(),
@@ -24,28 +25,28 @@ define([
           resource: 'wood',
           value: 3,
           maxWorkers : 7,
-          maxPlayers : 2
+          maxPlayers : workspaceMax
         }),
         new Workspace({
           name: 'claypit',
           resource: 'brick',
           value: 4,
           maxWorkers : 7,
-          maxPlayers : 2
+          maxPlayers : workspaceMax
         }),
         new Workspace({
           name: 'quary',
           resource: 'stone',
           value: 5,
           maxWorkers : 7,
-          maxPlayers : 2
+          maxPlayers : workspaceMax
         }),
         new Workspace({
           name: 'river',
           resource: 'gold',
           value: 6,
           maxWorkers : 7,
-          maxPlayers : 2
+          maxPlayers : workspaceMax
         }),
         new Field(),
         new SpecialHut(),
@@ -124,6 +125,9 @@ define([
         players.advanceLeaderToken();
         this.set('phase', 'place');
       }
+    },
+    maxPlayers : function(){
+      return this.get('players').length - 1;
     }
   });
 });
