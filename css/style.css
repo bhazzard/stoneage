@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url(../images/WoodTable.png);
+  background-image: url(images/WoodTable.png);
   background-size: 100%
 }
 .board {
@@ -11,7 +11,7 @@ body {
   margin: -333px 0 0 -511px;
   top: 50%;
   left: 50%;
-  background: url(../images/board.png) no-repeat;
+  background: url(images/board.png) no-repeat;
   position: relative;
 }
 
@@ -20,7 +20,7 @@ body {
   bottom: 0px;
   height: 81px;
   width: 100%;
-  background-image: url(../images/bottompanel.png);
+  background-image: url(images/bottompanel.png);
   background-size: 100%;
   z-index: 1000;
   float: left;
@@ -86,10 +86,10 @@ body {
   height: 35px;
 }
 .meeple.ghost { opacity: 0.3; }
-.meeple.player1 { background: url(../images/red_meeple.png); }
-.meeple.player2 { background: url(../images/green_meeple.png); }
-.meeple.player3 { background: url(../images/yellow_meeple.png); }
-.meeple.player4 { background: url(../images/blue_meeple.png); }
+.meeple.player1 { background: url(images/red_meeple.png); }
+.meeple.player2 { background: url(images/green_meeple.png); }
+.meeple.player3 { background: url(images/yellow_meeple.png); }
+.meeple.player4 { background: url(images/blue_meeple.png); }
 .workspace .meeple { position: absolute; }
 .toolhut .position1 { left: 10px; top: -10px; }
 .field .position1 { left: 15px; top: -7px; }
@@ -153,12 +153,12 @@ body {
 }
 
 .counter.worker-pile { background-size: 50%;}
-.player1 .counter.worker-pile { background-image: url(../images/red_meeple.png); }
-.player2 .counter.worker-pile { background-image: url(../images/green_meeple.png); }
-.counter.wood { background-image: url(../images/wood.png); }
-.counter.brick { background-image: url(../images/clay.png); }
-.counter.stone { background-image: url(../images/stone.png); }
-.counter.gold { background-image: url(../images/gold.png); }
+.player1 .counter.worker-pile { background-image: url(images/red_meeple.png); }
+.player2 .counter.worker-pile { background-image: url(images/green_meeple.png); }
+.counter.wood { background-image: url(images/wood.png); }
+.counter.brick { background-image: url(images/clay.png); }
+.counter.stone { background-image: url(images/stone.png); }
+.counter.gold { background-image: url(images/gold.png); }
 
 /* Dialogs */
 .gameover,
@@ -186,24 +186,24 @@ body {
 .building-pile2 { left: 178px; }
 .building-pile3 { left: 287px; }
 .building-pile4 { left: 395px; }
-.building-back { background: url(../images/hut_back.png); }
-.building1 { background: url(../images/hut_01.png); }
-.building4 { background: url(../images/hut_04.png); }
-.building6 { background: url(../images/hut_06.png); }
-.building8 { background: url(../images/hut_08.png); }
-.building12 { background: url(../images/hut_12.png); }
-.building13 { background: url(../images/hut_13.png); }
-.building14 { background: url(../images/hut_14.png); }
-.building15 { background: url(../images/hut_15.png); }
-.building16 { background: url(../images/hut_16.png); }
-.building18 { background: url(../images/hut_18.png); }
-.building20 { background: url(../images/hut_20.png); }
-.building21 { background: url(../images/hut_21.png); }
-.building23 { background: url(../images/hut_23.png); }
-.building24 { background: url(../images/hut_24.png); }
-.building26 { background: url(../images/hut_26.png); }
-.building27 { background: url(../images/hut_27.png); }
-.building28 { background: url(../images/hut_28.png); }
+.building-back { background: url(images/hut_back.png); }
+.building1 { background: url(images/hut_01.png); }
+.building4 { background: url(images/hut_04.png); }
+.building6 { background: url(images/hut_06.png); }
+.building8 { background: url(images/hut_08.png); }
+.building12 { background: url(images/hut_12.png); }
+.building13 { background: url(images/hut_13.png); }
+.building14 { background: url(images/hut_14.png); }
+.building15 { background: url(images/hut_15.png); }
+.building16 { background: url(images/hut_16.png); }
+.building18 { background: url(images/hut_18.png); }
+.building20 { background: url(images/hut_20.png); }
+.building21 { background: url(images/hut_21.png); }
+.building23 { background: url(images/hut_23.png); }
+.building24 { background: url(images/hut_24.png); }
+.building26 { background: url(images/hut_26.png); }
+.building27 { background: url(images/hut_27.png); }
+.building28 { background: url(images/hut_28.png); }
 .stack1 { z-index: 7; }
 .stack2 { z-index: 6; }
 .stack3 { z-index: 5; }
@@ -262,7 +262,7 @@ div.production-marker {
 
 /* Dice */
 .die {
-  background: url(../images/dice.png) no-repeat;
+  background: url(images/dice.png) no-repeat;
   width: 113px;
   height: 113px;
   display: inline-block;
