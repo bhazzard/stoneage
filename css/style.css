@@ -255,3 +255,17 @@ div.production-marker {
 .production-marker.player2 { background-color: green; }
 .production-marker.player3 { background-color: #EAC117; }
 .production-marker.player4 { background-color: blue; }
+
+/* Dice */
+.die {
+  background: url(../images/dice.png) no-repeat;
+  width: 113px;
+  height: 113px;
+  display: inline-block;
+}
+.die.face1 { background-position: 0px 0px; }
+.die.face2 { background-position: -113px 0px; }
+.die.face3 { background-position: -226px 0px; }
+.die.face4 { background-position: -339px 0px; }
+.die.face5 { background-position: -452px 0px; }
+.die.face6 { background-position: -565px 0px; }

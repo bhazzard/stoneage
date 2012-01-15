@@ -1,7 +1,8 @@
 define([
     'jquery',
+    'underscore',
     'backbone'
-  ], function($, Backbone) {
+  ], function($, _, Backbone) {
   return Backbone.View.extend({
     className: 'resolution-dialog',
     events: {
@@ -9,7 +10,10 @@ define([
     },
     render: function() {
       $(this.el).empty();
-      $('<div />').html('Rolled' + this.options.dice.sum).appendTo(this.el);
+      var roll = $('<div />').addClass('roll').appendTo(this.el);
+      _(this.options.dice.dice).each(function(die) {
+        $('<div />').addClass('die face' + die).appendTo(roll);
+      }, this);
       $('<button class="ok">Ok</button>').appendTo(this.el);
       return this;
     },
