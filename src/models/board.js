@@ -97,9 +97,9 @@ define([
       }
 
       workers = parseInt(workers);
-	  if(workspace.canPlace(player)){
+      if(workspace.canPlace(player)){
         workspace.place(player);
-	  }
+      }
     },
     resolve: function(workspace) {
       var player = this.get('players').current();
