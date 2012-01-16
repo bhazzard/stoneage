@@ -17,6 +17,7 @@ define([
       var workers = this.workers(player);
       this.set(player.id, undefined);
       player.add('workers', workers);
+      this.collection.remove(this);
       this.trigger('resolve', player);
     }
   });
