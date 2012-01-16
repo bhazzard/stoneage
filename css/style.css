@@ -201,6 +201,7 @@ body {
   display: inline-block;
   border: 1px solid #333;
   margin: 5px;
+  cursor: pointer;
 }
 
 /* Buildings */
@@ -312,3 +313,9 @@ div.production-marker {
 .tool2 { background: url(images/tool_2.png) no-repeat; }
 .tool3 { background: url(images/tool_3.png) no-repeat; }
 .tool4 { background: url(images/tool_4.png) no-repeat; }
+.board > .tool {
+  position: absolute;
+  top: 375px;
+}
+.board > .tool1 { left: 502px; }
+.board > .tool3 { left: 591px; }

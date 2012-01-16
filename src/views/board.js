@@ -29,6 +29,9 @@ define([
         workspace.view.remove();
       });
 
+      $('<div/>').addClass('tool tool1').appendTo(this.el);
+      $('<div/>').addClass('tool tool3').appendTo(this.el);
+
       return this;
     },
     _gameover: function(player) {
