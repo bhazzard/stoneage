@@ -6,8 +6,18 @@ define([
     'src/models/specialhut',
     'src/models/toolhut',
     'src/models/hunt',
-    'src/models/buildings'
-  ], function(Backbone, Workspace, Workspaces, Field, SpecialHut, ToolHut, Hunt, Buildings) {
+    'src/models/buildings',
+    'src/models/civilizationcards'
+  ], function(
+    Backbone,
+    Workspace,
+    Workspaces,
+    Field,
+    SpecialHut,
+    ToolHut,
+    Hunt,
+    Buildings,
+    CivilizationCards) {
   return Backbone.Model.extend({
     defaults: {
       phase: 'place'
@@ -16,6 +26,7 @@ define([
       var buildings = new Buildings([], {
         players: this.get('players').length
       });
+      var civilizationCards = new CivilizationCards();
       var workspaceMax = this.maxPlayers();
       var workspaces = new Workspaces();
       workspaces.add([
@@ -53,6 +64,7 @@ define([
         new ToolHut()
       ]);
       workspaces.add(buildings.models);
+      civilizationCards.deal(workspaces);
       this.workspaces = workspaces;
       this.buildings = buildings;
       this.buildings.bind('remove', function(building) {
