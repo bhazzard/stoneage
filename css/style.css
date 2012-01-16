@@ -265,6 +265,53 @@ body {
 .building-pile3.stack1,
 .building-pile4.stack1 { top: 536px; }
 
+/* Civilization Cards */
+.civcard {
+  top: 494px;
+  width: 107px;
+  height: 165px;
+}
+.civcard.space1 { left: 541px; }
+.civcard.space2 { left: 662px; }
+.civcard.space3 { left: 783px; }
+.civcard.space4 { left: 902px; }
+.civcard1 { background: url(images/civ_01.png); }
+.civcard2 { background: url(images/civ_02.png); }
+.civcard3 { background: url(images/civ_03.png); }
+.civcard4 { background: url(images/civ_04.png); }
+.civcard5 { background: url(images/civ_05.png); }
+.civcard6 { background: url(images/civ_06.png); }
+.civcard7 { background: url(images/civ_07.png); }
+.civcard8 { background: url(images/civ_08.png); }
+.civcard9 { background: url(images/civ_09.png); }
+.civcard10 { background: url(images/civ_10.png); }
+.civcard11 { background: url(images/civ_11.png); }
+.civcard12 { background: url(images/civ_12.png); }
+.civcard13 { background: url(images/civ_13.png); }
+.civcard14 { background: url(images/civ_14.png); }
+.civcard15 { background: url(images/civ_15.png); }
+.civcard16 { background: url(images/civ_16.png); }
+.civcard17 { background: url(images/civ_17.png); }
+.civcard18 { background: url(images/civ_18.png); }
+.civcard19 { background: url(images/civ_19.png); }
+.civcard20 { background: url(images/civ_20.png); }
+.civcard21 { background: url(images/civ_21.png); }
+.civcard22 { background: url(images/civ_22.png); }
+.civcard23 { background: url(images/civ_23.png); }
+.civcard24 { background: url(images/civ_24.png); }
+.civcard25 { background: url(images/civ_25.png); }
+.civcard26 { background: url(images/civ_26.png); }
+.civcard27 { background: url(images/civ_27.png); }
+.civcard28 { background: url(images/civ_28.png); }
+.civcard29 { background: url(images/civ_29.png); }
+.civcard30 { background: url(images/civ_30.png); }
+.civcard31 { background: url(images/civ_31.png); }
+.civcard32 { background: url(images/civ_32.png); }
+.civcard33 { background: url(images/civ_33.png); }
+.civcard34 { background: url(images/civ_34.png); }
+.civcard35 { background: url(images/civ_35.png); }
+.civcard36 { background: url(images/civ_36.png); }
+
 /* Production Track */
 .production-track {
   position: absolute;
