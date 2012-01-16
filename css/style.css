@@ -179,7 +179,13 @@ body {
   display: inline-block;
   margin-left: 3px;
 }
-.counter.score { padding: 0; }
+.counter.score {
+  min-width: 30px;
+  background-position: bottom center;
+  background-image: url(images/score.png);
+  padding: 0;
+  text-align: center;
+}
 
 /* Dialogs */
 .gameover,
