@@ -65,6 +65,7 @@ define([
       ]);
       workspaces.add(buildings.models);
       civilizationCards.deal(workspaces);
+      this.civilizationCards = civilizationCards;
       this.workspaces = workspaces;
       this.buildings = buildings;
       this.buildings.bind('remove', function(building) {
@@ -125,7 +126,7 @@ define([
     reset: function() {
       this.get('players').resetAll();
       this.workspaces.reset();
-      //TODO - flip culture cards when they exist
+      this.civilizationCards.deal(this.workspaces);
       this.checkForEndGame();
     },
     checkForEndGame: function() {
