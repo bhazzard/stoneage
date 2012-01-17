@@ -125,10 +125,16 @@ define([
       return this.length === 0;
     },
     deal: function(workspaces) {
-      for (var i=0; i<4; ++i) {
-        var card = this.at(i);
-        this.remove(card);
+      var cards = workspaces.filter(function(workspace) {
+        return workspace instanceof CivilizationCard;
+      });
+      _.each(cards, function(card, i) {
         card.set('space', i+1);
+      });
+      for (var i=cards.length + 1; i<=4; ++i) {
+        var card = this.at(0);
+        this.remove(card);
+        card.set('space', i);
         workspaces.add(card);
       }
     }

@@ -282,10 +282,10 @@ body {
   width: 107px;
   height: 165px;
 }
-.civcard.space1 { left: 541px; }
-.civcard.space2 { left: 662px; }
-.civcard.space3 { left: 783px; }
-.civcard.space4 { left: 902px; }
+.civcard.space4 { left: 541px; }
+.civcard.space3 { left: 662px; }
+.civcard.space2 { left: 783px; }
+.civcard.space1 { left: 902px; }
 .civcard1 { background: url(images/civ_01.png); }
 .civcard2 { background: url(images/civ_02.png); }
 .civcard3 { background: url(images/civ_03.png); }
