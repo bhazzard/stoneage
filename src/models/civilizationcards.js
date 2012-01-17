@@ -128,7 +128,7 @@ define([
       for (var i=0; i<4; ++i) {
         var card = this.at(i);
         this.remove(card);
-        card.set('name', card.get('name') + ' space' + (i+1));
+        card.set('space', i+1);
         workspaces.add(card);
       }
     }

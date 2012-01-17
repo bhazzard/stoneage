@@ -6,6 +6,7 @@ define([
   return Workspace.extend({
     initialize: function() {
       this.set('name', 'civcard civcard' + this.id);
+      this.bind('change:space', this._changeSpace, this);
     },
     canPlace: function(player) {
       return this.workers() === 0 && player.get('workers') > 0;
@@ -19,6 +20,10 @@ define([
       player.add('workers', workers);
       this.collection.remove(this);
       this.trigger('resolve', player);
+    },
+    _changeSpace: function(model, space) {
+      var name = this.get('name').replace(/ space\d/g, '');
+      this.set('name', name + ' space' + space);
     }
   });
 });
