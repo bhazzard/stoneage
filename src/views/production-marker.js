@@ -5,7 +5,7 @@ define([
   return Backbone.View.extend({
     className: 'production-marker',
     initialize: function() {
-      this.model.bind('change', this.update, this);
+      this.model.bind('change:production', this.update, this);
     },
     render: function() {
       $(this.el).addClass('player' + this.model.id);
