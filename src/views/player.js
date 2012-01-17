@@ -8,6 +8,9 @@ define([
     initialize: function() {
       this.model.bind('change', this.render, this);
     },
+	events: {
+		'click': "toggle"
+	},
     render: function() {
       var foodLabel = this.model.get('food');
 
@@ -25,6 +28,15 @@ define([
       $('<div/>').addClass('counter resource-pile stone').html(this.model.get('stone')).appendTo(this.el);
       $('<div/>').addClass('counter resource-pile gold').html(this.model.get('gold')).appendTo(this.el);
       return this;
-    }
+    },
+	toggle: function() {
+		var bottom = $(this.el).css('bottom');
+		
+		if (bottom === '0px') {
+		  $(this.el).animate({'bottom': '50px' }, 'fast');
+		} else {
+		  $(this.el).animate({'bottom': '0px' }, 'fast');
+		}
+	}
   });
 });

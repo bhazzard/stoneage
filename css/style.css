@@ -2,10 +2,10 @@ body {
   margin: 0;
   padding: 0;
   background-image: url(images/WoodTable.png);
-  background-size: 100%
+  background-size: 100%;
 }
 .board {
-  padding-bottom:81px;
+  padding-bottom:100px;
   width: 1023px;
   height: 665px;
   margin: -333px 0 0 -511px;
@@ -17,11 +17,9 @@ body {
 
 .bottom-panel {
   position: fixed;
-  bottom: 0px;
-  height: 91px;
-  width: 100%;
-  background-image: url(images/bottompanel.png);
-  background-size: 100%;
+  bottom: -50px;
+  height: 150px;
+  width: 1023px;
   z-index: 1000;
   float: left;
 }
@@ -134,11 +132,17 @@ body {
 
 /* Player Boards */
 .player-board {
-  width: 250px;
-  margin-top: 20px;
-  margin-left: 20px;
-  display: inline-block;
+  position: absolute;
+  background-image: url(images/playerboard.png);
+  bottom: 0px;
+  width: 240px;
+  padding: 17px;
 }
+
+.player-board.player1 { left: 0px; }
+.player-board.player2 { left: 280px; }
+.player-board.player3 { left: 460px; }
+.player-board.player4 { left: 840px; }
 
 .counter {
   display: inline-block;
