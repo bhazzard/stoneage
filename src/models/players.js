@@ -11,14 +11,20 @@ define([
       this.each(this._onAdd, this);
     },
     gotoLeader: function() {
+	  if (this.current()) {
+	    this.current().trigger('notactive');
+	  }
       this.active = this.leader;
+	  this.current().trigger('active');
     },
     advanceLeaderToken: function() {
       this.leader = (this.leader + 1) % this.length;
       this.gotoLeader();
     },
     nextTurn: function() {
+	  this.current().trigger('notactive');
       this.active = (this.active + 1) % this.length;
+	  this.current().trigger('active');
     },
     winner: function() {
       return this.max(function(player) {

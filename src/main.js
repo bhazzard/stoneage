@@ -61,6 +61,8 @@ require([
     });
     bottomPanel.addPlayer(playerView);
   });
+  
+  players.gotoLeader();
 
   board.workspaces.bind('howmany', function(workspace) {
     var player = players.current(),

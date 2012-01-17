@@ -7,6 +7,8 @@ define([
     className: 'player-board',
     initialize: function() {
       this.model.bind('change', this.render, this);
+	  this.model.bind('active', this.active, this);
+	  this.model.bind('notactive', this.notactive, this);
     },
 	events: {
 		'click': "toggle"
@@ -31,12 +33,17 @@ define([
     },
 	toggle: function() {
 		var bottom = $(this.el).css('bottom');
-		
 		if (bottom === '0px') {
-		  $(this.el).animate({'bottom': '50px' }, 'fast');
+		  this.active();
 		} else {
-		  $(this.el).animate({'bottom': '0px' }, 'fast');
+		  this.notactive();
 		}
+	},
+	active: function() {
+      $(this.el).animate({'bottom': '50px' }, 'fast');
+	},
+	notactive: function() {
+      $(this.el).animate({'bottom': '0px' }, 'fast');
 	}
   });
 });
