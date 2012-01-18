@@ -4,8 +4,12 @@ define([
   ], function($, Backbone) {
   return Backbone.View.extend({
     className: 'tools',
-    events: {
-      'click .tool:not(.tapped)': 'tap'
+    events: function() {
+      return MOBILE ? {
+        'tap .tool:not(.tapped)': 'tap'
+      } : {
+        'click .tool:not(.tapped)': 'tap'
+      };
     },
     initialize: function() {
       this.collection.bind('all', this.render, this);

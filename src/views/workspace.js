@@ -4,8 +4,12 @@ define([
   ], function($, Backbone) {
   return Backbone.View.extend({
     className: 'workspace',
-    events: {
-      'click': 'click'
+    events: function() {
+      return MOBILE ? {
+        'tap' : 'click'
+      } : {
+        'click': 'click'
+      };
     },
     initialize: function() {
       this.model.bind('change', this.render, this);

@@ -10,8 +10,12 @@ define([
       this.model.bind('active', this.active, this);
       this.model.bind('notactive', this.notactive, this);
     },
-    events: {
-      'click': "toggle"
+    events: function() {
+      return MOBILE ? {
+        'tap': "toggle"
+      } : {
+        'click': "toggle"
+      };
     },
     render: function() {
       var foodLabel = this.model.get('food');

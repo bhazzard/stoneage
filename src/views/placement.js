@@ -4,10 +4,16 @@ define([
   ], function($, Backbone) {
   return Backbone.View.extend({
     className: 'placement-dialog',
-    events: {
-      'click .ok': 'place',
-      'click .cancel': 'remove',
-      'click .meeple': 'select'
+    events: function() {
+      return MOBILE ? {
+        'tap .ok': 'place',
+        'tap .cancel': 'remove',
+        'tap .meeple': 'select'
+      } : {
+        'click .ok': 'place',
+        'click .cancel': 'remove',
+        'click .meeple': 'select'
+      };
     },
     render: function() {
       $(this.el).empty();

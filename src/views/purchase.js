@@ -3,9 +3,14 @@ define([
   ], function(Backbone) {
   return Backbone.View.extend({
     className: 'purchase-dialog',
-    events: {
-      'click .yes': 'purchase',
-      'click .no': 'remove'
+    events: function() {
+      return MOBILE ? {
+        'tap .yes': 'purchase',
+        'tap .no': 'remove'
+      } : {
+        'click .yes': 'purchase',
+        'click .no': 'remove'
+      };
     },
     render: function() {
       $(this.el).empty();

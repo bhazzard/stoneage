@@ -6,8 +6,12 @@ define([
   ], function($, _, Backbone, ToolsView) {
   return Backbone.View.extend({
     className: 'resolution-dialog',
-    events: {
-      'click .ok': 'resolve'
+    events: function() {
+      return MOBILE ? {
+        'tap .ok': 'resolve'
+      } : {
+        'click .ok': 'resolve'
+      };
     },
     render: function() {
       $(this.el).empty();

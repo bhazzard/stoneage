@@ -1,3 +1,5 @@
+window.MOBILE = navigator.userAgent.match(/mobile/i);
+
 require.config({
    paths: {
      'backbone': 'lib/backbone-0.5.3.optamd3',

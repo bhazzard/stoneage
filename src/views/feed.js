@@ -4,11 +4,18 @@ define([
   ], function($, Backbone) {
   return Backbone.View.extend({
     className: 'feeding-dialog',
-    events: {
-      'click .ok': 'feed',
-      'click .up': 'up',
-      'click .down': 'down',
-      'click :radio': 'checkDeficit'
+    events: function() {
+      return MOBILE ? {
+        'tap .ok': 'feed',
+        'tap .up': 'up',
+        'tap .down': 'down',
+        'tap :radio': 'checkDeficit'
+      } : {
+        'click .ok': 'feed',
+        'click .up': 'up',
+        'click .down': 'down',
+        'click :radio': 'checkDeficit'
+      };
     },
     initialize: function() {
       this.model.bind('deficit', this.render, this);
