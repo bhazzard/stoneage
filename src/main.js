@@ -1,14 +1,21 @@
 window.MOBILE = navigator.userAgent.match(/mobile/i);
 
 require.config({
-   paths: {
-     'backbone': 'lib/backbone-0.5.3.optamd3',
-     'underscore': 'lib/underscore-1.2.3',
-     'jquery': 'lib/jquery-1.7.1'
-   },
-   baseUrl: ".",
-   waitSeconds: 15,
-   urlArgs: "bust=" +  (new Date()).getTime()
+  paths: {
+    'backbone': 'lib/backbone-0.5.3.optamd3',
+    'underscore': 'lib/underscore-1.2.3',
+    'jquery': 'lib/jquery-1.7.1',
+    'jquery.mobile.core': 'lib/jquery.mobile.core',
+    'jquery.mobile.vmouse': 'lib/jquery.mobile.vmouse',
+    'jquery.mobile.support': 'lib/jquery.mobile.support',
+    'jquery.mobile.media': 'lib/jquery.mobile.media',
+    'jquery.mobile.widget': 'lib/jquery.mobile.widget',
+    'jquery.ui.widget': 'lib/jquery.ui.widget',
+    'jquery.mobile.event': 'lib/jquery.mobile.event'
+  },
+  baseUrl: ".",
+  waitSeconds: 15,
+  urlArgs: "bust=" +  (new Date()).getTime()
 });
 
 require([

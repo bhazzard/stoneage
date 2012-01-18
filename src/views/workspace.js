@@ -1,6 +1,7 @@
 define([
     'jquery',
-    'backbone'
+    'backbone',
+    'jquery.mobile.event'
   ], function($, Backbone) {
   return Backbone.View.extend({
     className: 'workspace',
