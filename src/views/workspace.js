@@ -1,16 +1,12 @@
 define([
     'jquery',
-    'backbone',
+    'src/views/mobile',
     'jquery.mobile.event'
-  ], function($, Backbone) {
-  return Backbone.View.extend({
+  ], function($, MobileView) {
+  return MobileView.extend({
     className: 'workspace',
-    events: function() {
-      return MOBILE ? {
-        'tap' : 'click'
-      } : {
-        'click': 'click'
-      };
+    events: {
+      'click': 'click'
     },
     initialize: function() {
       this.model.bind('change', this.render, this);
