@@ -30,7 +30,8 @@ define([
       }
       return this;
     },
-    click: function() {
+    click: function(event) {
+      event.preventDefault();
       this.options.board.activate(this.model);
     }
   });
