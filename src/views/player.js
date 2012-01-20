@@ -39,10 +39,10 @@ define([
       }
     },
   	active: function() {
-        $(this.el).animate({'bottom': '50px' }, 'fast');
+      $(this.el).addClass('active');
     },
     notactive: function() {
-      $(this.el).animate({'bottom': '0px' }, 'fast');
+      $(this.el).removeClass('active');
     }
   });
 });

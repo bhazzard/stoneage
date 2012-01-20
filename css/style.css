@@ -140,6 +140,10 @@ body {
   bottom: 0px;
   width: 240px;
   padding: 17px;
+  -webkit-transition: all .3s;
+}
+.player-board.active {
+  bottom: 50px;
 }
 
 .player-board.player1 { left: 0px; }
