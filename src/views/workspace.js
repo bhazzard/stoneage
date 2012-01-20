@@ -1,30 +1,47 @@
 define([
     'jquery',
+    'underscore',
     'src/views/mobile',
     'jquery.mobile.event'
-  ], function($, MobileView) {
+  ], function($, _, MobileView) {
   return MobileView.extend({
     className: 'workspace',
     events: {
       'click': 'click'
     },
     initialize: function() {
+      this.model.bind('change:name', this.changeName, this);
       this.model.bind('change', this.render, this);
     },
     render: function() {
-      $(this.el).empty()
-        .removeClass()
-        .addClass(this.className)
-        .addClass(this.model.get('name'));
-      var position = 1;
-      for (var i=1; i<=4; ++i) {
-        for (var j=1; j<=this.model.get(i); ++j) {
-          $('<div/>')
-            .addClass('meeple player' + i + ' position' + (position++))
-            .appendTo(this.el);
-        }
-      }
+      this.changeName();
+      this.update();
       return this;
+    },
+    update: function() {
+      var changed = this.model.changedAttributes();
+      if (changed) {
+        _(changed).chain()
+          .keys()
+          .filter(function(key) {
+            return !isNaN(key);
+          })
+          .each(function(player) {
+            player = Number(player);
+            var className = 'player' + player;
+            $('.' + className, this.el).remove();
+            for (var i=0; i<this.model.get(player) || 0; ++i) {
+              $('<div/>')
+                .addClass('meeple ' + className)
+                .appendTo(this.el);
+            }
+          }, this);
+      }
+    },
+    changeName: function() {
+      $(this.el)
+        .removeClass(this.model.previous('name'))
+        .addClass(this.model.get('name'));
     },
     click: function(event) {
       event.preventDefault();
