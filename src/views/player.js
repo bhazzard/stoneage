@@ -23,7 +23,6 @@ define([
         collection: this.model.get('tools')
       });
       $(tools.render().el).addClass('counter').appendTo(this.el);
-      tools.undelegateEvents();
       $('<div/>').addClass('counter score').html(this.model.get('score')).appendTo(this.el);
       $('<div/>').addClass('counter resource-pile wood').html(this.model.get('wood')).appendTo(this.el);
       $('<div/>').addClass('counter resource-pile brick').html(this.model.get('brick')).appendTo(this.el);

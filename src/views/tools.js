@@ -1,31 +1,22 @@
 define([
     'jquery',
-    'src/views/mobile'
-  ], function($, MobileView) {
+    'src/views/mobile',
+    'src/views/tool'
+  ], function($, MobileView, ToolView) {
   return MobileView.extend({
     className: 'tools',
-    events: {
-      'click .tool:not(.tapped)': 'tap'
-    },
     initialize: function() {
-      this.collection.bind('all', this.render, this);
+      this.collection.bind('add', this.renderTool, this);
     },
     render: function() {
-      $(this.el).empty();
-      this.collection.each(function(tool, i) {
-        var toolView = $('<div/>')
-          .data('tool-index', i)
-          .addClass('tool tool' + tool.get('value'));
-        if (tool.get('tapped')) {
-          toolView.addClass('tapped');
-        }
-        toolView.appendTo(this.el);
-      }, this);
+      this.collection.each(this.renderTool, this);
       return this;
     },
-    tap: function(e) {
-      var i = $(e.target).addClass('tapped').data('tool-index');
-      this.collection.at(i).tap();
+    renderTool: function(tool) {
+      var toolView = new ToolView({
+        model: tool
+      });
+      $(toolView.render().el).appendTo(this.el);
     }
   });
 });
