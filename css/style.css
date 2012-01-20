@@ -149,7 +149,6 @@ body {
 
 .counter {
   display: inline-block;
-  padding-left: 40px;
   margin-left: 5px;
   margin-top: 5px;
   height: 29px;
@@ -169,10 +168,22 @@ body {
   background-image: url(images/food.png);
   padding-left: 34px;
 }
-.counter.wood { background-image: url(images/wood.png); }
-.counter.brick { background-image: url(images/clay.png); }
-.counter.stone { background-image: url(images/stone.png); }
-.counter.gold { background-image: url(images/gold.png); }
+.counter.wood {
+  background-image: url(images/wood.png);
+  padding-left: 31px;
+}
+.counter.brick {
+  background-image: url(images/clay.png);
+  padding-left: 34px;
+}
+.counter.stone {
+  background-image: url(images/stone.png);
+  padding-left: 31px;
+}
+.counter.gold {
+  background-image: url(images/gold.png);
+  padding-left: 35px;
+}
 .counter.tools {
   vertical-align: top;
   margin-left: 0;
