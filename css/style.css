@@ -352,11 +352,16 @@ body {
 .building-pile4.stack1 { top: 536px; }
 
 /* Civilization Cards */
+@-webkit-keyframes deal-card {
+  0% { top: 768px; }
+  100% { top: 494px; }
+}
 .civcard {
   top: 494px;
   width: 107px;
   height: 165px;
-  -webkit-transition: all .3s ease-in;
+  -webkit-transition: left .3s ease-in;
+  -webkit-animation: deal-card .5s;
 }
 .civcard.space4 { left: 541px; }
 .civcard.space3 { left: 662px; }
