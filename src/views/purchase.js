@@ -2,16 +2,16 @@ define([
     'src/views/mobile'
   ], function(MobileView) {
   return MobileView.extend({
-    className: 'purchase-dialog',
+    className: 'dialog small',
     events: {
-      'click .yes': 'purchase',
-      'click .no': 'remove'
+      'click .ok': 'purchase',
+      'click .cancel': 'remove'
     },
     render: function() {
       $(this.el).empty();
       $('<div/>').html('Buy this building?').appendTo(this.el);
-      $('<button class="yes">Yes</button>').appendTo(this.el);
-      $('<button class="no">No</button>').appendTo(this.el);
+      $('<div class="ok button"/>').appendTo(this.el);
+      $('<div class="cancel button"/>').appendTo(this.el);
       return this;
     },
     purchase: function() {

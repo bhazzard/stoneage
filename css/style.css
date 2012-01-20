@@ -210,27 +210,84 @@ body {
 }
 
 /* Dialogs */
-.gameover,
-.resolution-dialog,
-.purchase-dialog,
-.placement-dialog,
-.feeding-dialog {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  background: white;
-  border: 2px solid gray;
+.dialog  {
+  position: absolute;
   z-index: 100;
+  background-image: url(images/dialogs.png);
+  background-repeat: no-repeat;
+  top: 45%;
+  left: 50%;
 }
-.placement-dialog .meeple {
+
+.dialog.large {
+  background-position: -5px -5px;
+  margin: -160px 0 0 -385px;
+  height: 260px;
+  width: 713px;
+  padding: 35px;
+}
+
+.dialog.medium {
+  background-position: -11px -340px;
+  margin: -117px 0 0 -225px;
+  padding-top: 15px;
+  padding-left: 25px;
+  height: 232px;
+  width: 411px;
+}
+
+.dialog.small {
+  background-position: -465px -340px;
+  margin: -120px 0 0 -150px;
+  height: 205px;
+  width: 270px;
+  padding: 15px;
+}
+
+.dialog .meeples {
+  width: 50%;
+  margin: auto;
+}
+
+.dialog .meeple {
   display: inline-block;
   cursor: pointer;
 }
-.resolution-dialog .tool {
+
+.dialog .tool {
   display: inline-block;
   border: 1px solid #333;
   margin: 5px;
   cursor: pointer;
+}
+
+.dialog.large .button {
+  bottom: 40px;
+}
+.dialog.medium .button {
+  bottom: 40px;
+}
+.dialog.small .button {
+  bottom: 20px;
+}
+
+.dialog .button {
+  float: left;
+  position: absolute;
+  height: 41px;
+  width: 33px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.dialog .ok {
+  right: 70px;
+  background-image: url(images/check.png);
+}
+
+.dialog .cancel {
+  right: 20px;
+  background-image: url(images/x.png);
 }
 
 /* Buildings */

@@ -3,7 +3,7 @@ define([
     'src/views/mobile'
   ], function($, MobileView) {
   return MobileView.extend({
-    className: 'placement-dialog',
+    className: 'small dialog',
     events: {
       'click .ok': 'place',
       'click .cancel': 'remove',
@@ -21,8 +21,8 @@ define([
         }
       }
       $('<input type="hidden" value="1" />').appendTo(this.el);
-      $('<button class="ok">Ok</button>').appendTo(this.el);
-      $('<button class="cancel">Cancel</button>').appendTo(this.el);
+      $('<div class="ok button"/>').appendTo(this.el);
+      $('<div class="cancel button"/>').appendTo(this.el);
       return this;
     },
     place: function() {

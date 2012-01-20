@@ -5,7 +5,7 @@ define([
     'src/views/tools'
   ], function($, _, MobileView, ToolsView) {
   return MobileView.extend({
-    className: 'resolution-dialog',
+    className: 'dialog large',
     events: {
       'click .ok': 'resolve'
     },
@@ -26,7 +26,7 @@ define([
         return memo + (tool.get('tapped') ? tool.get('value') : 0);
       }, 0);
 
-      $('<button class="ok">Ok</button>').appendTo(this.el);
+      $('<div class="ok button"/>').appendTo(this.el);
       return this;
     },
     resolve: function() {

@@ -3,7 +3,7 @@ define([
     'src/views/mobile'
   ], function($, MobileView) {
   return MobileView.extend({
-    className: 'feeding-dialog',
+    className: 'medium dialog',
     events: {
       'click .ok': 'feed',
       'click .up': 'up',
@@ -24,7 +24,7 @@ define([
           '<div>Stone: <button class="down">-</button><input type="text" name="stone" value="0" /><button class="up">+</button></div>' +
           '<div>Gold: <button class="down">-</button><input type="text" name="gold" value="0" /><button class="up">+</button></div>' +
         '</div>' +
-        '<button class="ok">Ok</button>'
+        '<div class="ok button"/>'
       ];
       $(this.el).html(template.join(''));
       $(this.el).appendTo('body');
