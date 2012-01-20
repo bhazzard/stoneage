@@ -295,6 +295,7 @@ body {
   top: 494px;
   width: 107px;
   height: 165px;
+  -webkit-transition: all .3s ease-in;
 }
 .civcard.space4 { left: 541px; }
 .civcard.space3 { left: 662px; }
