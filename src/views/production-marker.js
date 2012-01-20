@@ -1,8 +1,8 @@
 define([
     'jquery',
-    'backbone'
-  ], function($, Backbone) {
-  return Backbone.View.extend({
+    'src/views/mobile'
+  ], function($, MobileView) {
+  return MobileView.extend({
     className: 'production-marker',
     initialize: function() {
       this.model.bind('change:production', this.update, this);

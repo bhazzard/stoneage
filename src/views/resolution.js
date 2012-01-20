@@ -1,17 +1,13 @@
 define([
     'jquery',
     'underscore',
-    'backbone',
+    'src/views/mobile',
     'src/views/tools'
-  ], function($, _, Backbone, ToolsView) {
-  return Backbone.View.extend({
+  ], function($, _, MobileView, ToolsView) {
+  return MobileView.extend({
     className: 'resolution-dialog',
-    events: function() {
-      return MOBILE ? {
-        'tap .ok': 'resolve'
-      } : {
-        'click .ok': 'resolve'
-      };
+    events: {
+      'click .ok': 'resolve'
     },
     render: function() {
       $(this.el).empty();

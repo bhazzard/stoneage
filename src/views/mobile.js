@@ -7,7 +7,7 @@ define([
   return Backbone.View.extend({
     delegateEvents: function() {
       var mappedEvents = {};
-      if ($.support.touch) {
+      if ($.support.touch && this.events) {
         _(this.events).chain().keys().each(function(key) {
           var mappedKey = key.replace(/^click/, 'tap');
           mappedEvents[mappedKey] = this.events[key];

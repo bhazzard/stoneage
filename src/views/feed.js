@@ -1,21 +1,14 @@
 define([
     'jquery',
-    'backbone'
-  ], function($, Backbone) {
-  return Backbone.View.extend({
+    'src/views/mobile'
+  ], function($, MobileView) {
+  return MobileView.extend({
     className: 'feeding-dialog',
-    events: function() {
-      return MOBILE ? {
-        'tap .ok': 'feed',
-        'tap .up': 'up',
-        'tap .down': 'down',
-        'tap :radio': 'checkDeficit'
-      } : {
-        'click .ok': 'feed',
-        'click .up': 'up',
-        'click .down': 'down',
-        'click :radio': 'checkDeficit'
-      };
+    events: {
+      'click .ok': 'feed',
+      'click .up': 'up',
+      'click .down': 'down',
+      'click :radio': 'checkDeficit'
     },
     initialize: function() {
       this.model.bind('deficit', this.render, this);

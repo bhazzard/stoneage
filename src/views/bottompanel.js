@@ -1,10 +1,10 @@
 define([
     'jquery',
-    'backbone',
+    'src/views/mobile',
     'src/views/workspace',
     'src/views/production-track'
-  ], function($, Backbone, WorkspaceView, ProductionTrackView) {
-  return Backbone.View.extend({
+  ], function($, MobileView, WorkspaceView, ProductionTrackView) {
+  return MobileView.extend({
     className: 'bottom-panel',
     initialize: function() {
     },

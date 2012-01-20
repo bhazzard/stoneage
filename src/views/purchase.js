@@ -1,16 +1,11 @@
 define([
-    'backbone'
-  ], function(Backbone) {
-  return Backbone.View.extend({
+    'src/views/mobile'
+  ], function(MobileView) {
+  return MobileView.extend({
     className: 'purchase-dialog',
-    events: function() {
-      return MOBILE ? {
-        'tap .yes': 'purchase',
-        'tap .no': 'remove'
-      } : {
-        'click .yes': 'purchase',
-        'click .no': 'remove'
-      };
+    events: {
+      'click .yes': 'purchase',
+      'click .no': 'remove'
     },
     render: function() {
       $(this.el).empty();

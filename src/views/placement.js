@@ -1,19 +1,13 @@
 define([
     'jquery',
-    'backbone'
-  ], function($, Backbone) {
-  return Backbone.View.extend({
+    'src/views/mobile'
+  ], function($, MobileView) {
+  return MobileView.extend({
     className: 'placement-dialog',
-    events: function() {
-      return MOBILE ? {
-        'tap .ok': 'place',
-        'tap .cancel': 'remove',
-        'tap .meeple': 'select'
-      } : {
-        'click .ok': 'place',
-        'click .cancel': 'remove',
-        'click .meeple': 'select'
-      };
+    events: {
+      'click .ok': 'place',
+      'click .cancel': 'remove',
+      'click .meeple': 'select'
     },
     render: function() {
       $(this.el).empty();

@@ -1,10 +1,10 @@
 define([
     'jquery',
     'underscore',
-    'backbone',
+    'src/views/mobile',
     'src/views/production-marker'
-  ], function($, _, Backbone, ProductionMarkerView) {
-  return Backbone.View.extend({
+  ], function($, _, MobileView, ProductionMarkerView) {
+  return MobileView.extend({
     className: 'production-track',
     render: function() {
       var that = this;

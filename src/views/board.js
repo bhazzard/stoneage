@@ -1,21 +1,21 @@
 define([
     'jquery',
-    'backbone',
+    'src/views/mobile',
     'src/views/workspace',
     'src/views/production-track'
-  ], function($, Backbone, WorkspaceView, ProductionTrackView) {
-  return Backbone.View.extend({
+  ], function($, MobileView, WorkspaceView, ProductionTrackView) {
+  return MobileView.extend({
     className: 'board',
     initialize: function() {
       this.model.bind('gameover', this._gameover, this);
     },
     render: function() {
       this.model.workspaces.each(this._renderWorkspace, this);
-	  
+
       var productionTrack = new ProductionTrackView({
         model: this.model.get('players'),
         board: this.el
-      });	  
+      });
       $(productionTrack.render().el).appendTo(this.el);
 	  
       this.model.workspaces.bind('remove', function(workspace) {

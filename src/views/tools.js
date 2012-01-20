@@ -1,15 +1,11 @@
 define([
     'jquery',
-    'backbone'
-  ], function($, Backbone) {
-  return Backbone.View.extend({
+    'src/views/mobile'
+  ], function($, MobileView) {
+  return MobileView.extend({
     className: 'tools',
-    events: function() {
-      return MOBILE ? {
-        'tap .tool:not(.tapped)': 'tap'
-      } : {
-        'click .tool:not(.tapped)': 'tap'
-      };
+    events: {
+      'click .tool:not(.tapped)': 'tap'
     },
     initialize: function() {
       this.collection.bind('all', this.render, this);

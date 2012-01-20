@@ -1,21 +1,17 @@
 define([
     'jquery',
-    'backbone',
+    'src/views/mobile',
     'src/views/tools'
-  ], function($, Backbone, ToolsView) {
-  return Backbone.View.extend({
+  ], function($, MobileView, ToolsView) {
+  return MobileView.extend({
     className: 'player-board',
     initialize: function() {
       this.model.bind('change', this.render, this);
       this.model.bind('active', this.active, this);
       this.model.bind('notactive', this.notactive, this);
     },
-    events: function() {
-      return MOBILE ? {
-        'tap': "toggle"
-      } : {
-        'click': "toggle"
-      };
+    events: {
+      'click': "toggle"
     },
     render: function() {
       var foodLabel = this.model.get('food');
