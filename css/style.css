@@ -151,9 +151,9 @@ body {
 }
 
 .player-board.player1 { left: 0px; }
-.player-board.player2 { left: 280px; }
-.player-board.player3 { left: 460px; }
-.player-board.player4 { left: 840px; }
+.player-board.player2 { left: 270px; }
+.player-board.player3 { left: 540px; }
+.player-board.player4 { left: 810px; }
 
 .counter {
   display: inline-block;
