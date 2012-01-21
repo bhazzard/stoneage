@@ -10,6 +10,7 @@ define([
     render: function() {
       $(this.el).empty();
       $('<div/>').html('Buy this building?').appendTo(this.el);
+      $('<div/>').addClass(this.model.get('name')).appendTo(this.el);
       $('<div class="ok button"/>').appendTo(this.el);
       $('<div class="cancel button"/>').appendTo(this.el);
       return this;

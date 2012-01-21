@@ -221,6 +221,7 @@ body {
   background-repeat: no-repeat;
   top: 45%;
   left: 50%;
+  text-align: center;
 }
 
 .dialog.large {
@@ -246,6 +247,11 @@ body {
   height: 205px;
   width: 270px;
   padding: 15px;
+}
+
+.dialog .building {
+  margin: auto;
+  box-shadow: none;
 }
 
 .dialog .meeples {
