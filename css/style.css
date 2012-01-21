@@ -6,14 +6,13 @@ body {
   padding: 0;
   background-image: url(images/WoodTable.png);
   background-size: 100%;
+  width: 1024px;
+  height: 768px;
+  overflow: hidden;
 }
 .board {
-  padding-bottom:100px;
   width: 1023px;
   height: 665px;
-  margin: -333px 0 0 -511px;
-  top: 50%;
-  left: 50%;
   background: url(images/board.png) no-repeat;
   position: relative;
 }
