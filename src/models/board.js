@@ -7,7 +7,8 @@ define([
     'src/models/toolhut',
     'src/models/hunt',
     'src/models/buildings',
-    'src/models/civilizationcards'
+    'src/models/civilizationcards',
+    'src/models/hutrule'
   ], function(
     Backbone,
     Workspace,
@@ -17,7 +18,8 @@ define([
     ToolHut,
     Hunt,
     Buildings,
-    CivilizationCards) {
+    CivilizationCards,
+    HutRule) {
   return Backbone.Model.extend({
     defaults: {
       phase: 'place'
@@ -58,11 +60,15 @@ define([
           value: 6,
           maxWorkers : 7,
           maxPlayers : workspaceMax
-        }),
-        new Field(),
-        new SpecialHut(),
-        new ToolHut()
+        })
       ]);
+
+      var field = new Field();
+      var specialhut = new SpecialHut();
+      var toolhut = new ToolHut();
+
+      this.hutrule = new HutRule([field, specialhut, toolhut], this.get('players').length);
+      workspaces.add([field, specialhut, toolhut]); 
       workspaces.add(buildings.models);
       civilizationCards.deal(workspaces);
       this.civilizationCards = civilizationCards;
@@ -110,7 +116,7 @@ define([
       }
 
       workers = parseInt(workers);
-      if(workspace.canPlace(player)){
+      if(workspace.canPlace(player) && this.hutrule.isSatisfied(workspace)){
         workspace.place(player);
       }
     },
