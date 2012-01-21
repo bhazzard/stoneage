@@ -67,7 +67,7 @@ define([
       var specialhut = new SpecialHut();
       var toolhut = new ToolHut();
 
-      this.hutrule = new HutRule([field, specialhut, toolhut], this.get('players').length);
+      this.hutrule = new HutRule([field, specialhut, toolhut], this.get('players'));
       workspaces.add([field, specialhut, toolhut]); 
       workspaces.add(buildings.models);
       civilizationCards.deal(workspaces);

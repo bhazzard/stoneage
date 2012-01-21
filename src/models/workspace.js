@@ -58,6 +58,9 @@ define([
         return this.get(player.id) || 0;
       }
     },
+    equals : function(workspace){
+      return this.get('name') === workspace.get('name');
+    },
     _playersOnWorkspace: function(){
       var i, count = 0;
       for(i=1; i <=4; ++i){

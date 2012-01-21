@@ -1,24 +1,28 @@
 define(['underscore', 'backbone'], function(_, Backbone){
   return Backbone.Model.extend({
-    initialize : function(workspaces, playercount){
+    initialize : function(huts, players){
       this.set({
-        huts : workspaces,
-        playercount : playercount
+        huts : huts,
+        players : players
       });
     }, 
     isSatisfied : function(workspace){
-      var usedhuts = _(this.get('huts')).filter(function(hut){
-        return hut.workers() > 0;
-      }).length;
-      return !(this.get('playercount') === 2 &&
-        this._isHut(workspace) &&
-        usedhuts === 2);
+      return this._playerCount() !== 2 ||
+        !this._isHut(workspace) ||
+        this._usedHutCount() !== 2;
     },
     _isHut : function(workspace){
-      var workspaces = this.get('huts');
-      return _(workspaces).any(function(w){
-        return w.get('name') === workspace.get('name');
+      return _(this.get('huts')).any(function(hut){
+        return hut.equals(workspace);
       });
+    },
+    _playerCount : function(){
+      return this.get('players').length;
+    },
+    _usedHutCount : function(){
+      return _(this.get('huts')).filter(function(hut){
+        return hut.workers() > 0;
+      }).length;
     }
   });
 });
