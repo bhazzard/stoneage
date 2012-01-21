@@ -7,17 +7,20 @@ define([
     events: {
       'click .ok': 'place',
       'click .cancel': 'remove',
-      'click .meeple': 'select'
+      'click .meeple:not(.shadow)': 'select'
     },
     render: function() {
       $(this.el).empty();
       var meeples = $('<div class="meeples" />').appendTo(this.el),
         player = this.options.player,
         meeple;
-      for (var i=0; i<player.get('workers'); ++i) {
+      for (var i=0; i<10; ++i) {
         meeple = $('<div class="meeple player' + player.id + '" />').appendTo(meeples);
         if (i > 0) {
           meeple.addClass('ghost');
+        }
+        if (i >= player.get('workers')) {
+          meeple.addClass('shadow');
         }
       }
       $('<input type="hidden" value="1" />').appendTo(this.el);

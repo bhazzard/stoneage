@@ -86,11 +86,15 @@ body {
   height: 35px;
   background-size: contain;
 }
-.meeple.ghost { opacity: 0.3; }
+.meeple.ghost { opacity: 0.2; }
 .meeple.player1 { background: url(images/red_meeple.png); }
 .meeple.player2 { background: url(images/green_meeple.png); }
 .meeple.player3 { background: url(images/yellow_meeple.png); }
 .meeple.player4 { background: url(images/blue_meeple.png); }
+.meeple.player1.shadow { background: url(images/red_green_meeple_shadow.png); }
+.meeple.player2.shadow { background: url(images/red_green_meeple_shadow.png); }
+.meeple.player3.shadow { background: url(images/yellow_blue_meeple_shadow.png); }
+.meeple.player4.shadow { background: url(images/yellow_blue_meeple_shadow.png); }
 .workspace .meeple { position: absolute; }
 .toolhut :nth-child(1) { left: 10px; top: -10px; }
 .field :nth-child(1) { left: 15px; top: -7px; }
