@@ -5,6 +5,7 @@ define([
   ], function(_, Backbone, Tools) {
   return Backbone.Model.extend({
     defaults: {
+      active: false,
       score: 0,
       workers: 5,
       food: 12,

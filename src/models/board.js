@@ -85,12 +85,21 @@ define([
         this.feed();
       }, this);
       this.workspaces.bind('place', function() {
-        var players = this.get('players');
+        var i=0,
+          players = this.get('players');
         if (players.remainingWorkers() === 0) {
           this.get('players').gotoLeader();
           this.set('phase', 'resolve');
         } else {
           players.nextTurn();
+
+          //Skip players with 0 workers left to place
+          //There is probably a better place for this.
+          //Maybe the players collection should know more
+          //about phases?
+          while (i++ < players.length && players.current().get('workers') === 0) {
+            players.nextTurn();
+          }
         }
       }, this);
       this.get('players').bind('allfed', function() {
@@ -101,19 +110,9 @@ define([
       this[this.get('phase')](workspace);
     },
     place: function(workspace) {
-      var i = 0,
-        players = this.get('players'),
+      var players = this.get('players'),
         player = players.current(),
         workers;
-
-      //Skip players with 0 workers left to place
-      //There is probably a better place for this.
-      //Maybe the players collection should know more
-      //about phases?
-      while (i++ < players.length && player.get('workers') === 0) {
-        players.nextTurn();
-        player = players.current();
-      }
 
       workers = parseInt(workers);
       if(workspace.canPlace(player) && this.hutrule.isSatisfied(workspace)){

@@ -7,8 +7,7 @@ define([
     className: 'player-board',
     initialize: function() {
       this.model.bind('change', this.render, this);
-      this.model.bind('active', this.active, this);
-      this.model.bind('notactive', this.notactive, this);
+      this.model.bind('change:active', this.active, this);
     },
     events: {
       'click': "toggle"
@@ -17,6 +16,7 @@ define([
       var foodLabel = this.model.get('food');
 
       $(this.el).empty().addClass('player' + this.model.id);
+      this.active();
       $('<div/>').addClass('counter worker-pile').html(this.model.get('workers')).appendTo(this.el);
       $('<div/>').addClass('counter resource-pile food').html(foodLabel).appendTo(this.el);
       var tools = new ToolsView({
@@ -31,18 +31,10 @@ define([
       return this;
     },
     toggle: function() {
-      var bottom = $(this.el).css('bottom');
-      if (bottom === '0px') {
-        this.active();
-      } else {
-       this.notactive();
-      }
+      $(this.el).toggleClass('active');
     },
   	active: function() {
-      $(this.el).addClass('active');
-    },
-    notactive: function() {
-      $(this.el).removeClass('active');
+      $(this.el).toggleClass('active', this.model.get('active'));
     }
   });
 });

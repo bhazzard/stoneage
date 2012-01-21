@@ -12,19 +12,19 @@ define([
     },
     gotoLeader: function() {
       if (this.current()) {
-        this.current().trigger('notactive');
+        this.current().set('active', false);
       }
       this.active = this.leader;
-      this.current().trigger('active');
+      this.current().set('active', true);
     },
     advanceLeaderToken: function() {
       this.leader = (this.leader + 1) % this.length;
       this.gotoLeader();
     },
     nextTurn: function() {
-      this.current().trigger('notactive');
+      this.current().set('active', false);
       this.active = (this.active + 1) % this.length;
-      this.current().trigger('active');
+      this.current().set('active', true);
     },
     winner: function() {
       return this.max(function(player) {
