@@ -174,7 +174,7 @@ body {
 .player4 .counter.worker-pile { background-image: url(images/blue_meeple.png); }
 .counter.food {
   background-image: url(images/food.png);
-  padding-left: 34px;
+  padding-left: 23px;
 }
 .counter.wood {
   background-image: url(images/wood.png);
