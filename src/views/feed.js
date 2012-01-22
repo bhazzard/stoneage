@@ -18,8 +18,8 @@ define([
       $('<p/>').html('You have ' + this.model.get('deficit') + ' starving workers. How will you feed them?').appendTo(this.el);
       var view = new ResourceView();
       $(view.render().el).appendTo(this.el);
-      $('<div/>').addClass('points button').html('Lose 10 Points').appendTo(this.el);
-      $('<div/>').addClass('ok button').appendTo(this.el);
+      $('<button/>').addClass('points').html('Lose 10 Points').appendTo(this.el);
+      $('<button/>').addClass('ok').appendTo(this.el);
       $(this.el).appendTo('body');
 
       this.checkDeficit();

@@ -26,7 +26,7 @@ define([
         return memo + (tool.get('tapped') ? tool.get('value') : 0);
       }, 0);
 
-      $('<div class="ok button"/>').appendTo(this.el);
+      $('<button class="ok"/>').appendTo(this.el);
       return this;
     },
     resolve: function() {

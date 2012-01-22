@@ -273,24 +273,30 @@ body {
   cursor: pointer;
 }
 
-.dialog.large .button {
-  bottom: 40px;
+.dialog button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
 }
-.dialog.medium .button {
-  bottom: 40px;
+.dialog .up, .dialog .down {
+  width: 45px;
+  height: 29px;
+  vertical-align: top;
 }
-.dialog.small .button {
-  bottom: 20px;
-}
+.dialog .down { background: url(images/arrow_left.png) no-repeat; }
+.dialog .up { background: url(images/arrow_right.png) no-repeat; }
+.dialog button[disabled] { opacity: .5; }
 
-.dialog .button {
-  float: left;
+.dialog .ok, .dialog .cancel {
   position: absolute;
   height: 41px;
   width: 33px;
-  background-repeat: no-repeat;
-  background-size: 100%;
 }
+.dialog.large .ok, .dialog.large .cancel { bottom: 40px; }
+.dialog.medium .ok, .dialog.medium .cancel { bottom: 40px; }
+.dialog.small .ok, .dialog.small .cancel { bottom: 20px; }
 
 .dialog .ok {
   right: 70px;
@@ -302,21 +308,8 @@ body {
   background-image: url(images/x.png);
 }
 
-button {
-  background-size: contain;
-  border: none;
-}
-button.up, button.down {
-  width: 45px;
-  height: 29px;
-  vertical-align: top;
-}
-button.down { background: url(images/arrow_left.png) no-repeat; }
-button.up { background: url(images/arrow_right.png) no-repeat; }
-button[disabled] { opacity: .5; }
-
 .feed > div { margin: 3px 0; }
-.resource {
+.feed .resource {
   margin: 0 10px;
   padding-left: 40px;
   width: 30px;
@@ -325,10 +318,10 @@ button[disabled] { opacity: .5; }
   text-align: left;
   display: inline-block;
 }
-.resource.wood { background: url(images/wood.png) no-repeat; }
-.resource.brick { background: url(images/clay.png) no-repeat; }
-.resource.stone { background: url(images/stone.png) no-repeat; }
-.resource.gold { background: url(images/gold.png) no-repeat; }
+.feed .resource.wood { background: url(images/wood.png) no-repeat; }
+.feed .resource.brick { background: url(images/clay.png) no-repeat; }
+.feed .resource.stone { background: url(images/stone.png) no-repeat; }
+.feed .resource.gold { background: url(images/gold.png) no-repeat; }
 
 /* Buildings */
 .building {

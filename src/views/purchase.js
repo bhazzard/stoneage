@@ -11,8 +11,8 @@ define([
       $(this.el).empty();
       $('<div/>').html('Buy this building?').appendTo(this.el);
       $('<div/>').addClass(this.model.get('name')).appendTo(this.el);
-      $('<div class="ok button"/>').appendTo(this.el);
-      $('<div class="cancel button"/>').appendTo(this.el);
+      $('<button class="ok"/>').appendTo(this.el);
+      $('<button class="cancel"/>').appendTo(this.el);
       return this;
     },
     purchase: function() {

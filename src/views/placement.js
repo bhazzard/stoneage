@@ -24,8 +24,8 @@ define([
         }
       }
       $('<input type="hidden" value="1" />').appendTo(this.el);
-      $('<div class="ok button"/>').appendTo(this.el);
-      $('<div class="cancel button"/>').appendTo(this.el);
+      $('<button class="ok"/>').appendTo(this.el);
+      $('<button class="cancel"/>').appendTo(this.el);
       return this;
     },
     place: function() {
