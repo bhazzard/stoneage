@@ -142,7 +142,7 @@ body {
   position: absolute;
   background-image: url(images/playerboard.png);
   bottom: 0px;
-  width: 240px;
+  width: 225px;
   padding: 17px;
   -webkit-transition: all .3s;
 }
@@ -151,9 +151,9 @@ body {
 }
 
 .player-board.player1 { left: 0px; }
-.player-board.player2 { left: 270px; }
-.player-board.player3 { left: 540px; }
-.player-board.player4 { left: 810px; }
+.player-board.player2 { left: 255px; }
+.player-board.player3 { left: 510px; }
+.player-board.player4 { left: 765px; }
 
 .counter {
   display: inline-block;
@@ -166,7 +166,7 @@ body {
 
 .counter.worker-pile {
   background-size: contain;
-  padding-left: 30px;
+  padding-left: 25px;
 }
 .player1 .counter.worker-pile { background-image: url(images/red_meeple.png); }
 .player2 .counter.worker-pile { background-image: url(images/green_meeple.png); }
