@@ -2,8 +2,9 @@ define([
     'jquery',
     'src/views/mobile',
     'src/views/workspace',
-    'src/views/production-track'
-  ], function($, MobileView, WorkspaceView, ProductionTrackView) {
+    'src/views/production-track',
+    'src/views/gameover'
+  ], function($, MobileView, WorkspaceView, ProductionTrackView, GameOverView) {
   return MobileView.extend({
     className: 'board',
     initialize: function() {
@@ -29,10 +30,10 @@ define([
       return this;
     },
     _gameover: function(player) {
-      $('<div/>')
-        .addClass('gameover')
-        .html('Player ' + player.id + ' wins with ' + player.get('score') + ' points!')
-        .appendTo(this.el);
+      var view = new GameOverView({
+        collection: this.model.get('players')
+      });
+      $(view.render().el).appendTo(this.el);
     },
     _renderWorkspace: function(workspace) {
       var view = new WorkspaceView({

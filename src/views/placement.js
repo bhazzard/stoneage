@@ -3,7 +3,7 @@ define([
     'src/views/mobile'
   ], function($, MobileView) {
   return MobileView.extend({
-    className: 'small dialog',
+    className: 'placement small dialog',
     events: {
       'click .ok': 'place',
       'click .cancel': 'remove',
