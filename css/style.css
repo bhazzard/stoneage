@@ -302,6 +302,34 @@ body {
   background-image: url(images/x.png);
 }
 
+button {
+  background-size: contain;
+  border: none;
+}
+button.up, button.down {
+  width: 45px;
+  height: 29px;
+  vertical-align: top;
+}
+button.down { background: url(images/arrow_left.png) no-repeat; }
+button.up { background: url(images/arrow_right.png) no-repeat; }
+button[disabled] { opacity: .5; }
+
+.feed > div { margin: 3px 0; }
+.resource {
+  margin: 0 10px;
+  padding-left: 40px;
+  width: 30px;
+  height: 29px;
+  line-height: 29px;
+  text-align: left;
+  display: inline-block;
+}
+.resource.wood { background: url(images/wood.png) no-repeat; }
+.resource.brick { background: url(images/clay.png) no-repeat; }
+.resource.stone { background: url(images/stone.png) no-repeat; }
+.resource.gold { background: url(images/gold.png) no-repeat; }
+
 /* Buildings */
 .building {
   box-shadow: 0px 1px 0px #333;
