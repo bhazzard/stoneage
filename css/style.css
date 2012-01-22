@@ -289,13 +289,13 @@ body {
 .dialog .up { background: url(images/arrow_right.png) no-repeat; }
 .dialog button[disabled] { opacity: .5; }
 
-.dialog .ok, .dialog .cancel {
+.dialog .ok, .dialog .cancel, .dialog .points {
   position: absolute;
   height: 41px;
   width: 33px;
 }
 .dialog.large .ok, .dialog.large .cancel { bottom: 40px; }
-.dialog.medium .ok, .dialog.medium .cancel { bottom: 40px; }
+.dialog.medium .ok, .dialog.medium .cancel, .dialog.medium .points { bottom: 40px; }
 .dialog.small .ok, .dialog.small .cancel { bottom: 20px; }
 
 .dialog .ok {
@@ -306,6 +306,11 @@ body {
 .dialog .cancel {
   right: 20px;
   background-image: url(images/x.png);
+}
+
+.dialog .points {
+  right: 20px;
+  background-image: url(images/lose_10_points.png);
 }
 
 .feed > div { margin: 3px 0; }
