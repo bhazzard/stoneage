@@ -43,8 +43,7 @@ define([
         .removeClass(this.model.previous('name'))
         .addClass(this.model.get('name'));
     },
-    click: function(event) {
-      event.preventDefault();
+    click: function() {
       this.options.board.activate(this.model);
     }
   });
