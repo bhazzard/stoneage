@@ -1,9 +1,9 @@
 define([
     'jquery',
     'src/views/mobile',
-    'src/views/resource',
+    'src/views/payment',
     'src/models/payment'
-  ], function($, MobileView, ResourceView, Payment) {
+  ], function($, MobileView, PaymentView, Payment) {
   return MobileView.extend({
     className: 'medium dialog',
     events: {
@@ -17,7 +17,7 @@ define([
     },
     render: function() {
       $('<p/>').html('You have ' + this.model.get('deficit') + ' starving workers. How will you feed them?').appendTo(this.el);
-      var view = new ResourceView({
+      var view = new PaymentView({
         model: this.payment,
         player: this.model
       });
