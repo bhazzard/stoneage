@@ -8,6 +8,16 @@ define([
       this.set('name', 'civcard civcard' + this.id);
       this.bind('change:space', this._changeSpace, this);
     },
+    canPurchase: function(player) {
+      return player.resourceCount() >= this.get('space');
+    },
+    purchase: function(player, payment) {
+      _(payment).each(function(amount, resource) {
+        player.subtract(resource, amount);
+      });
+      this.collection.remove(this);
+      this.trigger('resolve', player);
+    },
     canPlace: function(player) {
       return this.workers() === 0 && player.get('workers') > 0;
     },
@@ -18,10 +28,16 @@ define([
       var workers = this.workers(player);
       this.set(player.id, undefined);
       player.add('workers', workers);
-      this.collection.remove(this);
       this.trigger('resolve', player);
+      //Resolve immediately if the player can't afford the card
+      if (!this.canPurchase(player)) {
+        this.trigger('resolve', player);
+      } else {
+        this.trigger('purchase', this, player);
+      }
     },
     _changeSpace: function(model, space) {
+      this.set('cost', space);
       var name = this.get('name').replace(/ space\d/g, '');
       this.set('name', name + ' space' + space);
     }
