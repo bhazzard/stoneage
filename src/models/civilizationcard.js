@@ -28,7 +28,6 @@ define([
       var workers = this.workers(player);
       this.set(player.id, undefined);
       player.add('workers', workers);
-      this.trigger('resolve', player);
       //Resolve immediately if the player can't afford the card
       if (!this.canPurchase(player)) {
         this.trigger('resolve', player);
@@ -37,7 +36,7 @@ define([
       }
     },
     _changeSpace: function(model, space) {
-      this.set('cost', space);
+      this.set('resources', space);
       var name = this.get('name').replace(/ space\d/g, '');
       this.set('name', name + ' space' + space);
     }
