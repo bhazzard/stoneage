@@ -14,5 +14,6 @@ require([
   'test/models/buildings',
   'test/models/cost',
   'test/models/field',
+  'test/models/payment',
   'test/models/civilizationcard'
 ]);

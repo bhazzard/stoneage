@@ -1,6 +1,7 @@
 define([
+    'underscore',
     'backbone'
-  ], function(Backbone) {
+  ], function(_, Backbone) {
   return Backbone.Model.extend({
     defaults: {
       wood: 0,
@@ -21,6 +22,11 @@ define([
         this.get('brick') +
         this.get('stone') +
         this.get('gold');
+    },
+    execute: function(player) {
+      _(this.toJSON()).each(function(amount, resource) {
+        player.subtract(resource, amount);
+      }, this);
     }
   });
 });
