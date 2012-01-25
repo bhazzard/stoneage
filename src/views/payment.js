@@ -40,10 +40,12 @@ define([
       }
     },
     change: function() {
-      var changed = this.model.changedAttributes();
+      var total = this.model.total(),
+        changed = this.model.changedAttributes();
       _(changed).each(function(amount, resource) {
         $('.resource.' + resource, this.el).html(amount);
       }, this);
+      $('.up', this.el).attr('disabled', this.options.cost.met(this.model));
     }
   });
 });

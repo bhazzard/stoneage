@@ -29,7 +29,8 @@ define([
           this.payment = new Payment();
           var view = new PaymentView({
             model: this.payment,
-            player: this.options.player
+            player: this.options.player,
+            cost: cost
           });
           $(view.render().el).appendTo(this.el);
         } else {
