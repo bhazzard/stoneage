@@ -1,8 +1,9 @@
 define([
     'underscore',
     'backbone',
-    'src/models/building'
-  ], function(_, Backbone, Building) {
+    'src/models/building',
+    'src/models/cost'
+  ], function(_, Backbone, Building, Cost) {
   return Backbone.Collection.extend({
     model: Building,
     initialize: function(models, options) {
@@ -10,146 +11,146 @@ define([
         new Building({
           id: 1,
           value: 13,
-          cost: {
+          cost: new Cost({
             wood: 1,
             brick: 1,
             gold: 1
-          }
+          })
         }),
         new Building({
           id: 12,
           value: 14,
-          cost: {
+          cost: new Cost({
             wood: 1,
             stone: 1,
             gold: 1
-          }
+          })
         }),
         new Building({
           id: 13,
           value: 10,
-          cost: {
+          cost: new Cost({
             wood: 2,
             brick: 1
-          }
+          })
         }),
         new Building({
           id: 14,
           value: 13,
-          cost: {
+          cost: new Cost({
             wood: 1,
             brick: 1,
             gold: 1
-          }
+          })
         }),
         new Building({
           id: 15,
           value: 13,
-          cost: {
+          cost: new Cost({
             brick: 2,
             stone: 1
-          }
+          })
         }),
         new Building({
           id: 16,
           value: 14,
-          cost: {
+          cost: new Cost({
             brick: 1,
             stone: 2
-          }
+          })
         }),
         new Building({
           id: 18,
           value: 11,
-          cost: {
+          cost: new Cost({
             wood: 1,
             brick: 2
-          }
+          })
         }),
         new Building({
           id: 20,
           value: 12,
-          cost: {
+          cost: new Cost({
             wood: 1,
             brick: 1,
             stone: 1
-          }
+          })
         }),
         new Building({
           id: 21,
           value: 13,
-          cost: {
+          cost: new Cost({
             wood: 1,
             stone: 2
-          }
+          })
         }),
         new Building({
           id: 23,
           value: 14,
-          cost: {
+          cost: new Cost({
             wood: 1,
             stone: 1,
             gold: 1
-          }
+          })
         }),
         new Building({
           id: 24,
           value: 16,
-          cost: {
+          cost: new Cost({
             stone: 2,
             gold: 1
-          }
+          })
         }),
         new Building({
           id: 26,
           value: 14,
-          cost: {
+          cost: new Cost({
             brick: 2,
             gold: 1
-          }
+          })
         }),
         new Building({
           id: 27,
           value: 11,
-          cost: {
+          cost: new Cost({
             wood: 2,
             stone: 1
-          }
+          })
         }),
         new Building({
           id: 28,
           value: 12,
-          cost: {
+          cost: new Cost({
             wood: 1,
             brick: 1,
             stone: 1
-          }
+          })
         }),
         new Building({
           id: 4,
           value: 15,
-          cost: {
+          cost: new Cost({
             brick: 1,
             stone: 1,
             gold: 1
-          }
+          })
         }),
         new Building({
           id: 6,
           value: 12,
-          cost: {
+          cost: new Cost({
             wood: 2,
             gold: 1,
-          }
+          })
         }),
         new Building({
           id: 8,
           value: 15,
-          cost: {
+          cost: new Cost({
             brick: 1,
             stone: 1,
             gold: 1
-          }
+          })
         })
       ];
 

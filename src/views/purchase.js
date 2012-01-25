@@ -18,22 +18,23 @@ define([
       return this;
     },
     purchase: function() {
-      if (this.payment) {
-        this.model.purchase(this.options.player, this.payment.toJSON());
-      } else {
-        this.model.purchase(this.options.player);
-      }
+      this.model.purchase(this.options.player, this.payment);
       this.remove();
     },
     showPayment: function() {
-      if (this.model.get('resources')) {
-        $(this.el).removeClass('small').addClass('medium');
-        this.payment = new Payment();
-        var view = new PaymentView({
-          model: this.payment,
-          player: this.options.player
-        });
-        $(view.render().el).appendTo(this.el);
+      var cost = this.model.get('cost');
+      if (cost) {
+        if (!cost.isFixed()) {
+          $(this.el).removeClass('small').addClass('medium');
+          this.payment = new Payment();
+          var view = new PaymentView({
+            model: this.payment,
+            player: this.options.player
+          });
+          $(view.render().el).appendTo(this.el);
+        } else {
+          this.payment = new Payment(cost.toJSON());
+        }
       }
     }
   });

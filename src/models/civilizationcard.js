@@ -1,8 +1,9 @@
 define([
     'underscore',
     'backbone',
-    'src/models/workspace'
-  ], function(_, Backbone, Workspace) {
+    'src/models/workspace',
+    'src/models/cost'
+  ], function(_, Backbone, Workspace, Cost) {
   return Workspace.extend({
     initialize: function() {
       this.set('name', 'civcard civcard' + this.id);
@@ -12,9 +13,7 @@ define([
       return player.resourceCount() >= this.get('space');
     },
     purchase: function(player, payment) {
-      _(payment).each(function(amount, resource) {
-        player.subtract(resource, amount);
-      });
+      payment.execute(player);
       this.collection.remove(this);
       this.trigger('resolve', player);
     },
@@ -36,7 +35,7 @@ define([
       }
     },
     _changeSpace: function(model, space) {
-      this.set('resources', space);
+      this.set('cost', new Cost({ any: space }));
       var name = this.get('name').replace(/ space\d/g, '');
       this.set('name', name + ' space' + space);
     }
