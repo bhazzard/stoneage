@@ -47,7 +47,7 @@ define([
         $('.resource.' + resource, this.el).html(amount);
       }, this);
       $('.up', this.el).attr('disabled', met);
-      $(this.el).trigger('met', [met]);
+      $(this.el).trigger('change');
     }
   });
 });

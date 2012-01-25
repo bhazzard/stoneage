@@ -8,7 +8,7 @@ define([
     events: {
       'click .ok': 'purchase',
       'click .cancel': 'remove',
-      'met': 'met'
+      'change': 'change'
     },
     render: function() {
       var cost = this.model.get('cost');
@@ -37,7 +37,8 @@ define([
       this.model.purchase(this.options.player, this.payment);
       this.remove();
     },
-    met: function(event, met) {
+    change: function() {
+      var met = this.model.get('cost').met(this.payment);
       $('.ok', this.el).attr('disabled', !met);
     }
   });

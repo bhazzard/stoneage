@@ -10,7 +10,7 @@ define([
     events: {
       'click .points': 'points',
       'click .ok': 'feed',
-      'met': 'met'
+      'change': 'change'
     },
     initialize: function() {
       this.model.bind('deficit', this.render, this);
@@ -42,7 +42,8 @@ define([
       this.model.feed('score');
       this.remove();
     },
-    met: function(event, met) {
+    change: function() {
+      var met = this.cost.met(this.payment);
       $('.ok', this.el).attr('disabled', !met);
     }
   });
