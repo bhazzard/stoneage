@@ -1,7 +1,8 @@
 require([
     'src/models/player',
+    'src/models/payment',
     'src/models/cost'
-  ], function(Player, Cost) {
+  ], function(Player, Payment, Cost) {
   module('models.cost');
 
   test('canAfford', function() {
@@ -27,5 +28,18 @@ require([
     cost.clear();
     cost.set({ any: 2 });
     ok(!cost.isFixed(), 'Is not fixed resource cost');
+  });
+
+  test('met.any', function() {
+    var cost = new Cost({ any: 2 }), payment;
+
+    payment = new Payment({ wood: 1, brick: 1 });
+    ok(cost.met(payment), 'Should be met with any 2 resources');
+
+    payment = new Payment({ brick: 2 });
+    ok(cost.met(payment), 'Should be met with 2 of the same resource');
+
+    payment = new Payment({ brick: 1 });
+    ok(!cost.met(payment), 'Should not be met with less than 2 resources');
   });
 });
