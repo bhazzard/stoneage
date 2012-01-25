@@ -7,22 +7,13 @@ define([
     className: 'dialog small purchase',
     events: {
       'click .ok': 'purchase',
-      'click .cancel': 'remove'
+      'click .cancel': 'remove',
+      'met': 'met'
     },
     render: function() {
+      var cost = this.model.get('cost');
       $(this.el).empty();
       $('<div/>').addClass(this.model.get('name')).appendTo(this.el);
-      this.showPayment();
-      $('<button class="ok"/>').appendTo(this.el);
-      $('<button class="cancel"/>').appendTo(this.el);
-      return this;
-    },
-    purchase: function() {
-      this.model.purchase(this.options.player, this.payment);
-      this.remove();
-    },
-    showPayment: function() {
-      var cost = this.model.get('cost');
       if (cost) {
         if (!cost.isFixed()) {
           $(this.el).removeClass('small').addClass('medium');
@@ -33,10 +24,21 @@ define([
             cost: cost
           });
           $(view.render().el).appendTo(this.el);
+          $('<button/>').addClass('ok').attr('disabled', true).appendTo(this.el);
         } else {
           this.payment = new Payment(cost.toJSON());
+          $('<button/>').addClass('ok').appendTo(this.el);
         }
       }
+      $('<button/>').addClass('cancel').appendTo(this.el);
+      return this;
+    },
+    purchase: function() {
+      this.model.purchase(this.options.player, this.payment);
+      this.remove();
+    },
+    met: function(event, met) {
+      $('.ok', this.el).attr('disabled', !met);
     }
   });
 });

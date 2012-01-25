@@ -41,11 +41,13 @@ define([
     },
     change: function() {
       var total = this.model.total(),
-        changed = this.model.changedAttributes();
+        changed = this.model.changedAttributes(),
+        met = this.options.cost.met(this.model);
       _(changed).each(function(amount, resource) {
         $('.resource.' + resource, this.el).html(amount);
       }, this);
-      $('.up', this.el).attr('disabled', this.options.cost.met(this.model));
+      $('.up', this.el).attr('disabled', met);
+      $(this.el).trigger('met', [met]);
     }
   });
 });

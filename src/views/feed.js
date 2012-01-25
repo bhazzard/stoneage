@@ -9,12 +9,12 @@ define([
     className: 'medium dialog',
     events: {
       'click .points': 'points',
-      'click .ok': 'feed'
+      'click .ok': 'feed',
+      'met': 'met'
     },
     initialize: function() {
       this.model.bind('deficit', this.render, this);
       this.payment = new Payment();
-      this.payment.bind('change', this.changePayment, this);
     },
     render: function() {
       $('<p/>').html('You have ' + this.model.get('deficit') + ' starving workers. How will you feed them?').appendTo(this.el);
@@ -26,10 +26,8 @@ define([
       });
       $(view.render().el).appendTo(this.el);
       $('<button/>').addClass('points').appendTo(this.el);
-      $('<button/>').addClass('ok').appendTo(this.el);
+      $('<button/>').attr('disabled', true).addClass('ok').appendTo(this.el);
       $(this.el).appendTo('body');
-
-      this.changePayment();
 
       //I'm not sure why we need to call this here.
       //I guess .remove() undelegates, but nothing
@@ -44,8 +42,8 @@ define([
       this.model.feed('score');
       this.remove();
     },
-    changePayment: function() {
-      $('.ok', this.el).attr('disabled', !this.cost.met(this.payment));
+    met: function(event, met) {
+      $('.ok', this.el).attr('disabled', !met);
     }
   });
 });
