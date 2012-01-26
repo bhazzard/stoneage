@@ -36,4 +36,12 @@ require(['src/models/player'], function(Player) {
     });
     equals(player.resourceCount(), 10, 'resourceCount should be 10');
   });
+
+  test('feed', function() {
+    var player = new Player();
+
+    player.feed();
+
+    equals(player.get('food'), 7, 'Should feed each worker');
+  });
 });
