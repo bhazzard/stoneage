@@ -8,14 +8,26 @@ require([
     var field = new Field(),
       player = new Player({ id: 1 });
 
+    expect(2);
+    field.bind('resolve', function() {
+      equals(player.get('production'), 1, 'production should increase by 1');
+      equals(player.get('workers'), 5, '1 worker should be returned to player');
+    });
     field.place(player);
     field.resolve(player);
+  });
 
-    equals(player.get('production'), 1, 'production should increase by 1');
-    equals(player.get('workers'), 5, '1 worker should be returned to player');
+  test('resolve.once', function() {
+    var field = new Field(),
+      player = new Player({ id: 1 });
 
+    expect(1);
+    field.bind('resolve', function() {
+      equals(player.get('production'), 1, 'production should increase by 1 only once');
+    });
+    field.place(player);
     field.resolve(player);
-    equals(player.get('production'), 1, 'production should not increase by 1 a second time');
+    field.resolve(player);
   });
 
   test('canPlace', function() {
