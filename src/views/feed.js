@@ -17,6 +17,7 @@ define([
       this.payment = new Payment();
     },
     render: function() {
+      $(this.el).empty();
       $('<p/>').html('You have ' + this.model.get('deficit') + ' starving workers. How will you feed them?').appendTo(this.el);
       this.cost = new Cost({ any: this.model.get('deficit') });
       var view = new PaymentView({
