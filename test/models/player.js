@@ -42,6 +42,62 @@ require(['src/models/player'], function(Player) {
 
     player.feed();
 
-    equals(player.get('food'), 7, 'Should feed each worker');
+    equals(player.get('food'), 7, 'Should have 7 food after feeding 5 workers');
+  });
+
+  test('feed.deficit.score.auto', function() {
+    var player = new Player({ food: 2 });
+
+    player.feed();
+    equals(player.get('food'), 0, 'Should have 0 food');
+    equals(player.get('score'), -10, 'Automatically lose 10 points');
+  });
+
+  test('feed.deficit', function() {
+    var player = new Player({
+      food: 2,
+      wood: 3
+    });
+
+    expect(1);
+    player.bind('deficit', function() {
+      equals(player.get('deficit'), 3, 'Should trigger deficit with 3 unfed workers');
+    });
+    player.feed();
+  });
+
+  test('feed.deficit.score', function() {
+    var player = new Player({
+      deficit: 3,
+      food: 2,
+      wood: 3
+    });
+
+    expect(3);
+    player.bind('fed', function() {
+      equals(player.get('food'), 0, 'Should have 0 food');
+      equals(player.get('deficit'), 0, 'Should have 0 deficit');
+      equals(player.get('score'), -10, 'Should lose 10 points');
+    });
+    player.feed('score');
+  });
+
+  test('feed.deficit.resources', function() {
+    var player = new Player({
+      deficit: 3,
+      food: 2,
+      wood: 3,
+      brick: 4
+    });
+
+    expect(5);
+    player.bind('fed', function() {
+      equals(player.get('food'), 0, 'Should have 0 food');
+      equals(player.get('wood'), 1, 'Should have 1 wood');
+      equals(player.get('brick'), 3, 'Should have 3 brick');
+      equals(player.get('deficit'), 0, 'Should have 0 deficit');
+      equals(player.get('score'), 0, 'Should not lose points');
+    });
+    player.feed({ wood: 2, brick: 1 });
   });
 });

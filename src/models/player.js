@@ -40,12 +40,14 @@ define([
       if (food < 0) {
         deficit = -food;
         if (this.resourceCount() < deficit) {
+          this.set('food', 0);
           this.subtract('score', 10);
         } else {
           this.set('deficit', deficit);
           this.trigger('deficit');
         }
       } else {
+        this.set('deficit', 0);
         this.set('food', food);
         this.trigger('fed');
       }
