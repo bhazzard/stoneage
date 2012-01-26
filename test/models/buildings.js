@@ -1,5 +1,18 @@
-require(['src/models/buildings'], function(Buildings) {
+require([
+    'underscore',
+    'src/models/buildings'
+  ], function(_, Buildings) {
   module('models.buildings');
+
+  test('initialize', function() {
+    var buildings = new Buildings([], {
+      players: 3
+    });
+
+    var piles = _.uniq(buildings.pluck('pile'));
+
+    deepEqual([1, 2, 3], piles, 'Should have a pile for each player');
+  });
 
   test('empty', function() {
     var buildings = new Buildings([], {
