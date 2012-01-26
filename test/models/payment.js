@@ -14,4 +14,14 @@ require([
     equal(player.get('brick'), 1, 'Should remove 2 brick');
     equal(player.get('stone'), 2, 'Should remove 0 stone');
   });
+
+  test('total', function() {
+    var payment = new Payment({
+      wood: 1,
+      brick: 2,
+      stone: 3,
+      gold: 4
+    });
+    equal(payment.total(), 10, 'Resource total should be 10');
+  });
 });
