@@ -20,8 +20,8 @@ define([
       this.set(player.id, undefined);
       if (workers === 2) {
         player.add('workers', workers + 1);
+        this.trigger('resolve', player);
       }
-      this.trigger('resolve', player);
     }
   });
 });
