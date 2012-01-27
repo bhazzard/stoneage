@@ -18,6 +18,8 @@ define([
     },
     initialize: function() {
       this.set('tools', new Tools());
+      this.bind('change:workers', this._capWorkers, this);
+      this.bind('change:production', this._capProduction, this);
     },
     add: function(attribute, count) {
       this.set(attribute, this.get(attribute) + count);
@@ -57,6 +59,16 @@ define([
         this.get('brick') +
         this.get('stone') +
         this.get('gold');
+    },
+    _capWorkers: function() {
+      if (this.get('workers') > 10) {
+        this.set('workers', 10);
+      }
+    },
+    _capProduction: function() {
+      if (this.get('production') > 10) {
+        this.set('production', 10);
+      }
     }
   });
 });

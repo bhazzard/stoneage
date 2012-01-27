@@ -41,10 +41,6 @@ require([
     field.place(player);
     ok(!field.canPlace(player), 'Cannot place if already occupied');
 
-    player.set('production', 10);
-    field.set(player.id, undefined);
-    ok(!field.canPlace(player), 'Cannot place if production is maximized');
-
     player.set('production', 1);
     field.set(player.id, undefined);
     ok(field.canPlace(player), 'Can place if not occupied');

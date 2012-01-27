@@ -100,4 +100,16 @@ require(['src/models/player'], function(Player) {
     });
     player.feed({ wood: 2, brick: 1 });
   });
+
+  test('worker.cap', function() {
+    var player = new Player({ workers: 10 });
+    player.add('workers', 1);
+    equals(player.get('workers'), 10, 'Should cap workers at 10');
+  });
+
+  test('production.cap', function() {
+    var player = new Player({ production: 10 });
+    player.add('production', 1);
+    equals(player.get('production'), 10, 'Should cap production at 10');
+  });
 });
