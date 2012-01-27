@@ -15,5 +15,6 @@ require([
   'test/models/cost',
   'test/models/field',
   'test/models/payment',
+  'test/models/toolhut',
   'test/models/civilizationcard'
 ]);

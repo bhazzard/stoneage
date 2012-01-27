@@ -19,10 +19,12 @@ define([
       var resourceName = this.get('resource'),
         value = this.get('value'),
         workers = this.workers(player);
-      this.set(player.id, undefined);
-      player.add('workers', workers);
-      player.get('tools').upgrade();
-      this.trigger('resolve', player);
+      if (workers > 0) {
+        this.set(player.id, undefined);
+        player.add('workers', workers);
+        player.get('tools').upgrade();
+        this.trigger('resolve', player);
+      }
     }
   });
 });
