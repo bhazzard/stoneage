@@ -11,7 +11,7 @@ define([
       'change': 'change'
     },
     render: function() {
-      var cost = this.model.get('cost');
+      var cost = this.model.cost;
       $(this.el).empty();
       $('<div/>').addClass(this.model.get('name')).appendTo(this.el);
       if (cost) {
@@ -38,7 +38,7 @@ define([
       this.remove();
     },
     change: function() {
-      var met = this.model.get('cost').met(this.payment);
+      var met = this.model.cost.met(this.payment);
       $('.ok', this.el).attr('disabled', !met);
     }
   });

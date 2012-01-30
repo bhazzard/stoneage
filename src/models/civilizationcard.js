@@ -35,7 +35,8 @@ define([
       }
     },
     _changeSpace: function(model, space) {
-      this.set('cost', new Cost({ any: space }));
+      this.cost = this.cost || new Cost();
+      this.cost.set('any', space);
       var name = this.get('name').replace(/ space\d/g, '');
       this.set('name', name + ' space' + space);
     }

@@ -4,8 +4,15 @@ define([
     'src/models/workspace'
   ], function(_, Backbone, Workspace) {
   return Workspace.extend({
+    initialize: function() {
+      var cost = this.get('cost');
+      if (cost) {
+        this.unset('cost');
+        this.cost = cost;
+      }
+    },
     canPurchase: function(player) {
-      return this.get('cost').canAfford(player);
+      return this.cost.canAfford(player);
     },
     purchase: function(player, payment) {
       payment.execute(player);
