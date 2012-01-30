@@ -27,4 +27,20 @@ require([
     card.set('space', 4);
     equals(card.cost.get('any'), 4, 'Should cost 4 of any resource');
   });
+
+  test('canPlace', function() {
+    var card = new CivilizationCard(),
+      player = new Player({ id: 1 });
+
+    player.set('workers', 0);
+    ok(!card.canPlace(player), 'Cannot place if 0 workers');
+
+    player.set('workers', 2);
+    card.place(player);
+    ok(!card.canPlace(player), 'Cannot place if already occupied');
+
+    player.set('production', 1);
+    card.set(player.id, undefined);
+    ok(card.canPlace(player), 'Can place if not occupied');
+  });
 });
