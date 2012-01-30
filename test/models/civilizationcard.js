@@ -43,4 +43,28 @@ require([
     card.set(player.id, undefined);
     ok(card.canPlace(player), 'Can place if not occupied');
   });
+
+  test('resolve.cannotAfford', function() {
+    var card = new CivilizationCard({ space: 2 }),
+      player = new Player({ id: 1 });
+
+    expect(1);
+    card.bind('resolve', function() {
+      ok(true, 'Should resolve immediately');
+    });
+    card.place(player);
+    card.resolve(player);
+  });
+
+  test('resolve.canAfford', function() {
+    var card = new CivilizationCard({ space: 2 }),
+      player = new Player({ id: 1, wood: 2 });
+
+    expect(1);
+    card.bind('purchase', function() {
+      ok(true, 'Should prompt for purchase');
+    });
+    card.place(player);
+    card.resolve(player);
+  });
 });
