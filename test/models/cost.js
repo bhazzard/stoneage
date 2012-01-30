@@ -14,8 +14,15 @@ require([
 
     ok(cost.canAfford(player), 'Can afford fixed resource cost');
 
-    player.subtract('wood', 1);
+    player.set('wood', 1);
     ok(!cost.canAfford(player), 'Cannot afford fixed resource cost');
+
+    cost.clear();
+    cost.set({ any: 2 });
+    ok(cost.canAfford(player), 'Can afford any 2 resource cost');
+
+    player.set('brick', 0);
+    ok(!cost.canAfford(player), 'Cannot afford any 2 resource cost');
   });
 
   test('isFixed', function() {

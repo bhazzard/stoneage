@@ -10,7 +10,7 @@ define([
       this.bind('change:space', this._changeSpace, this);
     },
     canPurchase: function(player) {
-      return player.resourceCount() >= this.get('space');
+      return this.cost.canAfford(player);
     },
     purchase: function(player, payment) {
       payment.execute(player);

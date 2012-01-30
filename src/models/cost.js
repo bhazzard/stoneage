@@ -13,9 +13,14 @@ define([
       return false;
     },
     canAfford: function(player) {
-      return _(resources).all(function(resource) {
-        return player.get(resource) >= (this.get(resource) || 0);
-      }, this);
+      var any = this.get('any');
+      if (any !== undefined) {
+        return player.resourceCount() >= any;
+      } else {
+        return _(resources).all(function(resource) {
+          return player.get(resource) >= (this.get(resource) || 0);
+        }, this);
+      }
     },
     isFixed: function() {
       return _(resources).any(function(resource) {
