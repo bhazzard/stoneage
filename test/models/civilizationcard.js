@@ -1,7 +1,9 @@
 require([
+    'backbone',
     'src/models/civilizationcard',
+    'src/models/payment',
     'src/models/player'
-  ], function(CivilizationCard, Player) {
+  ], function(Backbone, CivilizationCard, Payment, Player) {
   module('models.civilizationcard');
 
   test('name', function() {
@@ -66,5 +68,21 @@ require([
     });
     card.place(player);
     card.resolve(player);
+  });
+
+  test('purchase', function() {
+    var card = new CivilizationCard({ space: 2 }),
+      player = new Player({ id: 1, wood: 2, brick: 3 }),
+      payment = new Payment({ wood: 1, brick: 1 }),
+      collection = new Backbone.Collection();
+
+    expect(3);
+    card.bind('resolve', function() {
+      equals(player.get('wood'), 1, 'Should pay with 1 wood');
+      equals(player.get('brick'), 2, 'Should pay with 2 brick');
+      equals(collection.length, 0, 'Should remove card from collection');
+    });
+    collection.add(card);
+    card.purchase(player, payment);
   });
 });
