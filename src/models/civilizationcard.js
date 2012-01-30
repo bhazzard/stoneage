@@ -8,6 +8,9 @@ define([
     initialize: function() {
       this.set('name', 'civcard civcard' + this.id);
       this.bind('change:space', this._changeSpace, this);
+      if (this.get('space')) {
+        this._changeSpace();
+      }
     },
     canPurchase: function(player) {
       return this.cost.canAfford(player);
@@ -34,10 +37,11 @@ define([
         this.trigger('purchase', this, player);
       }
     },
-    _changeSpace: function(model, space) {
+    _changeSpace: function() {
+      var space = this.get('space'),
+        name = this.get('name').replace(/ space\d/g, '');
       this.cost = this.cost || new Cost();
       this.cost.set('any', space);
-      var name = this.get('name').replace(/ space\d/g, '');
       this.set('name', name + ' space' + space);
     }
   });

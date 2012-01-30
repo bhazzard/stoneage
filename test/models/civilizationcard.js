@@ -1,4 +1,7 @@
-require(['src/models/civilizationcard'], function(CivilizationCard) {
+require([
+    'src/models/civilizationcard',
+    'src/models/player'
+  ], function(CivilizationCard, Player) {
   module('models.civilizationcard');
 
   test('name', function() {
@@ -14,12 +17,14 @@ require(['src/models/civilizationcard'], function(CivilizationCard) {
   });
 
   test('space', function() {
-    var card = new CivilizationCard();
+    var card = new CivilizationCard({ space: 1 });
 
-    card.set('space', 1);
     equals(card.cost.get('any'), 1, 'Should cost 1 of any resource');
 
-    card.set('space', 3);
-    equals(card.cost.get('any'), 3, 'Should cost 3 of any resource');
+    card.set('space', 2);
+    equals(card.cost.get('any'), 2, 'Should cost 2 of any resource');
+
+    card.set('space', 4);
+    equals(card.cost.get('any'), 4, 'Should cost 4 of any resource');
   });
 });
