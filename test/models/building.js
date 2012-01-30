@@ -1,8 +1,10 @@
 require([
+    'backbone',
     'src/models/player',
     'src/models/building',
-    'src/models/cost'
-  ], function(Player, Building, Cost) {
+    'src/models/cost',
+    'src/models/payment'
+  ], function(Backbone, Player, Building, Cost, Payment) {
   module('models.building');
 
   test('initialize', function() {
@@ -42,5 +44,23 @@ require([
     });
     building.place(player);
     building.resolve(player);
+  });
+
+  test('purchase', function() {
+    var buildings = new Backbone.Collection(),
+      building = new Building({
+        cost: new Cost({ wood: 3 }),
+        buildings: buildings
+      }),
+      player = new Player({ id: 1, wood: 4 }),
+      payment = new Payment({ wood: 3 });
+
+    expect(2);
+    building.bind('resolve', function() {
+      equals(player.get('wood'), 1, 'Should pay with 3 wood');
+      equals(buildings.length, 0, 'Should remove building from collection');
+    });
+    buildings.add(building);
+    building.purchase(player, payment);
   });
 });
