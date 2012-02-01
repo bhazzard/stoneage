@@ -14,7 +14,7 @@ define([
       this.model.workspaces.each(this._renderWorkspace, this);
 
       var productionTrack = new ProductionTrackView({
-        model: this.model.get('players'),
+        model: this.model.players,
         board: this.el
       });
       $(productionTrack.render().el).appendTo(this.el);
@@ -31,7 +31,7 @@ define([
     },
     _gameover: function(player) {
       var view = new GameOverView({
-        collection: this.model.get('players')
+        collection: this.model.players
       });
       $(view.render().el).appendTo(this.el);
     },

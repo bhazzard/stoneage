@@ -2,9 +2,9 @@ define(['underscore', 'backbone'], function(_, Backbone){
   return Backbone.Model.extend({
     initialize : function(huts, players){
       this.set({
-        huts : huts,
-        players : players
+        huts : huts
       });
+      this.players = players;
     }, 
     isSatisfied : function(workspace){
       return this._playerCount() !== 2 ||
@@ -17,7 +17,7 @@ define(['underscore', 'backbone'], function(_, Backbone){
       });
     },
     _playerCount : function(){
-      return this.get('players').length;
+      return this.players.length;
     },
     _usedHutCount : function(){
       return _(this.get('huts')).filter(function(hut){

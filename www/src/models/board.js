@@ -25,8 +25,10 @@ define([
       phase: 'place'
     },
     initialize: function() {
+      this.players = this.get('players');
+      this.unset('players');
       var buildings = new Buildings([], {
-        players: this.get('players').length
+        players: this.players.length
       });
       var civilizationCards = new CivilizationCards();
       var workspaceMax = this.maxPlayers();
@@ -67,7 +69,7 @@ define([
       var specialhut = new SpecialHut();
       var toolhut = new ToolHut();
 
-      this.hutrule = new HutRule([field, specialhut, toolhut], this.get('players'));
+      this.hutrule = new HutRule([field, specialhut, toolhut], this.players);
       workspaces.add([field, specialhut, toolhut]); 
       workspaces.add(buildings.models);
       civilizationCards.deal(workspaces);
@@ -79,16 +81,16 @@ define([
       }, this);
 
       this.workspaces.bind('playerresolved', function() {
-        this.get('players').nextTurn();
+        this.players.nextTurn();
       }, this);
       this.workspaces.bind('allresolved', function() {
         this.feed();
       }, this);
       this.workspaces.bind('place', function() {
         var i=0,
-          players = this.get('players');
+          players = this.players;
         if (players.remainingWorkers() === 0) {
-          this.get('players').gotoLeader();
+          this.players.gotoLeader();
           this.set('phase', 'resolve');
         } else {
           players.nextTurn();
@@ -102,7 +104,7 @@ define([
           }
         }
       }, this);
-      this.get('players').bind('allfed', function() {
+      this.players.bind('allfed', function() {
         this.reset();
       }, this);
     },
@@ -110,7 +112,7 @@ define([
       this[this.get('phase')](workspace);
     },
     place: function(workspace) {
-      var players = this.get('players'),
+      var players = this.players,
         player = players.current(),
         workers;
 
@@ -120,16 +122,16 @@ define([
       }
     },
     resolve: function(workspace) {
-      var player = this.get('players').current();
+      var player = this.players.current();
       if(workspace.canResolve(player)) {
         workspace.resolve(player);
       }
     },
     feed: function() {
-      this.get('players').feed();
+      this.players.feed();
     },
     reset: function() {
-      this.get('players').resetAll();
+      this.players.resetAll();
       this.workspaces.reset();
       this.civilizationCards.deal(this.workspaces);
       this.checkForEndGame();
@@ -137,7 +139,7 @@ define([
     checkForEndGame: function() {
       //TODO - check if there are no more culture cards as well
       var gameover = this.buildings.empty(),
-        players = this.get('players');
+        players = this.players;
       if (gameover) {
         this.trigger('gameover', players.winner());
       } else {
@@ -146,7 +148,7 @@ define([
       }
     },
     maxPlayers : function(){
-      return this.get('players').length - 1;
+      return this.players.length - 1;
     }
   });
 });
