@@ -28,6 +28,20 @@ require([
     ok(!cost.canAfford(player), 'Cannot afford any 2 resource cost');
   });
 
+  test('canAfford.any.kinds', function() {
+    var cost = new Cost({ any: 4, kinds: 2 }),
+      player = new Player();
+
+    player.set({ wood: 2, brick: 2, stone: 1 });
+    ok(cost.canAfford(player), 'Can afford any 4 resource cost of 2 kinds');
+
+    player.set({ wood: 4, brick: 0, stone: 0 });
+    ok(!cost.canAfford(player), 'Cannot afford any 4 resource cost of 2 kinds');
+
+    player.set({ wood: 1, brick: 2 });
+    ok(!cost.canAfford(player), 'Cannot afford any 4 resource cost of 2 kinds');
+  });
+
   test('canAfford.atmost', function() {
     var cost = new Cost({ atmost: 7 }),
       player = new Player();

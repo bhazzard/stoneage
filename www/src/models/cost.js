@@ -22,9 +22,12 @@ define([
     },
     canAfford: function(player) {
       var any = this.get('any'),
+        kinds = this.get('kinds'),
         atmost = this.get('atmost'),
         total = player.resourceCount();
-      if (any !== undefined) {
+      if (any !== undefined && kinds !== undefined) {
+        return total >= any && player.kinds() >= kinds;
+      } else if (any !== undefined) {
         return total >= any;
       } else if (atmost !== undefined) {
         return total > 0 && total <= atmost;

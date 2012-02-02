@@ -60,6 +60,12 @@ define([
         this.get('stone') +
         this.get('gold');
     },
+    kinds: function() {
+      return (this.get('wood') > 0 ? 1 : 0) +
+        (this.get('brick') > 0 ? 1 : 0) +
+        (this.get('stone') > 0 ? 1 : 0) +
+        (this.get('gold') > 0 ? 1 : 0);
+    },
     _capWorkers: function() {
       if (this.get('workers') > 10) {
         this.set('workers', 10);

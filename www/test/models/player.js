@@ -112,4 +112,15 @@ require(['src/models/player'], function(Player) {
     player.add('production', 1);
     equals(player.get('production'), 10, 'Should cap production at 10');
   });
+
+  test('kinds', function() {
+    var player = new Player({
+      wood: 1
+    });
+
+    equal(player.kinds(), 1, 'Should have 1 unique resource type');
+
+    player.set({ stone: 2, gold: 3 });
+    equal(player.kinds(), 3, 'Should have 3 unique resource types');
+  });
 });
