@@ -17,6 +17,20 @@ define([
           })
         }),
         new Building({
+          id: 2,
+          cost: new Cost({
+            any: 5,
+            kinds: 2
+          })
+        }),
+        new Building({
+          id: 3,
+          cost: new Cost({
+            any: 4,
+            kinds: 2
+          })
+        }),
+        new Building({
           id: 4,
           cost: new Cost({
             brick: 1,
@@ -25,10 +39,24 @@ define([
           })
         }),
         new Building({
+          id: 5,
+          cost: new Cost({
+            any: 5,
+            kinds: 4
+          })
+        }),
+        new Building({
           id: 6,
           cost: new Cost({
             wood: 2,
             gold: 1,
+          })
+        }),
+        new Building({
+          id: 7,
+          cost: new Cost({
+            any: 4,
+            kinds: 4
           })
         }),
         new Building({
@@ -95,10 +123,24 @@ define([
           })
         }),
         new Building({
+          id: 17,
+          cost: new Cost({
+            any: 5,
+            kinds: 1
+          })
+        }),
+        new Building({
           id: 18,
           cost: new Cost({
             wood: 1,
             brick: 2
+          })
+        }),
+        new Building({
+          id: 19,
+          cost: new Cost({
+            any: 4,
+            kinds: 1
           })
         }),
         new Building({
@@ -117,6 +159,13 @@ define([
           })
         }),
         new Building({
+          id: 22,
+          cost: new Cost({
+            any: 5,
+            kinds: 3
+          })
+        }),
+        new Building({
           id: 23,
           cost: new Cost({
             wood: 1,
@@ -129,6 +178,13 @@ define([
           cost: new Cost({
             stone: 2,
             gold: 1
+          })
+        }),
+        new Building({
+          id: 25,
+          cost: new Cost({
+            any: 4,
+            kinds: 3
           })
         }),
         new Building({
@@ -158,7 +214,6 @@ define([
       deck = _.shuffle(deck);
       
       //Split into 4 even piles
-      //NOTE - some buildings may go missing until we have all 28
       var size = Math.floor(deck.length/4),
         players = options.players,
         pile;
