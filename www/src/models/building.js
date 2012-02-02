@@ -17,7 +17,7 @@ define([
     purchase: function(player, payment) {
       payment.execute(player);
       this.get('buildings').remove(this);
-      player.add('score', this.get('value'));
+      player.add('score', payment.value());
       this.trigger('resolve', player);
     },
     canPlace : function(player) {

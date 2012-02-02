@@ -27,6 +27,12 @@ define([
       _(this.toJSON()).each(function(amount, resource) {
         player.subtract(resource, amount);
       }, this);
+    },
+    value: function() {
+      return (this.get('wood') * 3) +
+        (this.get('brick') * 4) +
+        (this.get('stone') * 5) +
+        (this.get('gold') * 6);
     }
   });
 });

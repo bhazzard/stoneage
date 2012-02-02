@@ -49,7 +49,6 @@ require([
   test('purchase', function() {
     var buildings = new Backbone.Collection(),
       building = new Building({
-        value: 9,
         cost: new Cost({ wood: 3 }),
         buildings: buildings
       }),

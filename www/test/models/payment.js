@@ -24,4 +24,14 @@ require([
     });
     equal(payment.total(), 10, 'Resource total should be 10');
   });
+
+  test('value', function() {
+    var payment = new Payment({
+      wood: 1,
+      brick: 1,
+      stone: 1,
+      gold: 1
+    });
+    equal(payment.value(), 18, 'Resource value should be 18');
+  });
 });
