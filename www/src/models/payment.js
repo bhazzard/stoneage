@@ -33,6 +33,12 @@ define([
         (this.get('brick') * 4) +
         (this.get('stone') * 5) +
         (this.get('gold') * 6);
+    },
+    kinds: function() {
+      var values = _(this.toJSON()).values();
+      return values.reduce(function(memo, amount) {
+        return memo + (amount > 0 ? 1 : 0);
+      }, 0);
     }
   });
 });

@@ -34,4 +34,15 @@ require([
     });
     equal(payment.value(), 18, 'Resource value should be 18');
   });
+
+  test('kinds', function() {
+    var payment = new Payment({
+      wood: 1
+    });
+
+    equal(payment.kinds(), 1, 'Should have 1 unique resource type');
+
+    payment.set({ stone: 2, gold: 3 });
+    equal(payment.kinds(), 3, 'Should have 3 unique resource types');
+  });
 });
