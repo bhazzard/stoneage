@@ -7,19 +7,24 @@ define([
   return Backbone.Model.extend({
     met: function(payment) {
       var any = this.get('any'),
-        atmost = this.get('atmost');
+        atmost = this.get('atmost'),
+        total = payment.total();;
       if (any !== undefined) {
-        return payment.total() >= any;
+        return total >= any;
       }
       if (atmost !== undefined) {
-        return payment.total() > 0 && payment.total() <= atmost;
+        return total > 0 && total <= atmost;
       }
       return false;
     },
     canAfford: function(player) {
-      var any = this.get('any');
+      var any = this.get('any'),
+        atmost = this.get('atmost'),
+        total = player.resourceCount();
       if (any !== undefined) {
-        return player.resourceCount() >= any;
+        return total >= any;
+      } else if (atmost !== undefined) {
+        return total > 0 && total <= atmost;
       } else {
         return _(resources).all(function(resource) {
           return player.get(resource) >= (this.get(resource) || 0);

@@ -5,24 +5,41 @@ require([
   ], function(Player, Payment, Cost) {
   module('models.cost');
 
-  test('canAfford', function() {
-    var cost = new Cost(),
+  test('canAfford.fixed', function() {
+    var cost = new Cost({ wood: 2, brick: 3 }),
       player = new Player();
 
-    cost.set({ wood: 2, brick: 3 });
     player.set(cost.toJSON());
 
     ok(cost.canAfford(player), 'Can afford fixed resource cost');
 
     player.set('wood', 1);
     ok(!cost.canAfford(player), 'Cannot afford fixed resource cost');
+  });
 
-    cost.clear();
-    cost.set({ any: 2 });
+  test('canAfford.any', function() {
+    var cost = new Cost({ any: 2 }),
+      player = new Player();
+
+    player.set('brick', 2);
     ok(cost.canAfford(player), 'Can afford any 2 resource cost');
 
     player.set('brick', 0);
     ok(!cost.canAfford(player), 'Cannot afford any 2 resource cost');
+  });
+
+  test('canAfford.atmost', function() {
+    var cost = new Cost({ atmost: 7 }),
+      player = new Player();
+
+    player.set('stone', 1);
+    ok(cost.canAfford(player), 'Can afford at most 7 resource cost');
+
+    player.set('stone', 7);
+    ok(cost.canAfford(player), 'Can afford at most 7 resource cost');
+
+    player.set('stone', 0);
+    ok(!cost.canAfford(player), 'Cannot afford at most 7 resources cost');
   });
 
   test('isFixed', function() {
