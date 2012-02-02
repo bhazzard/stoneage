@@ -17,6 +17,47 @@ define([
           })
         }),
         new Building({
+          id: 4,
+          cost: new Cost({
+            brick: 1,
+            stone: 1,
+            gold: 1
+          })
+        }),
+        new Building({
+          id: 6,
+          cost: new Cost({
+            wood: 2,
+            gold: 1,
+          })
+        }),
+        new Building({
+          id: 8,
+          cost: new Cost({
+            brick: 1,
+            stone: 1,
+            gold: 1
+          })
+        }),
+        new Building({
+          id: 9,
+          cost: new Cost({
+            atmost: 7
+          })
+        }),
+        new Building({
+          id: 10,
+          cost: new Cost({
+            atmost: 7
+          })
+        }),
+        new Building({
+          id: 11,
+          cost: new Cost({
+            atmost: 7
+          })
+        }),
+        new Building({
           id: 12,
           cost: new Cost({
             wood: 1,
@@ -110,29 +151,6 @@ define([
             wood: 1,
             brick: 1,
             stone: 1
-          })
-        }),
-        new Building({
-          id: 4,
-          cost: new Cost({
-            brick: 1,
-            stone: 1,
-            gold: 1
-          })
-        }),
-        new Building({
-          id: 6,
-          cost: new Cost({
-            wood: 2,
-            gold: 1,
-          })
-        }),
-        new Building({
-          id: 8,
-          cost: new Cost({
-            brick: 1,
-            stone: 1,
-            gold: 1
           })
         })
       ];

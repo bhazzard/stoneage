@@ -49,4 +49,20 @@ require([
     payment = new Payment({ brick: 1 });
     ok(!cost.met(payment), 'Should not be met with less than 2 resources');
   });
+
+  test('met.atmost', function() {
+    var cost = new Cost({ atmost: 7 }), payment;
+
+    payment = new Payment({ wood: 1 });
+    ok(cost.met(payment), 'Should be met with any 1 resource');
+
+    payment = new Payment({ wood: 1, brick: 2, stone: 4 });
+    ok(cost.met(payment), 'Should be met with any 7 resources');
+
+    payment = new Payment();
+    ok(!cost.met(payment), 'Should not be met with less than 1 resource');
+
+    payment = new Payment({ gold: 8 });
+    ok(!cost.met(payment), 'Should not be met with more than 7 resource');
+  });
 });

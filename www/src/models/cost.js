@@ -6,9 +6,13 @@ define([
  
   return Backbone.Model.extend({
     met: function(payment) {
-      var any = this.get('any');
+      var any = this.get('any'),
+        atmost = this.get('atmost');
       if (any !== undefined) {
         return payment.total() >= any;
+      }
+      if (atmost !== undefined) {
+        return payment.total() > 0 && payment.total() <= atmost;
       }
       return false;
     },
