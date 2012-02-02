@@ -7,9 +7,12 @@ define([
   return Backbone.Model.extend({
     met: function(payment) {
       var any = this.get('any'),
+        kinds = this.get('kinds'),
         atmost = this.get('atmost'),
         total = payment.total();;
-      if (any !== undefined) {
+      if (any !== undefined && kinds !== undefined) {
+        return total >= any && payment.kinds() === kinds;
+      } else if (any !== undefined) {
         return total >= any;
       }
       if (atmost !== undefined) {

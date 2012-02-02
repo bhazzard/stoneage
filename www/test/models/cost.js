@@ -67,6 +67,22 @@ require([
     ok(!cost.met(payment), 'Should not be met with less than 2 resources');
   });
 
+  test('met.any.kinds', function() {
+    var cost = new Cost({ any: 4, kinds: 2 }), payment;
+
+    payment = new Payment({ wood: 1, brick: 3 });
+    ok(cost.met(payment), 'Should be met with any 4 resources of 2 kinds');
+
+    payment = new Payment({ wood: 2, brick: 1 });
+    ok(!cost.met(payment), 'Should not be met with less than 4 resources');
+
+    payment = new Payment({ wood: 2, brick: 1, stone: 1 });
+    ok(!cost.met(payment), 'Should not be met with 4 resources of 3 kinds');
+
+    payment = new Payment({ wood: 4 });
+    ok(!cost.met(payment), 'Should not be met with 4 resources of 1 kind');
+  });
+
   test('met.atmost', function() {
     var cost = new Cost({ atmost: 7 }), payment;
 
