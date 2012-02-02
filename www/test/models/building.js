@@ -49,15 +49,17 @@ require([
   test('purchase', function() {
     var buildings = new Backbone.Collection(),
       building = new Building({
+        value: 9,
         cost: new Cost({ wood: 3 }),
         buildings: buildings
       }),
       player = new Player({ id: 1, wood: 4 }),
       payment = new Payment({ wood: 3 });
 
-    expect(2);
+    expect(3);
     building.bind('resolve', function() {
       equals(player.get('wood'), 1, 'Should pay with 3 wood');
+      equals(player.get('score'), 9, 'Should increase score by 9');
       equals(buildings.length, 0, 'Should remove building from collection');
     });
     buildings.add(building);
