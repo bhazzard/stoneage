@@ -4,8 +4,8 @@ require([
   ], function(Player, Toolhut) {
   module('models.toolhut');
 
-  Player.prototype.tools = function() {
-    return this.get('tools').reduce(function(memo, tool) {
+  Player.prototype.toolValue = function() {
+    return this.tools.reduce(function(memo, tool) {
       return memo + tool.get('value');
     }, 0);
   };
@@ -16,7 +16,7 @@ require([
 
     expect(2);
     toolhut.bind('resolve', function() {
-      equals(player.tools(), 1, 'tools should increase by 1');
+      equals(player.toolValue(), 1, 'tools should increase by 1');
       equals(player.get('workers'), 5, '1 worker should be returned to player');
     });
     toolhut.place(player);
@@ -29,7 +29,7 @@ require([
 
     expect(1);
     toolhut.bind('resolve', function() {
-      equals(player.tools(), 1, 'tools should increase by 1 only once');
+      equals(player.toolValue(), 1, 'tools should increase by 1 only once');
     });
     toolhut.place(player);
     toolhut.resolve(player);

@@ -16,7 +16,7 @@ define([
         $('<div />').addClass('die face' + die).appendTo(roll);
       }, this);
 
-      var tools = this.options.player.get('tools');
+      var tools = this.options.player.tools;
       var toolsView = new ToolsView({
         collection: tools
       });
@@ -30,7 +30,7 @@ define([
       return this;
     },
     resolve: function() {
-      var tapped = this.options.player.get('tools').reduce(function(memo, tool) {
+      var tapped = this.options.player.tools.reduce(function(memo, tool) {
         return memo + (tool.get('tapped') ? tool.get('value') : 0);
       }, 0) - this.unavailable;
 

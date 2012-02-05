@@ -17,7 +17,7 @@ define([
       gold: 0
     },
     initialize: function() {
-      this.set('tools', new Tools());
+      this.tools = new Tools();
       this.bind('change:workers', this._capWorkers, this);
       this.bind('change:production', this._capProduction, this);
     },

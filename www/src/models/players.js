@@ -45,7 +45,7 @@ define([
     },
     resetAll: function() {
       this.each(function(player) {
-        player.get('tools').untapAll();
+        player.tools.untapAll();
       });
     },
     _onAdd: function(player, index) {

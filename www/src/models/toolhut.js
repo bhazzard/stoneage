@@ -22,7 +22,7 @@ define([
       if (workers > 0) {
         this.set(player.id, undefined);
         player.add('workers', workers);
-        player.get('tools').upgrade();
+        player.tools.upgrade();
         this.trigger('resolve', player);
       }
     }

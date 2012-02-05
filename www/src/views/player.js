@@ -20,7 +20,7 @@ define([
       $('<div/>').addClass('counter worker-pile').html(this.model.get('workers')).appendTo(this.el);
       $('<div/>').addClass('counter resource-pile food').html(foodLabel).appendTo(this.el);
       var tools = new ToolsView({
-        collection: this.model.get('tools')
+        collection: this.model.tools
       });
       $(tools.render().el).addClass('counter').appendTo(this.el);
       $('<div/>').addClass('counter score').html(this.model.get('score')).appendTo(this.el);
