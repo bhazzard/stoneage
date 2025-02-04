@@ -1,3 +1,7 @@
+> [!NOTE]
+> This was an HTML and Javascript implementation of the boardgame "Stone Age", brought to iOS with PhoneGap.
+> It is not a maintained project
+
 # Stone Age for iOS
 
 ## Setting up
